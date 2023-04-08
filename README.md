@@ -1,4 +1,4 @@
-# Brigada
+# БЯIGДDД
 
 ## In a Nutshell
 The GTA Roleplay also known "Brigada" web platform is a unique platform that allows players to manage and administer their own "family within the GTA universe. The platform offers a variety of features that make it easier for users to manage their own faction and coordinate their activities.
