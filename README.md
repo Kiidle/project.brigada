@@ -1,5 +1,9 @@
 # БЯIGДDД
 
+<p align="center">
+    <img width="200" src="https://cdn.discordapp.com/attachments/1094025578887266405/1094039820306743306/pasted_image_0.png" alt="Brigada">
+</p>
+
 ## In a Nutshell
 The GTA Roleplay also known "Brigada" web platform is a unique platform that allows players to manage and administer their own "family within the GTA universe. The platform offers a variety of features that make it easier for users to manage their own faction and coordinate their activities.
 
@@ -10,8 +14,6 @@ Users can also manage members tin the faction management by warning or banning t
 The platform is user-friendly and offers an intuitive interface that makes it easy for even inexperienced players to navigate. The design of the platform is modern and appealing, and the various features are easily accesible. Users can access the platform via their browser and manage their faction from anywhere.
 
 Overall, the Fraktionsverwaltung web platform provides a comprehensive solution for those who want to manage and administer their own faction in the gta universe. From planning actions to managing members to communicating within the faction, the platform offers everything users need to lead and make their faction successful.
-
-![image](https://user-images.githubusercontent.com/104766564/230746897-8d7966b1-719a-4c03-8672-bb4f156fd6da.png)
 
 ## Technologies
 ### Django
