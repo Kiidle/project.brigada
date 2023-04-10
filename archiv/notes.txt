@@ -1,0 +1,22 @@
+Rollen:
+	- 10 LEW	 		# Leader
+	-  9 MEDVED 		# Co-Leader
+	-  8 Brigadier 		# Ausbildungsleitung -> Promote Demote (Ab 4)
+	-  7 Sovietnik		# Ausbildner -> Promote Demote, unterlegiung Ausbildungsleitung (Rang 1 - 3)
+	-  6 Soldat			# Probeausbildner: keine Ränge Rechte
+	-  5 Bojewik		# Höchstert Rang wo man bekommen kann
+	-  4 Wolk			# -
+	-  3 Byk			# -
+	-  2 Lica			# -
+	-  1 Hoodlum		# Probewuche
+	-  0 
+
+- Berechtigung:
+	- Konto erstellen				(Alle)
+	- Rollen zuweisen 			(Leader, Ausbildner)
+	- Verwarnungssystem			(Leader, Coleader, Ausibldungsleiter)
+
+- Funktionen
+	- Aktionen:
+		-> Was gemacht?
+		-> Itemname? Wieviele?
