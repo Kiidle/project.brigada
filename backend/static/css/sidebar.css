@@ -9,3 +9,74 @@
     height: 250px;
     width: 250px;
 }
+
+.sidebar .navigation {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 48px 48px 48px 48px;
+}
+
+.sidebar .navigation .section {
+    border-top-color: #d9d9d9;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-bottom-color: #d9d9d9;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.sidebar .navigation .section .grid-section {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    grid-template-rows: 24px;
+    grid-template-areas:
+        "icon text";
+    grid-gap: 12px;
+}
+
+.sidebar .navigation .section .grid-section .icon {
+    grid-area: icon;
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.sidebar .navigation .section .grid-section .text {
+    grid-area: text;
+    display: flex;
+    align-items: center;
+}
+
+.current {
+    filter: brightness(0) saturate(100%) invert(57%) sepia(72%) saturate(1181%) hue-rotate(4deg) brightness(109%) contrast(102%);
+}
+
+.not-current {
+filter: brightness(0) saturate(100%) invert(56%) sepia(4%) saturate(13%) hue-rotate(346deg) brightness(96%) contrast(87%);
+}
+
+.sidebar .rest-sidebar {
+    padding: 12px;
+
+}
+
+.sidebar .rest-sidebar a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    text-decoration: none;
+    background-color: #ffab00;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+}

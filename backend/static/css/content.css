@@ -2,6 +2,112 @@
     padding: 12px;
 }
 
+.user-container {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    justify-content: right;
+}
+
+.user-container .card {
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.user-container .card .grid-card {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 48px;
+    grid-template-rows: 24px 24px;
+    grid-template-areas:
+        "userdata profile"
+        "group profile";
+    margin: 0 12px;
+}
+
+.user-container .card .grid-card .user-data {
+    grid-area: userdata;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    margin-right: 12px;
+    filter: brightness(0) saturate(100%) invert(56%) sepia(4%) saturate(13%) hue-rotate(346deg) brightness(96%) contrast(87%);
+
+}
+
+.user-container .card .grid-card .group {
+    grid-area: group;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.user-container .card .grid-card .group .citizen {
+    color: gray;
+}
+
+.user-container .card .grid-card .group .lew {
+    color: red;
+}
+
+.user-container .card .grid-card .profile {
+    grid-area: profile;
+    filter: brightness(0) saturate(100%) invert(56%) sepia(4%) saturate(13%) hue-rotate(346deg) brightness(96%) contrast(87%);
+
+
+}
+
+.dashboard {
+    display: grid;
+    margin: 24px 0;
+    grid-gap: 16px;
+}
+
+.dashboard .field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard .card {
+    background-color: white;
+    height: 148px;
+    width: 148px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+}
+
+.dashboard .card .grid-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 84px 1fr;
+    grid-template-areas:
+        "app-icon"
+        "app-name";
+}
+
+.dashboard .card .app-icon {
+    grid-area: app-icon;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard .card .app-name {
+    grid-area: app-name;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
 .card-container {
     height: 100%;
     display: flex;
@@ -92,9 +198,23 @@
     border-radius: 2px;
     border: none;
     width: 100%;
+    cursor: pointer;
 }
 
 .card a {
     color: #ffab00;
     text-decoration: none;
+}
+
+@media screen and (min-width: 655px) {
+    .dashboard {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+}
+
+@media screen and (min-width: 915px) {
+    .dashboard {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 }
