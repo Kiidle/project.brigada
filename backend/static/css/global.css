@@ -20,7 +20,7 @@ main {
     display: none;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 655px) {
     header, header *, main, main * {
         display: none;
     }

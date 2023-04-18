@@ -2,7 +2,13 @@
     padding: 12px;
 }
 
-.content .card {
+.card-container {
+    height: 100%;
+    display: flex;
+    vertical-align: center;
+}
+
+.content .card-container .card {
     display: block;
     background-color: white;
     width: 400px;

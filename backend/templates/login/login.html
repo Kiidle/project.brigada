@@ -15,22 +15,41 @@
             </div>
         </div>
         <div class="content">
-            <div class="card">
-                <div class="header">
-                    <p>Registrieren</p>
-                </div>
-                <div class="form-container">
-                    <form method="POST">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit">Anmelden</button>
-                    </form>
-                    <p>Stattdessen <a href="{% url 'signup' %}">Registrieren</a></p>
+            <div class="card-container">
+                <div class="card">
+                    <div class="header">
+                        <p>Anmelden</p>
+                    </div>
+                    <div class="form-container">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit">Anmelden</button>
+                        </form>
+                        <p>Kein Konto? Stattdessen <a href="{% url 'signup' %}">Registrieren</a></p>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
     <footer>
-
+        <div class="ad">
+            <div class="text">
+                <div class="swiss-made">
+                    <p>Swiss Made</p>
+                </div>
+                <div class="kiidle">
+                    <p class="blue">K</p>
+                    <p class="red">i</p>
+                    <p class="gold">i</p>
+                    <p class="blue">d</p>
+                    <p class="green">l</p>
+                    <p class="red">e</p>
+                </div>
+            </div>
+            <div class="flag">
+                <img src="{% static 'images/switzerland.png' %}" alt='brigada'/>
+            </div>
+        </div>
     </footer>
 {% endblock %}
