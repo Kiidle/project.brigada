@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <header>
+        <div class="grid-header">
+            <div class="title">
+                <h1>Anmelden</h1>
+            </div>
+        </div>
+    </header>
+    <main class="grid-main">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="{% static 'images/brigada.png' %}" alt='brigada'/>
+            </div>
+        </div>
+        <div class="content">
+            <div class="card">
+                <div class="header">
+                    <p>Registrieren</p>
+                </div>
+                <div class="form-container">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Anmelden</button>
+                    </form>
+                    <p>Stattdessen <a href="{% url 'signup' %}">Registrieren</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+{% endblock %}

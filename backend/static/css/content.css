@@ -1,0 +1,94 @@
+.content {
+    padding: 12px;
+}
+
+.content .card {
+    display: block;
+    background-color: white;
+    width: 400px;
+    margin: auto;
+    border-radius: 2px;
+}
+
+.card .header {
+    background-color: black;
+    height: 50px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.4rem;
+    border-radius: 2px 2px 0 0;
+}
+
+.card .form-container {
+    background-color: white;
+    padding: 12px;
+}
+
+.card form p {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 25px;
+    margin: 20px 0;
+}
+
+.card form p input, .card form select, .card form textarea, .card form input {
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #DDDDDD;
+    padding: 10px;
+    resize: none;
+}
+
+.card form label {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.card form .checkbox {
+    height: 25px;
+    width: 25px;
+    margin: 0 10px 0 0;
+}
+
+.card form textarea {
+    height: 75px;
+}
+
+.card form p select {
+
+}
+
+.card form .answer p {
+    display: block;
+    margin: 0;
+}
+
+.card form ul {
+    margin-left: 20px;
+}
+
+.card form .errorlist {
+    color: red;
+}
+
+.card form button {
+    height: 50px;
+    margin: 20px 0;
+    background-color: #ffab00;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 2px;
+    border: none;
+    width: 100%;
+}
+
+.card a {
+    color: #ffab00;
+    text-decoration: none;
+}
