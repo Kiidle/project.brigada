@@ -16,12 +16,29 @@ main {
     grid-template-rows: 1fr;
 }
 
+.custom-main {
+    height: calc(100vh - 67px);
+    display: grid;
+    grid-template-columns: 250px 250px 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 1px;
+}
+
+.custom-main .contacts {
+    display: flex;
+    width: 250px;
+    background-color: white;
+    border-top-color: #d9d9d9;
+    border-top-width: 1px;
+    border-top-style: solid;
+}
+
 .error-card {
     display: none;
 }
 
 @media screen and (max-width: 655px) {
-    header, header *, main, main * {
+    header, header *, main, main *, .custom-main, .custom-main * {
         display: none;
     }
 

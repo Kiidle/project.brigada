@@ -13,16 +13,13 @@
 .sidebar .navigation {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 48px 48px 48px 48px;
+    grid-template-rows: 48px 48px 48px 48px 48px;
 }
 
 .sidebar .navigation .section {
     border-top-color: #d9d9d9;
     border-top-width: 1px;
     border-top-style: solid;
-    border-bottom-color: #d9d9d9;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
     display: flex;
     align-items: center;
     padding: 0 12px;
@@ -57,7 +54,7 @@
 }
 
 .not-current {
-filter: brightness(0) saturate(100%) invert(56%) sepia(4%) saturate(13%) hue-rotate(346deg) brightness(96%) contrast(87%);
+    filter: brightness(0) saturate(100%) invert(56%) sepia(4%) saturate(13%) hue-rotate(346deg) brightness(96%) contrast(87%);
 }
 
 .sidebar .rest-sidebar {

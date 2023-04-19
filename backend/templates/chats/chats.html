@@ -1,0 +1,105 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <header>
+        <div class="grid-header">
+            <div class="title">
+                <h1>Chats</h1>
+            </div>
+        </div>
+    </header>
+    <div class="custom-main">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="{% static 'images/brigada.png' %}" alt='brigada'/>
+            </div>
+            <div class="navigation">
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/home_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Home
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/notification_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Benachrichtigung
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/log_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Systemprotokolle
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/group_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Benutzer
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/help_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Hilfe
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="rest-sidebar">
+                <a href="{% url 'logout' %}">
+                    Abmelden
+                </a>
+            </div>
+        </div>
+        <div class="contacts">
+            <p>fdf</p>
+            {% for user in users %}
+                <div>
+                    <p>{{ user.first_name }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="content">
+        </div>
+    </div>
+    <footer>
+        <div class="ad">
+            <div class="text">
+                <div class="swiss-made">
+                    <p>Swiss Made</p>
+                </div>
+                <div class="kiidle">
+                    <p class="blue">K</p>
+                    <p class="red">i</p>
+                    <p class="gold">i</p>
+                    <p class="blue">d</p>
+                    <p class="green">l</p>
+                    <p class="red">e</p>
+                </div>
+            </div>
+            <div class="flag">
+                <img src="{% static 'images/switzerland.png' %}" alt='brigada'/>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
