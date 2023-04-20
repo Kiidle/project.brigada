@@ -28,7 +28,7 @@ class Commentary(models.Model):
     def __str__(self):
         return self.content
 
-class message(models.Model):
+class Message(models.Model):
     content = models.TextField(max_length=500, verbose_name="Inhalt")
     to = models.ForeignKey(User, on_delete=models.CASCADE, related_name="received_messages")
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sent_messages")
