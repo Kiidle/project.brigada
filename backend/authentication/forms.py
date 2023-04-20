@@ -1,10 +1,13 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.forms import ModelForm
+from django.core.validators import MaxLengthValidator
 
 User = get_user_model()
 
 class SignUpForm(ModelForm):
+    first_name= forms.CharField(validators=[MaxLengthValidator(15)])
+    last_name= forms.CharField(validators=[MaxLengthValidator(15)])
     password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:

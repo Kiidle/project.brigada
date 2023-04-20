@@ -33,6 +33,144 @@ main {
     border-top-style: solid;
 }
 
+.custom-main .contacts .grid-contacts {
+    width: 100%;
+    height: calc(100vh - 51px);
+    display: inline-block;
+    overflow-y: scroll;
+
+}
+
+.custom-main .contacts .grid-contacts .section {
+    height: 48px;
+    border-bottom-color: #d9d9d9;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    cursor: pointer;
+    text-decoration: none;
+    color: gray
+}
+
+.custom-main .chat {
+    background: #e8e8e8;
+    display: flex;
+}
+
+.custom-main .chat .chat-grid {
+    width: 100%;
+    display: grid;
+    grid-gap: 1px;
+    grid-template-rows: 48px 1fr 72px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "user"
+        "chat-area"
+        "post-chat";
+}
+
+.custom-main .chat .chat-grid .user {
+    grid-area: user;
+    height: 48px;
+    background: white;
+    border-bottom-color: #d9d9d9;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    display: flex;
+    align-items: center;
+    color: gray;
+    padding: 0 12px;
+}
+
+.custom-main .chat-container {
+    height: calc(100vh - 51px);
+    display: flex;
+}
+
+.custom-main .chat {
+    width: 100%;
+}
+
+.custom-main .chat .chat-grid .user .grid {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.custom-main .chat .chat-grid .user .grid .name {
+    font-weight: bold;
+}
+
+.custom-main .chat .chat-grid .user .grid .username {
+
+}
+
+.custom-main .chat .chat-grid .chat-area {
+    height: calc(100vh - 175px);
+    overflow-y: scroll;
+    grid-area: chat-area;
+    padding: 0 12px;
+}
+
+.custom-main .chat .chat-grid .chat-area .sent {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    word-break: break-word;
+}
+
+.custom-main .chat .chat-grid .chat-area .card {
+    max-width: 500px;
+    background: white;
+    margin: 6px 0;
+    padding: 12px;
+    border-radius: 2px;
+}
+
+.custom-main .chat .chat-grid .chat-area .received {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: left;
+    word-break: break-word;
+}
+
+.custom-main .chat .chat-grid .post-chat {
+    grid-area: post-chat;
+    margin: 0 12px;
+}
+
+.custom-main .chat .chat-grid .post-chat input {
+    height: 36px;
+    border-width: 1px;
+    border-style: solid;
+    width: calc(100% - 250px);
+    padding: 0 12px;
+}
+
+input {
+    border-color: #c9c8c8;
+}
+
+input:focus {
+    outline-color: #ffab00;
+    outline-width: 2px;
+    outline-style: solid;
+}
+
+.custom-main .chat .chat-grid .post-chat button {
+    height: 36px;
+    width: 100px;
+    background: #000000;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .error-card {
     display: none;
 }

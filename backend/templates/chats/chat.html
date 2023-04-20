@@ -73,44 +73,59 @@
         </div>
         <div class="contacts">
             <div class="grid-contacts">
-                {% for user in users %}
-                    {% if not request.GET.search or user.first_name|lower in request.GET.search|lower or user.last_name|lower in request.GET.search|lower %}
-
-                        <a href="{% url 'chat' user.id %}" class="section">
-                            <p>{{ user.first_name }} {{ user.last_name }}</p>
+                {% for user_in in users %}
+                    {% if user_in == user %}
+                        <a href="{% url 'chats' %}" class="section">
+                            <p class=" current">{{ user_in.first_name }} {{ user_in.last_name }}</p>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'chat' user_in.id %}" class="section">
+                            <p>{{ user_in.first_name }} {{ user_in.last_name }}</p>
                         </a>
                     {% endif %}
+
                 {% endfor %}
             </div>
         </div>
-        <div class="content">
-            <div class="user-container">
-                <div class="card">
-                    <div class="grid-card">
-                        <div class="user-data">
-                            <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
+        <div class="chat-container">
+            <div class="chat">
+                <div class="chat-grid">
+                    <div class="user">
+                        <div class="grid">
+                            <p class="name">{{ user.first_name }} {{ user.last_name }}</p>
+                            <p class="username">@{{ user.username }}</p>
                         </div>
-                        <div class="group">
-                            {% for group in request.user.groups.all %}
-                                {% if group.name == 'citizen' %}
-                                    <p class="citizen">{{ group.name|title }}</p>
-                                {% elif group.name == 'lew' %}
-                                    <p class="lew">{{ group.name|title }}</p>
-                                {% else %}
-                                    <p>Unverified Group</p>
+                    </div>
+                    <div class="chat-area" id="chat-area">
+                        {% for message in messages %}
+                            {% if message.author == request.user and message.to == user %}
+                                <div class="sent">
+                                    <div class="card">
+                                        <p>{{ message.author.first_name }} {{ message.author.last_name }}</p>
+                                        <p>{{ message.content }}</p>
+                                    </div>
+                                </div>
+                            {% else %}
+                                {% if message.author == user %}
+                                    <div class="received">
+                                        <div class="card">
+                                            <p>{{ message.author.first_name }} {{ message.author.last_name }}</p>
+                                            <p>{{ message.content }}</p>
+                                        </div>
+                                    </div>
                                 {% endif %}
-                            {% endfor %}
-                        </div>
-                        <a href="{% url 'home' %}" class="profile">
-                            <img src="{% static 'svgs/profile_filled.svg' %}" alt='home'/>
-                        </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="post-chat">
+                        <form method="post" action="{% url 'chat' pk=user.pk %}">
+                            {% csrf_token %}
+                            <input type="text" class="form-control" id="message" name="message" placeholder="Nachricht">
+                            <button type="submit" class="btn btn-primary">Abschicken</button>
+                        </form>
                     </div>
                 </div>
             </div>
-            <form class="search-user" action="{% url 'chats' %}" method="get">
-                <input type="text" name="search" placeholder="Vorname oder Nachname">
-                <button type="submit">Suche</button>
-            </form>
         </div>
     </div>
     <footer>
@@ -133,4 +148,5 @@
             </div>
         </div>
     </footer>
+    <script src="{% static 'js/chat.js' %}"></script>
 {% endblock %}
