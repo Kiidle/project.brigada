@@ -133,4 +133,24 @@
             </div>
         </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const chatSocket = new WebSocket('ws://localhost:8000/chats');
+
+        chatSocket.onopen = function () {
+            console.log('WebSocket-Verbindung geöffnet');
+        };
+
+        chatSocket.onmessage = function (event) {
+            console.log('Nachricht erhalten:', event.data);
+        };
+
+        chatSocket.onclose = function (event) {
+            console.log('WebSocket-Verbindung geschlossen:', event);
+        };
+
+        chatSocket.onerror = function (error) {
+            console.error('WebSocket-Fehler:', error);
+        };
+    </script>
 {% endblock %}

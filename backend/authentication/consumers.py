@@ -15,6 +15,7 @@ class ChatConsumer(WebsocketConsumer):
     def connect(self):
         self.accept()
 
+
 class ChatViewWrapper(TemplateView):
     template_name = "chats/chat.html"
 
@@ -46,8 +47,6 @@ class ChatViewWrapper(TemplateView):
 
         return context
 
-
-
     def post(self, request, *args, **kwargs):
         message_content = request.POST.get('message')
         to_user = User.objects.get(id=kwargs.get('pk'))
@@ -55,58 +54,52 @@ class ChatViewWrapper(TemplateView):
         message = Message.objects.create(content=message_content, to=to_user, author=from_user)
         return redirect(request.path)
 
-class ChatView(WebsocketConsumer):
-    login_url = reverse_lazy('login')
 
-    def get(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return redirect(self.login_url)
-        else:
-            return super().get(request, *args, **kwargs)
+class ChatRoom(WebsocketConsumer):
+    async def connect(self):
+        self.room_name = 'room_name'
+        self.room_group_name = f'chat_{self.room_name}'
 
-    def connect(self):
-        self.chat_room = 'chat_%s' % self.scope['url_route']['kwargs']['chat_room']
-        self.room_group_name = 'chat_%s_group' % self.scope['url_route']['kwargs']
-
-        # Join room group
-        async_to_sync(self.channel_layer.group_add)(
+        # Gruppe dem Channel hinzufügen
+        await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
         )
 
-        self.accept()
+        # WebSocket-Verbindung akzeptieren
+        await self.accept()
 
-    def disconnect(self, close_code):
-        # Leave room group
-        async_to_sync(self.channel_layer.group_discard)(
+    async def disconnect(self, close_code):
+        # Gruppe aus dem Channel entfernen
+        await self.channel_layer.group_discard(
             self.room_group_name,
             self.channel_name
         )
 
-    # Receive message from WebSocket
-    def receive(self, text_data):
-        message_json = json.loads(text_data)
-        message = message_json['message']
+    async def receive(self, text_data):
+        text_data_json = json.loads(text_data)
+        author = text_data_json['author']
+        to = text_data_json['to']
+        content = text_data_json['content']
 
-        # Save message to database
-        to_user = User.objects.get(id=self.scope['url_route']['kwargs']['pk'])
-        from_user = self.scope["user"]
-        message = Message.objects.create(content=message, to=to_user, author=from_user)
+        if to == str(self.scope['user'].id):
+            # Hier kannst du die Nachricht verarbeiten und entsprechend reagieren
 
-        # Send message to room group
-        async_to_sync(self.channel_layer.group_send)(
-            self.room_group_name,
-            {
-                'type': 'chat_message',
-                'message': message_json
-            }
-        )
+            # Beispiel: Nachricht an alle im Raum senden
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'chat_message',
+                    'author': author,
+                    'to': to,
+                    'content': content
+                }
+            )
 
-    # Receive message from room group
-    def chat_message(self, event):
-        message = event['message']
-
-        # Send message to WebSocket
-        self.send(text_data=json.dumps({
-            'message': message
+    async def chat_message(self, event):
+        # Hier kannst du die Nachricht an den Client senden
+        await self.send(json.dumps({
+            'author': event['author'],
+            'to': event['to'],
+            'content': event['content']
         }))

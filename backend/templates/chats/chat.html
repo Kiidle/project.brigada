@@ -116,11 +116,59 @@
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script>
+                            $(document).ready(function () {
+                                var socket = new WebSocket("ws://" + window.location.host + "/chats");
+
+                                // WebSocket-Verbindung hergestellt
+                                socket.onopen = function (event) {
+                                    console.log("WebSocket connected:", event);
+                                };
+
+                                // WebSocket-Nachricht empfangen
+                                socket.onmessage = function (event) {
+                                    var message = JSON.parse(event.data);
+
+                                    // Prüfen, ob die Nachricht an den aktuellen Benutzer gerichtet ist
+                                    if (message.to == "{{ request.user.id }}" && message.author == "{{ user_id }}") {
+                                        // Nachrichteninhalt in der HTML-Ansicht aktualisieren
+                                        $("#chat-messages").append("<p>" + message.content + "</p>");
+                                    }
+                                };
+
+                                // WebSocket-Verbindung geschlossen
+                                socket.onclose = function (event) {
+                                    console.log("WebSocket closed:", event);
+                                };
+
+                                // Formular absenden
+                                $("#chat-form").on("submit", function (event) {
+                                    event.preventDefault();
+
+                                    // Nachrichtendaten aus dem Formular extrahieren
+                                    var author = "{{ request.user.id }}";
+                                    var to = "{{ user_id }}";
+                                    var content = $("#chat-input").val();
+
+                                    // Nachricht an den Server senden
+                                    socket.send(JSON.stringify({
+                                        "author": author,
+                                        "to": to,
+                                        "content": content
+                                    }));
+
+                                    // Formular zurücksetzen
+                                    $("#chat-input").val("");
+                                });
+                            });
+                        </script>
                     </div>
                     <div class="post-chat">
                         <form method="post" action="{% url 'chat' pk=user.pk %}">
                             {% csrf_token %}
-                            <input type="text" class="form-control" id="message" name="message" placeholder="Nachricht">
+                            <input type="text" class="form-control" name="message"
+                                   placeholder="Nachricht">
                             <button type="submit" class="btn btn-primary">Abschicken</button>
                         </form>
                     </div>
