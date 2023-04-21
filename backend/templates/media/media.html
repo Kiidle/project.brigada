@@ -129,7 +129,7 @@
                                         <form method="POST" action="{% url 'unlike_feed' feed.id %}">
                                             {% csrf_token %}
                                             <button type="submit">
-                                                <img class="unlike" src="{% static 'svgs/heart_filled.svg' %}"/>
+                                                <img class="like" src="{% static 'svgs/heart_filled.svg' %}"/>
                                             </button>
                                         </form>
                                     {% endif %}
@@ -153,4 +153,24 @@
             </div>
         </div>
     </div>
+    <footer>
+        <div class="ad">
+            <div class="text">
+                <div class="swiss-made">
+                    <p>Swiss Made</p>
+                </div>
+                <div class="kiidle">
+                    <p class="blue">K</p>
+                    <p class="red">i</p>
+                    <p class="gold">i</p>
+                    <p class="blue">d</p>
+                    <p class="green">l</p>
+                    <p class="red">e</p>
+                </div>
+            </div>
+            <div class="flag">
+                <img src="{% static 'images/switzerland.png' %}" alt='brigada'/>
+            </div>
+        </div>
+    </footer>
 {% endblock %}

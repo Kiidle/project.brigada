@@ -285,6 +285,11 @@
     width: 100%;
 }
 
+.content .feeds .feed .feed-buttons .button-like .like {
+    width: 100%;
+    filter: brightness(0) saturate(100%) invert(56%) sepia(37%) saturate(3679%) hue-rotate(323deg) brightness(113%) contrast(106%);
+}
+
 .card .header {
     background-color: black;
     height: 50px;
