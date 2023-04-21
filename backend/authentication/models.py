@@ -9,15 +9,29 @@ class User(AbstractUser):
     email = models.CharField(max_length=100, verbose_name="E-Mail Adresse")
     verified = models.BooleanField(null=False, default=False)
 
+class FeedManager(models.Manager):
+    def liked_by_user(self, feed_id, user_id):
+        return self.filter(id=feed_id, likes__user_id=user_id).exists()
+
 class Feed(models.Model):
     description = models.TextField(max_length=200, verbose_name="Beschreibung")
-    image = models.ImageField(upload_to='feeds/', verbose_name="Bild")
+    image = models.ImageField(upload_to='static/images/uploads/feed', verbose_name="Bild")
     published_date = models.DateField(auto_now_add=True, verbose_name="Veröffentlicht")
     visibility = models.BooleanField(null=False, default=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="feeds")
 
+    def get_image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+
     def __str__(self):
         return self.description
+
+class FeedLikes(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    feed = models.ForeignKey(Feed, on_delete=models.CASCADE, related_name='likes')
+    def __str__(self):
+        return '{} liked {}'.format(self.user.username, self.feed.description)
 
 class Commentary(models.Model):
     content = models.TextField(max_length=200, verbose_name="Inhalt")
@@ -35,3 +49,9 @@ class Message(models.Model):
 
     def __str__(self):
         return self.content
+
+class Stone(models.Model):
+    pass
+
+class Wood(models.Model):
+    pass

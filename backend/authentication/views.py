@@ -7,7 +7,8 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import Group
-from .models import Feed
+from .models import Feed, FeedLikes
+from django.http import HttpResponseRedirect
 
 User = get_user_model()
 
@@ -17,11 +18,13 @@ class SignUpView(generic.CreateView):
     success_url = reverse_lazy("login")
     template_name = "signup/signup.html"
 
-    group, created = Group.objects.get_or_create(name='citizen')
-    if created:
-        print("Group 'citizen' created successfully.")
-    else:
-        print("Group 'citizen' already exists.")
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        group, created = Group.objects.get_or_create(name='citizen')
+        if created:
+            print("Group 'citizen' created successfully.")
+        else:
+            print("Group 'citizen' already exists.")
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -69,6 +72,7 @@ class HomeView(generic.ListView):
         else:
             return super().get(request, *args, **kwargs)
 
+
 class MediaView(generic.ListView):
     model = Feed
     fields = ["description", "image", "published_date", "visibility", "author"]
@@ -78,7 +82,15 @@ class MediaView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["feeds"] = super().get_queryset().order_by("description", "image", "published_date", "visibility", "author")
+        context["feeds"] = super().get_queryset().order_by("-id", "image")
+
+        feed_likes = FeedLikes.objects.all()
+        unlike_flag = []
+        for feed in context["feeds"]:
+            liked = feed_likes.filter(feed_id=feed.id, user_id=self.request.user.id).exists()
+            if not liked:
+                unlike_flag.append(feed.id)
+        context["unlike_flag"] = unlike_flag
 
         print(context)
 
@@ -89,6 +101,20 @@ class MediaView(generic.ListView):
             return redirect(self.login_url)
         else:
             return super().get(request, *args, **kwargs)
+
+
+def like_feed(request, feed_id):
+    feed = get_object_or_404(Feed, id=feed_id)
+    like = FeedLikes.objects.create(user=request.user, feed=feed)
+    like.save()
+    return HttpResponseRedirect(reverse('media'))
+
+
+def unlike_feed(request, feed_id):
+    feed = get_object_or_404(Feed, id=feed_id)
+    like = FeedLikes.objects.get(feed=feed, user=request.user)
+    like.delete()
+    return HttpResponseRedirect(reverse('media'))
 
 
 class ChatsView(generic.ListView):
@@ -111,6 +137,3 @@ class ChatsView(generic.ListView):
             return redirect(self.login_url)
         else:
             return super().get(request, *args, **kwargs)
-
-
-

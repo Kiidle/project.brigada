@@ -11,4 +11,6 @@ urlpatterns = [
     path("media", MediaView.as_view(), name="media"),
     path("chats/", ChatsView.as_view(), name="chats"),
     path("chats/<int:pk>/", ChatViewWrapper.as_view(), name="chat"),
+    path('feeds/<int:feed_id>/like', views.like_feed, name='like_feed'),
+    path('feeds/<int:feed_id>/unlike', views.unlike_feed, name='unlike_feed'),
 ]

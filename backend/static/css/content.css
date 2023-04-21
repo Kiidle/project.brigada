@@ -151,6 +151,17 @@
     border-radius: 2px;
 }
 
+.content .feed-container {
+    width: 100%;
+    max-width: 500px;
+    overflow-y: scroll;
+    height: calc(100vh - 75px);
+}
+
+.content .feed-container::-webkit-scrollbar {
+    display: none;
+}
+
 .content .feeds {
     width: 100%;
     max-width: 500px;
@@ -159,14 +170,14 @@
 .content .feeds .feed {
     width: 100%;
     background: white;
-    margin: 12px 0;
+    margin: 0 0 12px 0;
     border-bottom-color: #d9d9d9;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    padding: 12px;
 }
 
 .content .feeds .feed .feed-user {
+    padding: 6px;
     height: 50px;
     display: grid;
     grid-template-columns: 48px 1fr;
@@ -175,6 +186,9 @@
         "feed-profile feed-name"
         "feed-profile feed-username";
     grid-column-gap: 12px;
+    border-bottom-color: #b6b6b6;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
 }
 
 .content .feeds .feed .feed-user .feed-profile {
@@ -197,10 +211,78 @@
     align-items: center;
 }
 
+.content .feeds .feed .feed-user .feed-name p {
+    margin-right: 6px;
+}
+
+.content .feeds .feed .feed-user .feed-name img {
+    height: 16px;
+    filter: brightness(0) saturate(100%) invert(71%) sepia(56%) saturate(832%) hue-rotate(159deg) brightness(91%) contrast(96%);
+    color: #3ec2e5
+}
+
 .content .feeds .feed .feed-user .feed-username {
     grid-area: feed-username;
     display: flex;
     align-items: center;
+    color: gray;
+}
+
+.content .feeds .feed .feed-description {
+    padding: 12px;
+    word-break: break-word;
+    color: gray;
+}
+
+.content .feeds .feed .feed-image {
+    display: flex;
+    align-items: center;
+    background-color: #eeeeee
+}
+
+.content .feeds .feed .feed-image img {
+    width: 100%;
+    border-top-color: #b6b6b6;
+    border-bottom-color: #b6b6b6;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+}
+
+.content .feeds .feed .feed-buttons {
+    padding: 12px;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    grid-template-rows: 32px 1fr;
+    grid-template-areas:
+        "button-like ."
+        "feed-like .";
+}
+
+.content .feeds .feed .feed-buttons .button-like {
+    grid-area: button-like;
+}
+
+.content .feeds .feed .feed-buttons .feed-like {
+    grid-area: feed-like;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+}
+
+.content .feeds .feed .feed-buttons .button-like button {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.content .feeds .feed .feed-buttons .button-like .unlike {
+    width: 100%;
 }
 
 .card .header {

@@ -96,28 +96,60 @@
             </div>
         </div>
         <div class="content">
-            <div class="feeds">
-                {% for feed in feeds %}
-                    <div class="feed">
-                        <div class="feed-user">
-                            <div class="feed-profile">
-                                <img src="{% static 'svgs/profile_filled.svg' %}" />
+            <div class="feed-container">
+                <div class="feeds">
+                    {% for feed in feeds %}
+                        <div class="feed">
+                            <div class="feed-user">
+                                <div class="feed-profile">
+                                    <img src="{% static 'svgs/profile_filled.svg' %}"/>
+                                </div>
+                                <div class="feed-name">
+                                    <p>{{ feed.author.first_name }} {{ feed.author.last_name }}</p>
+                                    {% if feed.author.verified %}
+                                        <img src="{% static 'images/verified_filled.svg' %}" alt="verified"/>
+
+                                    {% endif %}
+                                </div>
+                                <div class="feed-username">
+                                    <p>@{{ feed.author.username }}</p>
+                                </div>
                             </div>
-                            <div class="feed-name">
-                                <p>{{ feed.author.first_name }} {{ feed.author.last_name }}</p>
+                            <div class="feed-description">
+                                <p>{{ feed.description }}</p>
                             </div>
-                            <div class="feed-username">
-                                <p>@{{ feed.author.username }}</p>
+                            <div class="feed-image">
+                                {% if feed.image %}
+                                    <img src="{{ feed.get_image_url }}" alt="{{ feed.description }}">
+                                {% endif %}
+                            </div>
+                            <div class="feed-buttons">
+                                <div class="button-like">
+                                    {% if feed.id not in unlike_flag %}
+                                        <form method="POST" action="{% url 'unlike_feed' feed.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit">
+                                                <img class="unlike" src="{% static 'svgs/heart_filled.svg' %}"/>
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                    {% if feed.id in unlike_flag %}
+                                        <form method="POST" action="{% url 'like_feed' feed.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit">
+                                                <img class="unlike" src="{% static 'svgs/heart_unfilled.svg' %}"/>
+                                            </button>
+                                        </form>
+                                    {% endif %}
+
+                                </div>
+                                <div class="feed-like">
+                                    <p>{{ feed.likes.count }}</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="feed-description">
-                            <p>{{ feed.description }}</p>
-                        </div>
-                        <div class="feed-image">
-                            <img src="{{ feed.image }}"/>
-                        </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
