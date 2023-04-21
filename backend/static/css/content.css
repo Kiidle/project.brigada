@@ -253,11 +253,12 @@
 .content .feeds .feed .feed-buttons {
     padding: 12px;
     display: grid;
-    grid-template-columns: 32px 1fr;
+    grid-template-columns: 32px 32px 1fr;
     grid-template-rows: 32px 1fr;
     grid-template-areas:
-        "button-like ."
-        "feed-like .";
+        "button-like button-commentary ."
+        "feed-like feed-commentary .";
+    grid-column-gap: 12px;
 }
 
 .content .feeds .feed .feed-buttons .button-like {
@@ -288,6 +289,19 @@
 .content .feeds .feed .feed-buttons .button-like .like {
     width: 100%;
     filter: brightness(0) saturate(100%) invert(56%) sepia(37%) saturate(3679%) hue-rotate(323deg) brightness(113%) contrast(106%);
+}
+
+.content .feeds .feed .feed-buttons .button-commentary {
+    grid-area: button-commentary;
+    display: flex;
+}
+
+.content .feeds .feed .feed-buttons .feed-commentary {
+    grid-area: feed-commentary;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: gray;
 }
 
 .card .header {

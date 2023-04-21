@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <header>
         <div class="grid-header">
             <div class="title">
@@ -126,25 +127,93 @@
                             <div class="feed-buttons">
                                 <div class="button-like">
                                     {% if feed.id not in unlike_flag %}
-                                        <form method="POST" action="{% url 'unlike_feed' feed.id %}">
-                                            {% csrf_token %}
-                                            <button type="submit">
-                                                <img class="like" src="{% static 'svgs/heart_filled.svg' %}"/>
-                                            </button>
-                                        </form>
+                                        <button class="unlike-btn" data-feed-id="{{ feed.id }}">
+                                            <img class="like" src="{% static 'svgs/heart_filled.svg' %}"/>
+                                        </button>
                                     {% endif %}
                                     {% if feed.id in unlike_flag %}
-                                        <form method="POST" action="{% url 'like_feed' feed.id %}">
-                                            {% csrf_token %}
-                                            <button type="submit">
-                                                <img class="unlike" src="{% static 'svgs/heart_unfilled.svg' %}"/>
-                                            </button>
-                                        </form>
+                                        <button class="like-btn" data-feed-id="{{ feed.id }}">
+                                            <img class="unlike" src="{% static 'svgs/heart_unfilled.svg' %}"/>
+                                        </button>
                                     {% endif %}
-
                                 </div>
                                 <div class="feed-like">
-                                    <p>{{ feed.likes.count }}</p>
+                                        <p class="likes-count">{{ feed.likes.count }}</p>
+                                </div>
+
+                                <script>
+                                    $(document).ready(function () {
+                                        $(".like-btn").click(function (e) {
+                                            e.preventDefault();
+                                            var $this = $(this);
+                                            if ($this.prop("disabled")) {
+                                                // Der Button ist bereits deaktiviert, die Anfrage wird gerade bearbeitet
+                                                return;
+                                            }
+                                            $this.prop("disabled", true); // Button deaktivieren, um mehrfache Klicks zu verhindern
+                                            var feedId = $this.data("feed-id");
+                                            var url = "/feeds/" + feedId + "/like";
+                                            var heartImage = $this.find("img");
+                                            $.ajax({
+                                                url: url,
+                                                type: "POST",
+                                                data: {
+                                                    csrfmiddlewaretoken: "{{ csrf_token }}"
+                                                },
+                                                success: function (data) {
+                                                    var likesCount = parseInt($(`.likes-count[data-feed-id='${feedId}']`).text());
+                                                    $(".likes-count[data-feed-id='" + feedId + "']").text(likesCount + 1);
+                                                    heartImage.attr("src", "{% static 'svgs/heart_unfilled.svg' %}");
+                                                    $this.hide();
+                                                    $(".unlike-btn[data-feed-id='" + feedId + "']").show();
+                                                },
+                                                complete: function () {
+                                                    $this.prop("disabled", false); // Button aktivieren, wenn die Anfrage abgeschlossen ist
+                                                }
+                                            });
+                                        });
+
+                                        $(".unlike-btn").click(function (e) {
+                                            e.preventDefault();
+                                            var $this = $(this);
+                                            if ($this.prop("disabled")) {
+                                                // Der Button ist bereits deaktiviert, die Anfrage wird gerade bearbeitet
+                                                return;
+                                            }
+                                            $this.prop("disabled", true); // Button deaktivieren, um mehrfache Klicks zu verhindern
+                                            var feedId = $this.data("feed-id");
+                                            var url = "/feeds/" + feedId + "/unlike";
+                                            var heartImage = $this.find("img");
+                                            $.ajax({
+                                                url: url,
+                                                type: "POST",
+                                                data: {
+                                                    csrfmiddlewaretoken: "{{ csrf_token }}"
+                                                },
+                                                success: function (data) {
+                                                    var likesCount = parseInt($(`.likes-count[data-feed-id='${feedId}']`).text());
+                                                    $(".likes-count[data-feed-id='" + feedId + "']").text(likesCount - 1);
+                                                    heartImage.attr("src", "/static/svgs/heart_unfilled.svg");
+                                                    $this.hide();
+                                                    $(".like-btn[data-feed-id='" + feedId + "']").show();
+                                                },
+                                                complete: function () {
+                                                    $this.prop("disabled", false); // Button aktivieren, wenn die Anfrage abgeschlossen ist
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+
+                                <div class="button-commentary">
+                                    <img class="unlike" src="{% static 'svgs/commentary_unfilled.svg' %}"/>
+                                </div>
+                                <div class="feed-commentary">
+                                    {% if feed.commentaries.count < 1 %}
+                                        <p></p>
+                                    {% else %}
+                                        <p>{{ feed.commentaries.count }}</p>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

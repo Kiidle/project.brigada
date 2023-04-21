@@ -8,7 +8,8 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import Group
 from .models import Feed, FeedLikes
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
+from urllib.parse import urlencode
 
 User = get_user_model()
 
@@ -102,19 +103,20 @@ class MediaView(generic.ListView):
         else:
             return super().get(request, *args, **kwargs)
 
-
 def like_feed(request, feed_id):
     feed = get_object_or_404(Feed, id=feed_id)
-    like = FeedLikes.objects.create(user=request.user, feed=feed)
-    like.save()
-    return HttpResponseRedirect(reverse('media'))
-
+    FeedLikes.objects.create(user=request.user, feed=feed)
+    likes_count = FeedLikes.objects.filter(feed_id=feed_id).count()
+    response_data = {'result': 'success', 'likes_count': likes_count}
+    return JsonResponse(response_data)
 
 def unlike_feed(request, feed_id):
     feed = get_object_or_404(Feed, id=feed_id)
     like = FeedLikes.objects.get(feed=feed, user=request.user)
     like.delete()
-    return HttpResponseRedirect(reverse('media'))
+    likes_count = FeedLikes.objects.filter(feed_id=feed_id).count()
+    response_data = {'result': 'success', 'likes_count': likes_count}
+    return JsonResponse(response_data)
 
 
 class ChatsView(generic.ListView):
