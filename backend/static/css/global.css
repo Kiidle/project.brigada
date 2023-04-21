@@ -24,7 +24,7 @@ main {
     grid-gap: 1px;
 }
 
-.custom-main .contacts {
+.custom-main .contacts, .custom-main .media {
     display: flex;
     width: 250px;
     background-color: white;
@@ -33,7 +33,7 @@ main {
     border-top-style: solid;
 }
 
-.custom-main .contacts .grid-contacts {
+.custom-main .contacts .grid-contacts, .custom-main .media .grid-media {
     width: 100%;
     height: calc(100vh - 51px);
     display: inline-block;
@@ -41,7 +41,7 @@ main {
 
 }
 
-.custom-main .contacts .grid-contacts .section {
+.custom-main .contacts .grid-contacts .section, .custom-main .media .grid-media .section {
     height: 48px;
     border-bottom-color: #d9d9d9;
     border-bottom-width: 1px;

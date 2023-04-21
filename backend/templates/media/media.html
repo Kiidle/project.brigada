@@ -1,0 +1,124 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <header>
+        <div class="grid-header">
+            <div class="title">
+                <h1>Medien</h1>
+            </div>
+        </div>
+    </header>
+    <div class="custom-main">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="{% static 'images/brigada.png' %}" alt='brigada'/>
+            </div>
+            <div class="navigation">
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/home_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Home
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/notification_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Benachrichtigung
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/log_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Systemprotokolle
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/group_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Benutzer
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/help_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Hilfe
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="rest-sidebar">
+                <a href="{% url 'logout' %}">
+                    Abmelden
+                </a>
+            </div>
+        </div>
+        <div class="media">
+            <div class="grid-media">
+                <div class="section">
+                    <div>
+                        Startseite
+                    </div>
+                </div>
+                <div class="section">
+                    <div>
+                        Suche
+                    </div>
+                </div>
+                <div class="section">
+                    <div>
+                        Abonniert
+                    </div>
+                </div>
+                <div class="section">
+                    <div>
+                        Abonnenten
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="feeds">
+                {% for feed in feeds %}
+                    <div class="feed">
+                        <div class="feed-user">
+                            <div class="feed-profile">
+                                <img src="{% static 'svgs/profile_filled.svg' %}" />
+                            </div>
+                            <div class="feed-name">
+                                <p>{{ feed.author.first_name }} {{ feed.author.last_name }}</p>
+                            </div>
+                            <div class="feed-username">
+                                <p>@{{ feed.author.username }}</p>
+                            </div>
+                        </div>
+                        <div class="feed-description">
+                            <p>{{ feed.description }}</p>
+                        </div>
+                        <div class="feed-image">
+                            <img src="{{ feed.image }}"/>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

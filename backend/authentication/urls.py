@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import SignUpView, HomeView, ChatsView
+from .views import SignUpView, HomeView, MediaView, ChatsView
 from .consumers import ChatViewWrapper
 
 urlpatterns = [
@@ -8,6 +8,7 @@ urlpatterns = [
     path("login/", views.sign_in, name="login"),
     path("logout", views.custom_logout, name="logout"),
     path("", HomeView.as_view(), name="home"),
+    path("media", MediaView.as_view(), name="media"),
     path("chats/", ChatsView.as_view(), name="chats"),
     path("chats/<int:pk>/", ChatViewWrapper.as_view(), name="chat"),
 ]

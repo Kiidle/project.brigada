@@ -7,11 +7,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import Group
-from authentication.models import Message
-from django.views.decorators.csrf import csrf_exempt
-from .models import Message
-from channels.generic.websocket import AsyncWebsocketConsumer
-import json
+from .models import Feed
 
 User = get_user_model()
 
@@ -66,6 +62,27 @@ class HomeView(generic.ListView):
     model = User
     template_name = "home/home.html"
     login_url = reverse_lazy('login')
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect(self.login_url)
+        else:
+            return super().get(request, *args, **kwargs)
+
+class MediaView(generic.ListView):
+    model = Feed
+    fields = ["description", "image", "published_date", "visibility", "author"]
+    template_name = "media/media.html"
+    login_url = reverse_lazy('login')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["feeds"] = super().get_queryset().order_by("description", "image", "published_date", "visibility", "author")
+
+        print(context)
+
+        return context
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
