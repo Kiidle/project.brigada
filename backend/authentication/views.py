@@ -93,8 +93,6 @@ class MediaView(generic.ListView):
                 unlike_flag.append(feed.id)
         context["unlike_flag"] = unlike_flag
 
-        print(context)
-
         return context
 
     def get(self, request, *args, **kwargs):

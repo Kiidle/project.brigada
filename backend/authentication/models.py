@@ -3,11 +3,16 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 class User(AbstractUser):
+    pp = models.ImageField(upload_to='static/images/uploads/profile', verbose_name="Profilbild", null=True)
     first_name = models.CharField(max_length=100, verbose_name="Vorname")
     last_name = models.CharField(max_length=100, verbose_name="Nachname")
     username = models.CharField(unique=True, max_length=100, verbose_name="Benutzername")
     email = models.CharField(max_length=100, verbose_name="E-Mail Adresse")
     verified = models.BooleanField(null=False, default=False)
+
+    def get_profile_url(self):
+        if self.pp and hasattr(self.pp, 'url'):
+            return self.pp.url
 
 class FeedManager(models.Manager):
     def liked_by_user(self, feed_id, user_id):
@@ -19,6 +24,10 @@ class Feed(models.Model):
     published_date = models.DateField(auto_now_add=True, verbose_name="Veröffentlicht")
     visibility = models.BooleanField(null=False, default=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="feeds")
+
+    def get_profile_url(self):
+        if self.author.pp and hasattr(self.author.pp, 'url'):
+            return self.author.pp.url
 
     def get_image_url(self):
         if self.image and hasattr(self.image, 'url'):

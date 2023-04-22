@@ -2,6 +2,10 @@
     padding: 12px;
 }
 
+.content .a-reset {
+    text-decoration: none;
+}
+
 .content .search-user {
     width: 100%;
     display: flex;
@@ -81,11 +85,18 @@
     color: red;
 }
 
-.user-container .card .grid-card .profile {
+.user-container .card .grid-card .no-profile {
     grid-area: profile;
     filter: brightness(0) saturate(100%) invert(56%) sepia(4%) saturate(13%) hue-rotate(346deg) brightness(96%) contrast(87%);
+}
 
+.user-container .card .grid-card .profile {
+    grid-area: profile;
+    display: flex;
+}
 
+.user-container .card .grid-card .profile img {
+    border-radius: 100%;
 }
 
 .dashboard {
@@ -174,6 +185,7 @@
     border-bottom-color: #d9d9d9;
     border-bottom-width: 1px;
     border-bottom-style: solid;
+    cursor: pointer;
 }
 
 .content .feeds .feed .feed-user {
@@ -195,13 +207,16 @@
     grid-area: feed-profile;
     display: flex;
     align-items: center;
-    filter: brightness(0) saturate(100%) invert(56%) sepia(4%) saturate(13%) hue-rotate(346deg) brightness(96%) contrast(87%);
+}
 
+.content .feeds .feed .feed-user .feed-profile .no-pp {
+    filter: brightness(0) saturate(100%) invert(56%) sepia(4%) saturate(13%) hue-rotate(346deg) brightness(96%) contrast(87%);
 }
 
 .content .feeds .feed .feed-user .feed-profile img {
     width: 100%;
     height: 100%;
+    border-radius: 100%;
 }
 
 .content .feeds .feed .feed-user .feed-name {
@@ -209,6 +224,7 @@
     grid-area: feed-name;
     display: flex;
     align-items: center;
+    color: black;
 }
 
 .content .feeds .feed .feed-user .feed-name p {
@@ -234,10 +250,21 @@
     color: gray;
 }
 
+.content .feeds .feed .feed-description .private {
+    color: red;
+    margin-bottom: 12px;
+}
+
+.content .feeds .feed .feed-description p {
+    margin-left: 12px;
+}
+
 .content .feeds .feed .feed-image {
     display: flex;
     align-items: center;
-    background-color: #eeeeee
+    background-color: #eeeeee;
+    max-height: 650px;
+    overflow: hidden;
 }
 
 .content .feeds .feed .feed-image img {
@@ -248,16 +275,17 @@
     border-bottom-width: 1px;
     border-top-style: solid;
     border-bottom-style: solid;
+    height: 100%;
 }
 
 .content .feeds .feed .feed-buttons {
     padding: 12px;
     display: grid;
-    grid-template-columns: 32px 32px 1fr;
+    grid-template-columns: 32px 32px 1fr 32px;
     grid-template-rows: 32px 1fr;
     grid-template-areas:
-        "button-like button-commentary ."
-        "feed-like feed-commentary .";
+        "button-like button-commentary . button-report"
+        "feed-like feed-commentary . .";
     grid-column-gap: 12px;
 }
 
@@ -273,7 +301,7 @@
     color: gray;
 }
 
-.content .feeds .feed .feed-buttons .button-like button {
+.content .feeds .feed .feed-buttons button {
     border: none;
     background-color: transparent;
     display: flex;
@@ -282,11 +310,11 @@
 }
 
 
-.content .feeds .feed .feed-buttons .button-like .unlike {
+.content .feeds .feed .feed-buttons .unlike {
     width: 100%;
 }
 
-.content .feeds .feed .feed-buttons .button-like .like {
+.content .feeds .feed .feed-buttons .like {
     width: 100%;
     filter: brightness(0) saturate(100%) invert(56%) sepia(37%) saturate(3679%) hue-rotate(323deg) brightness(113%) contrast(106%);
 }
@@ -302,6 +330,14 @@
     justify-content: center;
     align-items: center;
     color: gray;
+}
+
+.content .feeds .feed .feed-buttons .button-report {
+    grid-area: button-report;
+}
+
+.content .feeds .feed .feed-buttons .not-reported {
+    width: 100%;
 }
 
 .card .header {

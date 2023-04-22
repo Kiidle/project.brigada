@@ -100,123 +100,77 @@
             <div class="feed-container">
                 <div class="feeds">
                     {% for feed in feeds %}
-                        <div class="feed">
-                            <div class="feed-user">
-                                <div class="feed-profile">
-                                    <img src="{% static 'svgs/profile_filled.svg' %}"/>
-                                </div>
-                                <div class="feed-name">
-                                    <p>{{ feed.author.first_name }} {{ feed.author.last_name }}</p>
-                                    {% if feed.author.verified %}
-                                        <img src="{% static 'images/verified_filled.svg' %}" alt="verified"/>
+                        {% if feed.visibility == True or feed.author == request.user %}
+                            <div class="feed">
+                                <a href="/" class="feed-user a-reset">
+                                    <div class="feed-profile">
+                                        {% if feed.author.pp %}
+                                            <img src="{{ feed.author.get_profile_url }}" alt="{{ feed.profile }}" />
+                                        {% else %}
+                                            <img class="no-pp" src="{% static 'svgs/profile_filled.svg' %}"/>
+                                        {% endif %}
 
-                                    {% endif %}
-                                </div>
-                                <div class="feed-username">
-                                    <p>@{{ feed.author.username }}</p>
-                                </div>
-                            </div>
-                            <div class="feed-description">
-                                <p>{{ feed.description }}</p>
-                            </div>
-                            <div class="feed-image">
-                                {% if feed.image %}
-                                    <img src="{{ feed.get_image_url }}" alt="{{ feed.description }}">
-                                {% endif %}
-                            </div>
-                            <div class="feed-buttons">
-                                <div class="button-like">
-                                    {% if feed.id not in unlike_flag %}
-                                        <button class="unlike-btn" data-feed-id="{{ feed.id }}">
-                                            <img class="like" src="{% static 'svgs/heart_filled.svg' %}"/>
-                                        </button>
-                                    {% endif %}
-                                    {% if feed.id in unlike_flag %}
-                                        <button class="like-btn" data-feed-id="{{ feed.id }}">
-                                            <img class="unlike" src="{% static 'svgs/heart_unfilled.svg' %}"/>
-                                        </button>
-                                    {% endif %}
-                                </div>
-                                <div class="feed-like">
-                                        <p class="likes-count">{{ feed.likes.count }}</p>
-                                </div>
+                                    </div>
+                                    <div class="feed-name">
+                                        <p>{{ feed.author.first_name }} {{ feed.author.last_name }}</p>
+                                        {% if feed.author.verified %}
+                                            <img src="{% static 'images/verified_filled.svg' %}" alt="verified"/>
 
-                                <script>
-                                    $(document).ready(function () {
-                                        $(".like-btn").click(function (e) {
-                                            e.preventDefault();
-                                            var $this = $(this);
-                                            if ($this.prop("disabled")) {
-                                                // Der Button ist bereits deaktiviert, die Anfrage wird gerade bearbeitet
-                                                return;
-                                            }
-                                            $this.prop("disabled", true); // Button deaktivieren, um mehrfache Klicks zu verhindern
-                                            var feedId = $this.data("feed-id");
-                                            var url = "/feeds/" + feedId + "/like";
-                                            var heartImage = $this.find("img");
-                                            $.ajax({
-                                                url: url,
-                                                type: "POST",
-                                                data: {
-                                                    csrfmiddlewaretoken: "{{ csrf_token }}"
-                                                },
-                                                success: function (data) {
-                                                    var likesCount = parseInt($(`.likes-count[data-feed-id='${feedId}']`).text());
-                                                    $(".likes-count[data-feed-id='" + feedId + "']").text(likesCount + 1);
-                                                    heartImage.attr("src", "{% static 'svgs/heart_unfilled.svg' %}");
-                                                    $this.hide();
-                                                    $(".unlike-btn[data-feed-id='" + feedId + "']").show();
-                                                },
-                                                complete: function () {
-                                                    $this.prop("disabled", false); // Button aktivieren, wenn die Anfrage abgeschlossen ist
-                                                }
-                                            });
-                                        });
-
-                                        $(".unlike-btn").click(function (e) {
-                                            e.preventDefault();
-                                            var $this = $(this);
-                                            if ($this.prop("disabled")) {
-                                                // Der Button ist bereits deaktiviert, die Anfrage wird gerade bearbeitet
-                                                return;
-                                            }
-                                            $this.prop("disabled", true); // Button deaktivieren, um mehrfache Klicks zu verhindern
-                                            var feedId = $this.data("feed-id");
-                                            var url = "/feeds/" + feedId + "/unlike";
-                                            var heartImage = $this.find("img");
-                                            $.ajax({
-                                                url: url,
-                                                type: "POST",
-                                                data: {
-                                                    csrfmiddlewaretoken: "{{ csrf_token }}"
-                                                },
-                                                success: function (data) {
-                                                    var likesCount = parseInt($(`.likes-count[data-feed-id='${feedId}']`).text());
-                                                    $(".likes-count[data-feed-id='" + feedId + "']").text(likesCount - 1);
-                                                    heartImage.attr("src", "/static/svgs/heart_unfilled.svg");
-                                                    $this.hide();
-                                                    $(".like-btn[data-feed-id='" + feedId + "']").show();
-                                                },
-                                                complete: function () {
-                                                    $this.prop("disabled", false); // Button aktivieren, wenn die Anfrage abgeschlossen ist
-                                                }
-                                            });
-                                        });
-                                    });
-                                </script>
-
-                                <div class="button-commentary">
-                                    <img class="unlike" src="{% static 'svgs/commentary_unfilled.svg' %}"/>
-                                </div>
-                                <div class="feed-commentary">
-                                    {% if feed.commentaries.count < 1 %}
-                                        <p></p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="feed-username">
+                                        <p>@{{ feed.author.username }}</p>
+                                    </div>
+                                </a>
+                                <a href="/chats/" class="feed-description a-reset">
+                                    {% if feed.visibility == True %}
+                                        <p>{{ feed.description }}</p>
                                     {% else %}
-                                        <p>{{ feed.commentaries.count }}</p>
+                                        <p class="private">Hinweis: Nicht sichtbar</p>
+                                        <p>{{ feed.description }}</p>
                                     {% endif %}
-                                </div>
+                                </a>
+                                <a href="/chats/" class="feed-image a-reset">
+                                    {% if feed.image %}
+                                        <img src="{{ feed.get_image_url }}" alt="{{ feed.description }}">
+                                    {% endif %}
+                                </a>
+                                <a href="/chats/" class="feed-buttons a-reset">
+                                    <div class="button-like">
+                                        {% if feed.id not in unlike_flag %}
+                                            <button class="unlike-btn">
+                                                <img class="like" src="{% static 'svgs/heart_filled.svg' %}"/>
+                                            </button>
+                                        {% endif %}
+                                        {% if feed.id in unlike_flag %}
+                                            <button class="like-btn">
+                                                <img class="unlike" src="{% static 'svgs/heart_unfilled.svg' %}"/>
+                                            </button>
+                                        {% endif %}
+                                    </div>
+                                    <div class="feed-like">
+                                        {% if feed.likes.count > 0 %}
+                                            <p class="likes-count">{{ feed.likes.count }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="button-commentary">
+                                        <img class="unlike" src="{% static 'svgs/commentary_unfilled.svg' %}"/>
+                                    </div>
+                                    <div class="feed-commentary">
+                                        {% if feed.commentaries.count < 1 %}
+                                            <p></p>
+                                        {% else %}
+                                            <p>{{ feed.commentaries.count }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="button-report">
+                                        <button>
+                                            <img class="not-reported" src="{% static 'svgs/report_unfilled.svg' %}"/>
+                                        </button>
+                                    </div>
+                                </a>
                             </div>
-                        </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
