@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.db.models import Prefetch
 from django.shortcuts import get_object_or_404, redirect, render, reverse
 from .forms import LoginForm, SignUpForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -103,19 +104,59 @@ class MediaView(generic.ListView):
 
 def like_feed(request, feed_id):
     feed = get_object_or_404(Feed, id=feed_id)
-    FeedLikes.objects.create(user=request.user, feed=feed)
-    likes_count = FeedLikes.objects.filter(feed_id=feed_id).count()
-    response_data = {'result': 'success', 'likes_count': likes_count}
-    return JsonResponse(response_data)
-
+    if not FeedLikes.objects.filter(user=request.user, feed=feed).exists():
+        FeedLikes.objects.create(user=request.user, feed=feed)
+        likes_count = FeedLikes.objects.filter(feed_id=feed_id).count()
+    return HttpResponseRedirect(reverse('feed', args=[feed_id]))
 def unlike_feed(request, feed_id):
     feed = get_object_or_404(Feed, id=feed_id)
-    like = FeedLikes.objects.get(feed=feed, user=request.user)
-    like.delete()
-    likes_count = FeedLikes.objects.filter(feed_id=feed_id).count()
-    response_data = {'result': 'success', 'likes_count': likes_count}
-    return JsonResponse(response_data)
+    try:
+        like = FeedLikes.objects.get(feed=feed, user=request.user)
+        like.delete()
+        likes_count = FeedLikes.objects.filter(feed_id=feed_id).count()
+        return HttpResponseRedirect(reverse('feed', args=[feed_id]))
+    except FeedLikes.DoesNotExist:
+        return HttpResponseRedirect(reverse('feed', args=[feed_id]))
 
+class FeedView(generic.DetailView):
+    model = Feed
+    fields = ["description", "image", "published_date", "visibility", "author", "commentaries"]
+    template_name = "feeds/feed.html"
+    login_url = reverse_lazy('login')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["feeds"] = super().get_queryset().order_by("-id", "image")
+
+        feed_likes = FeedLikes.objects.all()
+        unlike_flag = []
+        for feed in context["feeds"]:
+            liked = feed_likes.filter(feed_id=feed.id, user_id=self.request.user.id).exists()
+            if not liked:
+                unlike_flag.append(feed.id)
+        context["unlike_flag"] = unlike_flag
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect(self.login_url)
+        else:
+            return super().get(request, *args, **kwargs)
+
+class FeedCreateView(generic.CreateView):
+    model = Feed
+    fields = ["description", "image", "visibility"]
+    template_name = "feeds/create.html"
+
+    def get_success_url(self):
+        return reverse_lazy('media')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+
+        return super().form_valid(form)
 
 class ChatsView(generic.ListView):
     model = User

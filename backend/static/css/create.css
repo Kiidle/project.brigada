@@ -1,0 +1,49 @@
+.create-form {
+    background-color: white;
+    padding: 12px;
+}
+
+.create-form form p {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 25px;
+    margin: 20px 0;
+}
+
+.create-form form p input, .create-form form select, .create-form form textarea, .create-form form input {
+    border-radius: 2px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #DDDDDD;
+    padding: 10px;
+    resize: none;
+}
+
+.create-form form label {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.create-form form .checkbox {
+    height: 25px;
+    width: 25px;
+    margin: 0 10px 0 0;
+}
+
+.create-form form textarea {
+    height: 75px;
+}
+
+.create-form form button {
+    height: 50px;
+    margin: 20px 0;
+    background-color: #ffab00;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 2px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+}

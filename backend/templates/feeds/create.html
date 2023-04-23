@@ -1,0 +1,137 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <header>
+        <div class="grid-header">
+            <div class="title">
+                <h1>Medien</h1>
+            </div>
+        </div>
+    </header>
+    <div class="custom-main">
+        <div class="sidebar">
+            <div class="logo">
+                <img src="{% static 'images/brigada.png' %}" alt='brigada'/>
+            </div>
+            <div class="navigation">
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/home_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Home
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/notification_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Benachrichtigung
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/log_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Systemprotokolle
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/group_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Benutzer
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/help_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            Hilfe
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="rest-sidebar">
+                <a href="{% url 'logout' %}">
+                    Abmelden
+                </a>
+            </div>
+        </div>
+        <div class="media">
+            <div class="grid-media">
+                <a href="{% url 'media' %}" class="section">
+                    <div>
+                        Startseite
+                    </div>
+                </a>
+                <div class="section">
+                    <div>
+                        Suche
+                    </div>
+                </div>
+                <div class="section">
+                    <div>
+                        Abonniert
+                    </div>
+                </div>
+                <div class="section">
+                    <div>
+                        Abonnenten
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="feed-container">
+                <div class="feeds">
+                    <div class="feed">
+                        <a href="/" class="feed-user a-reset">
+                            <div class="feed-profile">
+                                {% if request.user.pp %}
+                                    <img src="{{ request.user.get_profile_url }}" alt="{{ request.user.profile }}"/>
+                                {% else %}
+                                    <img class="no-pp" src="{% static 'svgs/profile_filled.svg' %}"/>
+                                {% endif %}
+
+                            </div>
+                            <div class="feed-name">
+                                <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
+                                {% if request.user.verified %}
+                                    <img src="{% static 'images/verified_filled.svg' %}" alt="verified"/>
+
+                                {% endif %}
+                            </div>
+                            <div class="feed-username">
+                                <p>@{{ request.user.username }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="create-form">
+                    <form method="POST" enctype="multipart/form-data">
+                        <div>
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit">Posten</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

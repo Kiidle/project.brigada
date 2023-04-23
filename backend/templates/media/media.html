@@ -122,7 +122,7 @@
                                         <p>@{{ feed.author.username }}</p>
                                     </div>
                                 </a>
-                                <a href="/chats/" class="feed-description a-reset">
+                                <a href="{% url 'feed' feed.id %}" class="feed-description a-reset">
                                     {% if feed.visibility == True %}
                                         <p>{{ feed.description }}</p>
                                     {% else %}
@@ -130,12 +130,12 @@
                                         <p>{{ feed.description }}</p>
                                     {% endif %}
                                 </a>
-                                <a href="/chats/" class="feed-image a-reset">
+                                <a href="{% url 'feed' feed.id %}" class="feed-image a-reset">
                                     {% if feed.image %}
                                         <img src="{{ feed.get_image_url }}" alt="{{ feed.description }}">
                                     {% endif %}
                                 </a>
-                                <a href="/chats/" class="feed-buttons a-reset">
+                                <a href="{% url 'feed' feed.id %}" class="feed-buttons a-reset">
                                     <div class="button-like">
                                         {% if feed.id not in unlike_flag %}
                                             <button class="unlike-btn">
