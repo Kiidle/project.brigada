@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 09:31+0000\n"
+"POT-Creation-Date: 2023-04-24 14:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,18 +17,154 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: authentication/models.py:7
+#: authentication/forms.py:10 authentication/models.py:7
 msgid "Vorname"
-msgstr ""
+msgstr "名字"
 
-#: authentication/models.py:8
+#: authentication/forms.py:11 authentication/models.py:8
 msgid "Nachname"
+msgstr "姓氏"
+
+#: authentication/forms.py:12 authentication/forms.py:35
+msgid "Passwort"
 msgstr ""
 
-#: authentication/models.py:9
+#: authentication/forms.py:34 authentication/models.py:9
 msgid "Benutzername"
-msgstr ""
+msgstr "用户名"
 
 #: authentication/models.py:10
 msgid "E-Mail Adresse"
+msgstr "电子邮件地址"
+
+#: authentication/models.py:22
+msgid "Beschreibung"
 msgstr ""
+
+#: authentication/models.py:23
+msgid "Bild"
+msgstr ""
+
+#: authentication/models.py:24 authentication/models.py:47
+msgid "Veröffentlicht"
+msgstr ""
+
+#: authentication/models.py:25
+msgid "Sichtbar"
+msgstr ""
+
+#: authentication/models.py:46
+msgid "Inhalt"
+msgstr ""
+
+#: templates/chats/chat.html:8 templates/chats/chats.html:8
+#: templates/home/home.html:125
+msgid "Chats"
+msgstr "聊天列表"
+
+#: templates/chats/chat.html:24 templates/chats/chats.html:24
+#: templates/feeds/create.html:25 templates/feeds/feed.html:25
+#: templates/home/home.html:8 templates/home/home.html:24
+#: templates/media/media.html:25
+msgid "Home"
+msgstr "主页"
+
+#: templates/chats/chat.html:34 templates/chats/chats.html:34
+#: templates/feeds/create.html:35 templates/feeds/feed.html:35
+#: templates/home/home.html:34 templates/media/media.html:35
+msgid "Benachrichtigung"
+msgstr "通知书"
+
+#: templates/chats/chat.html:44 templates/chats/chats.html:44
+#: templates/feeds/create.html:45 templates/feeds/feed.html:45
+#: templates/home/home.html:44 templates/media/media.html:45
+msgid "Systemprotokolle"
+msgstr "系统日志"
+
+#: templates/chats/chat.html:54 templates/chats/chats.html:54
+#: templates/feeds/create.html:55 templates/feeds/feed.html:55
+#: templates/home/home.html:54 templates/media/media.html:55
+msgid "Benutzer"
+msgstr "用户列表 "
+
+#: templates/chats/chat.html:64 templates/chats/chats.html:64
+#: templates/feeds/create.html:65 templates/feeds/feed.html:65
+#: templates/home/home.html:64 templates/login/login.html:24
+#: templates/media/media.html:65 templates/signup/signup.html:24
+msgid "Hilfe"
+msgstr "帮助"
+
+#: templates/chats/chat.html:71 templates/chats/chats.html:71
+#: templates/feeds/create.html:72 templates/feeds/feed.html:72
+#: templates/home/home.html:71 templates/media/media.html:72
+msgid "Abmelden"
+msgstr "登出"
+
+#: templates/chats/chat.html:172
+msgid "Nachricht"
+msgstr "留言"
+
+#: templates/chats/chat.html:173
+msgid "Abschicken"
+msgstr "发送"
+
+#: templates/chats/chats.html:112
+msgid "Vorname oder Nachname"
+msgstr "名或姓"
+
+#: templates/chats/chats.html:113 templates/feeds/create.html:85
+#: templates/feeds/feed.html:85 templates/media/media.html:85
+msgid "Suche"
+msgstr "搜索"
+
+#: templates/feeds/create.html:9 templates/feeds/feed.html:9
+#: templates/home/home.html:113 templates/media/media.html:9
+msgid "Medien"
+msgstr "媒体"
+
+#: templates/feeds/create.html:80 templates/feeds/feed.html:80
+#: templates/media/media.html:80
+msgid "Startseite"
+msgstr "首页"
+
+#: templates/feeds/create.html:90 templates/feeds/feed.html:90
+#: templates/media/media.html:90
+msgid "Abonniert"
+msgstr "订阅"
+
+#: templates/feeds/create.html:95 templates/feeds/feed.html:95
+#: templates/media/media.html:95
+msgid "Abonnenten"
+msgstr "订户"
+
+#: templates/home/home.html:137
+msgid "Archiv"
+msgstr "档案"
+
+#: templates/home/home.html:149
+msgid "Fraktion"
+msgstr "党团"
+
+#: templates/login/login.html:8 templates/login/login.html:34
+#: templates/login/login.html:40 templates/signup/signup.html:42
+msgid "Anmelden"
+msgstr "登录"
+
+#: templates/login/login.html:42
+msgid "Kein Konto? Stattdessen"
+msgstr "没有账户?"
+
+#: templates/login/login.html:43 templates/signup/signup.html:34
+#: templates/signup/signup.html:40
+msgid "Registrieren"
+msgstr "注册"
+
+#: templates/signup/signup.html:8
+#, fuzzy
+#| msgid "Registrieren"
+msgid "Registrierung"
+msgstr "注册"
+
+#: templates/signup/signup.html:42
+msgid "Bereits Konto? Stattdessen"
+msgstr "已经有一个账户?"

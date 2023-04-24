@@ -19,10 +19,10 @@ class FeedManager(models.Manager):
         return self.filter(id=feed_id, likes__user_id=user_id).exists()
 
 class Feed(models.Model):
-    description = models.TextField(max_length=200, verbose_name="Beschreibung")
-    image = models.ImageField(upload_to='static/images/uploads/feed', verbose_name="Bild")
-    published_date = models.DateField(auto_now_add=True, verbose_name="Veröffentlicht")
-    visibility = models.BooleanField(null=False, default=True)
+    description = models.TextField(max_length=200, verbose_name=_("Beschreibung"))
+    image = models.ImageField(upload_to='static/images/uploads/feed', verbose_name=_("Bild"))
+    published_date = models.DateField(auto_now_add=True, verbose_name=_("Veröffentlicht"))
+    visibility = models.BooleanField(null=False, default=True, verbose_name=_("Sichtbar"))
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="feeds")
 
     def get_profile_url(self):
@@ -43,8 +43,8 @@ class FeedLikes(models.Model):
         return '{} liked {}'.format(self.user.username, self.feed.description)
 
 class Commentary(models.Model):
-    content = models.TextField(max_length=200, verbose_name="Inhalt")
-    published_date = models.DateField(auto_now_add=True, verbose_name="Veröffentlicht")
+    content = models.TextField(max_length=200, verbose_name=_("Inhalt"))
+    published_date = models.DateField(auto_now_add=True, verbose_name=_("Veröffentlicht"))
     reference = models.ForeignKey(Feed, on_delete=models.CASCADE, related_name="commentaries")
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="commentaries")
 

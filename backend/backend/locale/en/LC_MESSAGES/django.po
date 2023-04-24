@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 09:31+0000\n"
+"POT-Creation-Date: 2023-04-24 14:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,18 +18,154 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: authentication/models.py:7
+#: authentication/forms.py:10 authentication/models.py:7
 msgid "Vorname"
 msgstr "First Name"
 
-#: authentication/models.py:8
+#: authentication/forms.py:11 authentication/models.py:8
 msgid "Nachname"
 msgstr "Last Name"
 
-#: authentication/models.py:9
+#: authentication/forms.py:12 authentication/forms.py:35
+msgid "Passwort"
+msgstr "Password"
+
+#: authentication/forms.py:34 authentication/models.py:9
 msgid "Benutzername"
 msgstr "Username"
 
 #: authentication/models.py:10
 msgid "E-Mail Adresse"
 msgstr "E-Mail Address"
+
+#: authentication/models.py:22
+msgid "Beschreibung"
+msgstr "Description"
+
+#: authentication/models.py:23
+msgid "Bild"
+msgstr "Image"
+
+#: authentication/models.py:24 authentication/models.py:47
+msgid "Veröffentlicht"
+msgstr "Published"
+
+#: authentication/models.py:25
+msgid "Sichtbar"
+msgstr "Visible"
+
+#: authentication/models.py:46
+msgid "Inhalt"
+msgstr "Content"
+
+#: templates/chats/chat.html:8 templates/chats/chats.html:8
+#: templates/home/home.html:125
+msgid "Chats"
+msgstr "Chats"
+
+#: templates/chats/chat.html:24 templates/chats/chats.html:24
+#: templates/feeds/create.html:25 templates/feeds/feed.html:25
+#: templates/home/home.html:8 templates/home/home.html:24
+#: templates/media/media.html:25
+msgid "Home"
+msgstr "Home"
+
+#: templates/chats/chat.html:34 templates/chats/chats.html:34
+#: templates/feeds/create.html:35 templates/feeds/feed.html:35
+#: templates/home/home.html:34 templates/media/media.html:35
+msgid "Benachrichtigung"
+msgstr "Notification"
+
+#: templates/chats/chat.html:44 templates/chats/chats.html:44
+#: templates/feeds/create.html:45 templates/feeds/feed.html:45
+#: templates/home/home.html:44 templates/media/media.html:45
+msgid "Systemprotokolle"
+msgstr "System logs"
+
+#: templates/chats/chat.html:54 templates/chats/chats.html:54
+#: templates/feeds/create.html:55 templates/feeds/feed.html:55
+#: templates/home/home.html:54 templates/media/media.html:55
+msgid "Benutzer"
+msgstr "User"
+
+#: templates/chats/chat.html:64 templates/chats/chats.html:64
+#: templates/feeds/create.html:65 templates/feeds/feed.html:65
+#: templates/home/home.html:64 templates/login/login.html:24
+#: templates/media/media.html:65 templates/signup/signup.html:24
+msgid "Hilfe"
+msgstr "Help"
+
+#: templates/chats/chat.html:71 templates/chats/chats.html:71
+#: templates/feeds/create.html:72 templates/feeds/feed.html:72
+#: templates/home/home.html:71 templates/media/media.html:72
+msgid "Abmelden"
+msgstr "Logout"
+
+#: templates/chats/chat.html:172
+msgid "Nachricht"
+msgstr "Message"
+
+#: templates/chats/chat.html:173
+msgid "Abschicken"
+msgstr "Send"
+
+#: templates/chats/chats.html:112
+msgid "Vorname oder Nachname"
+msgstr "First name or last name"
+
+#: templates/chats/chats.html:113 templates/feeds/create.html:85
+#: templates/feeds/feed.html:85 templates/media/media.html:85
+msgid "Suche"
+msgstr "Search"
+
+#: templates/feeds/create.html:9 templates/feeds/feed.html:9
+#: templates/home/home.html:113 templates/media/media.html:9
+msgid "Medien"
+msgstr "Media"
+
+#: templates/feeds/create.html:80 templates/feeds/feed.html:80
+#: templates/media/media.html:80
+msgid "Startseite"
+msgstr "Start"
+
+#: templates/feeds/create.html:90 templates/feeds/feed.html:90
+#: templates/media/media.html:90
+msgid "Abonniert"
+msgstr "Subscribes"
+
+#: templates/feeds/create.html:95 templates/feeds/feed.html:95
+#: templates/media/media.html:95
+msgid "Abonnenten"
+msgstr "Subscribers"
+
+#: templates/home/home.html:137
+msgid "Archiv"
+msgstr "Archive"
+
+#: templates/home/home.html:149
+msgid "Fraktion"
+msgstr "Fraction"
+
+#: templates/login/login.html:8 templates/login/login.html:34
+#: templates/login/login.html:40 templates/signup/signup.html:42
+msgid "Anmelden"
+msgstr "Login"
+
+#: templates/login/login.html:42
+msgid "Kein Konto? Stattdessen"
+msgstr "No Account?"
+
+#: templates/login/login.html:43 templates/signup/signup.html:34
+#: templates/signup/signup.html:40
+msgid "Registrieren"
+msgstr "Sign Up"
+
+#: templates/signup/signup.html:8
+#, fuzzy
+#| msgid "Registrieren"
+msgid "Registrierung"
+msgstr "Sign Up"
+
+#: templates/signup/signup.html:42
+msgid "Bereits Konto? Stattdessen"
+msgstr "Already have an Account?"

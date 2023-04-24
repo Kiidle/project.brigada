@@ -1,10 +1,11 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
     <header>
         <div class="grid-header">
             <div class="title">
-                <h1>Registrierung</h1>
+                <h1>{% translate "Registrieren" %}</h1>
             </div>
         </div>
     </header>
@@ -20,7 +21,7 @@
                             <img src="{% static 'svgs/help_filled.svg' %}" alt='home'/>
                         </div>
                         <div class="text">
-                            Hilfe
+                            {% translate "Hilfe" %}
                         </div>
                     </div>
                 </a>
@@ -30,15 +31,15 @@
             <div class="card-container">
                 <div class="card">
                     <div class="header">
-                        <p>Registrieren</p>
+                        <p>{% translate "Registrieren" %}</p>
                     </div>
                     <div class="form-container">
                         <form method="POST">
                             {% csrf_token %}
                             {{ form.as_p }}
-                            <button type="submit">Registrieren</button>
+                            <button type="submit">{% translate "Registrieren" %}</button>
                         </form>
-                        <p>Bereits Konto? Stattdessen <a href="{% url 'login' %}">Anmelden</a></p>
+                        <p>{% translate "Bereits Konto? Stattdessen" %} <a href="{% url 'login' %}">{% translate "Anmelden" %}</a></p>
                     </div>
                 </div>
             </div>

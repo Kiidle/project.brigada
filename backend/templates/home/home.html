@@ -1,10 +1,11 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
     <header>
         <div class="grid-header">
             <div class="title">
-                <h1>Home</h1>
+                <h1>{% translate "Home" %}</h1>
             </div>
         </div>
     </header>
@@ -20,7 +21,7 @@
                             <img src="{% static 'svgs/home_filled.svg' %}" alt='home'/>
                         </div>
                         <div class="text">
-                            Home
+                            {% translate "Home" %}
                         </div>
                     </div>
                 </a>
@@ -30,7 +31,7 @@
                             <img src="{% static 'svgs/notification_filled.svg' %}" alt='home'/>
                         </div>
                         <div class="text">
-                            Benachrichtigung
+                            {% translate "Benachrichtigung" %}
                         </div>
                     </div>
                 </a>
@@ -40,7 +41,7 @@
                             <img src="{% static 'svgs/log_filled.svg' %}" alt='home'/>
                         </div>
                         <div class="text">
-                            Systemprotokolle
+                            {% translate "Systemprotokolle" %}
                         </div>
                     </div>
                 </a>
@@ -50,7 +51,7 @@
                             <img src="{% static 'svgs/group_filled.svg' %}" alt='home'/>
                         </div>
                         <div class="text">
-                            Benutzer
+                            {% translate "Benutzer" %}
                         </div>
                     </div>
                 </a>
@@ -60,14 +61,14 @@
                             <img src="{% static 'svgs/help_filled.svg' %}" alt='home'/>
                         </div>
                         <div class="text">
-                            Hilfe
+                            {% translate "Hilfe" %}
                         </div>
                     </div>
                 </a>
             </div>
             <div class="rest-sidebar">
                 <a href="{% url 'logout' %}">
-                    Abmelden
+                    {% translate "Abmelden" %}
                 </a>
             </div>
         </div>
@@ -109,7 +110,7 @@
                                 <img src="{% static 'svgs/forum_filled.svg' %}" alt='home'/>
                             </div>
                             <div class="app-name">
-                                Medien
+                                {% translate "Medien" %}
                             </div>
                         </div>
                     </a>
@@ -121,7 +122,7 @@
                                 <img src="{% static 'svgs/chat_filled.svg' %}" alt='home'/>
                             </div>
                             <div class="app-name">
-                                Chats
+                                {% translate "Chats" %}
                             </div>
                         </div>
                     </a>
@@ -133,7 +134,7 @@
                                 <img src="{% static 'svgs/archive_filled.svg' %}" alt='home'/>
                             </div>
                             <div class="app-name">
-                                Archiv
+                                {% translate "Archiv" %}
                             </div>
                         </div>
                     </a>
@@ -145,7 +146,7 @@
                                 <img src="{% static 'images/brigada.png' %}" alt='home'/>
                             </div>
                             <div class="app-name">
-                                Fraktion
+                                {% translate "Fraktion" %}
                             </div>
                         </div>
                     </a>

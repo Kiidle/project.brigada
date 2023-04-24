@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+python manage.py makemessages --all --ignore=venv
+python manage.py compilemessages --ignore=venv
