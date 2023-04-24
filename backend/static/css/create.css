@@ -25,7 +25,7 @@
     align-items: center;
 }
 
-.create-form form .checkbox {
+.create-form form .checkbox, .create-form form input[type=checkbox] {
     height: 25px;
     width: 25px;
     margin: 0 10px 0 0;

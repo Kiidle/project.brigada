@@ -19,13 +19,6 @@ class SignUpForm(ModelForm):
             "email",
             "password"
         ]
-        labels = {
-            "first_name": "Vorname",
-            "last_name": "Nachname",
-            "username": "Benutzername",
-            "email": "E-Mail Adresse",
-            "password": "Passwort",
-        }
         help_texts = {"username": ""}
         error_messages = {"name": {"required": "Pflichtfeld"}}
 

@@ -96,7 +96,12 @@
                 </div>
             </div>
         </div>
-        <div class="content">
+        <div class="content flex-content">
+            <div class="square-buttons">
+                <a href="{% url 'feed_create' %}" class="square-button a-reset">
+                    <img src="{% static 'svgs/create.svg' %}" alt="create">
+                </a>
+            </div>
             <div class="feed-container">
                 <div class="feeds">
                     {% for feed in feeds %}
@@ -105,7 +110,7 @@
                                 <a href="/" class="feed-user a-reset">
                                     <div class="feed-profile">
                                         {% if feed.author.pp %}
-                                            <img src="{{ feed.author.get_profile_url }}" alt="{{ feed.profile }}" />
+                                            <img src="{{ feed.author.get_profile_url }}" alt="{{ feed.profile }}"/>
                                         {% else %}
                                             <img class="no-pp" src="{% static 'svgs/profile_filled.svg' %}"/>
                                         {% endif %}

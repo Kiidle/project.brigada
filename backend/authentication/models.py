@@ -4,10 +4,10 @@ from django.utils.translation import gettext_lazy as _
 
 class User(AbstractUser):
     pp = models.ImageField(upload_to='static/images/uploads/profile', verbose_name="Profilbild", null=True)
-    first_name = models.CharField(max_length=100, verbose_name="Vorname")
-    last_name = models.CharField(max_length=100, verbose_name="Nachname")
-    username = models.CharField(unique=True, max_length=100, verbose_name="Benutzername")
-    email = models.CharField(max_length=100, verbose_name="E-Mail Adresse")
+    first_name = models.CharField(max_length=100, verbose_name=_("Vorname"))
+    last_name = models.CharField(max_length=100, verbose_name=_("Nachname"))
+    username = models.CharField(unique=True, max_length=100, verbose_name=_("Benutzername"))
+    email = models.CharField(max_length=100, verbose_name=_("E-Mail Adresse"))
     verified = models.BooleanField(null=False, default=False)
 
     def get_profile_url(self):
