@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 14:10+0000\n"
+"POT-Creation-Date: 2023-04-24 14:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -157,17 +157,16 @@ msgstr "Войти"
 msgid "Kein Konto? Stattdessen"
 msgstr "Нет счета?"
 
-#: templates/login/login.html:43 templates/signup/signup.html:34
-#: templates/signup/signup.html:40
+#: templates/login/login.html:43 templates/signup/signup.html:8
+#: templates/signup/signup.html:34 templates/signup/signup.html:40
 msgid "Registrieren"
-msgstr "Регистрация"
-
-#: templates/signup/signup.html:8
-#, fuzzy
-#| msgid "Registrieren"
-msgid "Registrierung"
 msgstr "Регистрация"
 
 #: templates/signup/signup.html:42
 msgid "Bereits Konto? Stattdessen"
 msgstr "У вас уже есть аккаунт?"
+
+#, fuzzy
+#~| msgid "Registrieren"
+#~ msgid "Registrierung"
+#~ msgstr "Регистрация"
