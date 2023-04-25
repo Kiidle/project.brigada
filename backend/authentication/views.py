@@ -2,13 +2,13 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.db.models import Prefetch
 from django.shortcuts import get_object_or_404, redirect, render, reverse
-from .forms import LoginForm, SignUpForm
+from .forms import LoginForm, SignUpForm, CommentaryForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import Group
-from .models import Feed, FeedLikes
+from .models import Feed, FeedLikes, Commentary
 from django.http import HttpResponseRedirect, JsonResponse
 from urllib.parse import urlencode
 
@@ -85,7 +85,6 @@ class MediaView(generic.ListView):
         context = super().get_context_data(**kwargs)
 
         context["feeds"] = super().get_queryset().order_by("-published_date", "-id")
-
         feed_likes = FeedLikes.objects.all()
         unlike_flag = []
         for feed in context["feeds"]:
@@ -102,12 +101,15 @@ class MediaView(generic.ListView):
         else:
             return super().get(request, *args, **kwargs)
 
+
 def like_feed(request, feed_id):
     feed = get_object_or_404(Feed, id=feed_id)
     if not FeedLikes.objects.filter(user=request.user, feed=feed).exists():
         FeedLikes.objects.create(user=request.user, feed=feed)
         likes_count = FeedLikes.objects.filter(feed_id=feed_id).count()
     return HttpResponseRedirect(reverse('feed', args=[feed_id]))
+
+
 def unlike_feed(request, feed_id):
     feed = get_object_or_404(Feed, id=feed_id)
     try:
@@ -117,6 +119,7 @@ def unlike_feed(request, feed_id):
         return HttpResponseRedirect(reverse('feed', args=[feed_id]))
     except FeedLikes.DoesNotExist:
         return HttpResponseRedirect(reverse('feed', args=[feed_id]))
+
 
 class FeedView(generic.DetailView):
     model = Feed
@@ -137,8 +140,22 @@ class FeedView(generic.DetailView):
                 unlike_flag.append(feed.id)
         context["unlike_flag"] = unlike_flag
 
+        context['commentaries'] = self.object.commentaries.order_by('-published_date', "-id")
+        context['commentary_form'] = CommentaryForm()
+
         return context
 
+    def get_success_url(self):
+        return reverse_lazy('feed', kwargs={'pk': self.kwargs['pk']})
+
+    def post(self, request, *args, **kwargs):
+        form = CommentaryForm(request.POST)
+        if form.is_valid():
+            commentary = form.save(commit=False)
+            commentary.author = request.user
+            commentary.reference = self.get_object()
+            commentary.save()
+        return redirect('feed', pk=self.get_object().pk)
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect(self.login_url)
@@ -157,6 +174,7 @@ class FeedCreateView(generic.CreateView):
         form.instance.author = self.request.user
 
         return super().form_valid(form)
+
 
 class ChatsView(generic.ListView):
     model = User

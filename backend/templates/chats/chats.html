@@ -102,9 +102,15 @@
                                 {% endif %}
                             {% endfor %}
                         </div>
-                        <a href="{% url 'home' %}" class="profile">
-                            <img src="{% static 'svgs/profile_filled.svg' %}" alt='home'/>
-                        </a>
+                        {% if user.pp %}
+                            <a href="{% url 'home' %}" class="profile">
+                                <img src="{{ user.get_profile_url }}" alt="{{ feed.profile }}"/>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'home' %}" class="no-profile">
+                                <img src="{% static 'svgs/profile_filled.svg' %}" alt='home'/>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

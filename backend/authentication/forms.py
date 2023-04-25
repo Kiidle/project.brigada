@@ -3,12 +3,14 @@ from django.contrib.auth import get_user_model
 from django.forms import ModelForm
 from django.core.validators import MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
+from .models import Commentary
 
 User = get_user_model()
 
+
 class SignUpForm(ModelForm):
-    first_name= forms.CharField(validators=[MaxLengthValidator(15)], label=_("Vorname"))
-    last_name= forms.CharField(validators=[MaxLengthValidator(15)], label=_("Nachname"))
+    first_name = forms.CharField(validators=[MaxLengthValidator(15)], label=_("Vorname"))
+    last_name = forms.CharField(validators=[MaxLengthValidator(15)], label=_("Nachname"))
     password = forms.CharField(widget=forms.PasswordInput(), label=_("Passwort"))
 
     class Meta:
@@ -30,6 +32,19 @@ class SignUpForm(ModelForm):
             user.save()
         return user
 
+
 class LoginForm(forms.Form):
     username = forms.CharField(label=_("Benutzername"))
     password = forms.CharField(widget=forms.PasswordInput, label=_("Passwort"))
+
+
+class CommentaryForm(forms.ModelForm):
+    content = forms.CharField(max_length=200, widget=forms.Textarea(attrs={'rows': 5}), label=_("Inhalt"))
+
+    class Meta:
+        model = Commentary
+        fields = ["content"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['content'].widget = forms.Textarea(attrs={'rows': 5, 'maxlength': '200'})

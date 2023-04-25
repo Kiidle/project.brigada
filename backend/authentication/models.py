@@ -79,6 +79,8 @@ class Commentary(models.Model):
     def __str__(self):
         return self.content
 
+    class Meta:
+        ordering = ['-published_date', "-id"]
 
 class Message(models.Model):
     content = models.TextField(max_length=500, verbose_name="Inhalt")
