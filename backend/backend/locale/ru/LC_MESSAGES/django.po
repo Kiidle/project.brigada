@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 14:25+0000\n"
+"POT-Creation-Date: 2023-04-25 08:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,11 +20,11 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: authentication/forms.py:10 authentication/models.py:7
+#: authentication/forms.py:10 authentication/models.py:9
 msgid "Vorname"
 msgstr "Имя"
 
-#: authentication/forms.py:11 authentication/models.py:8
+#: authentication/forms.py:11 authentication/models.py:10
 msgid "Nachname"
 msgstr "Фамилия"
 
@@ -32,33 +32,71 @@ msgstr "Фамилия"
 msgid "Passwort"
 msgstr "Пароль"
 
-#: authentication/forms.py:34 authentication/models.py:9
+#: authentication/forms.py:34 authentication/models.py:11
 msgid "Benutzername"
 msgstr "Имя пользователя"
 
-#: authentication/models.py:10
+#: authentication/models.py:12
 msgid "E-Mail Adresse"
 msgstr "Адрес электронной почты"
 
-#: authentication/models.py:22
+#: authentication/models.py:26
 msgid "Beschreibung"
-msgstr ""
+msgstr "Описание"
 
-#: authentication/models.py:23
+#: authentication/models.py:27
 msgid "Bild"
-msgstr ""
+msgstr "Изображение"
 
-#: authentication/models.py:24 authentication/models.py:47
+#: authentication/models.py:28 authentication/models.py:75
 msgid "Veröffentlicht"
-msgstr ""
+msgstr "Опубликовано"
 
-#: authentication/models.py:25
+#: authentication/models.py:29
 msgid "Sichtbar"
-msgstr ""
+msgstr "Видимый"
+
+#: authentication/models.py:38
+#, python-brace-format
+msgid "Vor {count} Jahr{plural}"
+msgstr "До {count} год{plural}"
+
+#: authentication/models.py:38 authentication/models.py:41
+#: authentication/models.py:43
+msgid "e"
+msgstr "ы"
+
+#: authentication/models.py:41
+#, python-brace-format
+msgid "Vor {count} Monat{plural}"
+msgstr "До {count} Месяц{plural}"
+
+#: authentication/models.py:43
+#, python-brace-format
+msgid "Vor {count} Tag{plural}"
+msgstr "До {count} День{plural}"
 
 #: authentication/models.py:46
+#, python-brace-format
+msgid "Vor {count} Stunde{plural}"
+msgstr "До {count} Час{plural}"
+
+#: authentication/models.py:46 authentication/models.py:49
+msgid "n"
+msgstr "ы"
+
+#: authentication/models.py:49
+#, python-brace-format
+msgid "Vor {count} Minute{plural}"
+msgstr "До {count} Минута{plural}"
+
+#: authentication/models.py:51
+msgid "Gerade eben"
+msgstr "Только что"
+
+#: authentication/models.py:74
 msgid "Inhalt"
-msgstr ""
+msgstr "Содержание"
 
 #: templates/chats/chat.html:8 templates/chats/chats.html:8
 #: templates/home/home.html:125
@@ -165,8 +203,3 @@ msgstr "Регистрация"
 #: templates/signup/signup.html:42
 msgid "Bereits Konto? Stattdessen"
 msgstr "У вас уже есть аккаунт?"
-
-#, fuzzy
-#~| msgid "Registrieren"
-#~ msgid "Registrierung"
-#~ msgstr "Регистрация"

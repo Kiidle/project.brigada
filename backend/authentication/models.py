@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
+from datetime import datetime, time
+from django.utils.translation import gettext, gettext_lazy as _
 
 class User(AbstractUser):
     pp = models.ImageField(upload_to='static/images/uploads/profile', verbose_name="Profilbild", null=True)
@@ -14,16 +16,39 @@ class User(AbstractUser):
         if self.pp and hasattr(self.pp, 'url'):
             return self.pp.url
 
+
 class FeedManager(models.Manager):
     def liked_by_user(self, feed_id, user_id):
         return self.filter(id=feed_id, likes__user_id=user_id).exists()
 
+
 class Feed(models.Model):
     description = models.TextField(max_length=200, verbose_name=_("Beschreibung"))
     image = models.ImageField(upload_to='static/images/uploads/feed', verbose_name=_("Bild"))
-    published_date = models.DateField(auto_now_add=True, verbose_name=_("Veröffentlicht"))
+    published_date = models.DateTimeField(auto_now_add=True, verbose_name=_("Veröffentlicht"))
     visibility = models.BooleanField(null=False, default=True, verbose_name=_("Sichtbar"))
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="feeds")
+
+    def time_since_published(self):
+        now = timezone.now()
+        diff = now - self.published_date
+
+        if diff.days >= 365:
+            count = diff.days // 365
+            return _("Vor {count} Jahr{plural}").format(count=count, plural=_('e') if count > 1 else '')
+        elif diff.days >= 30:
+            count = diff.days // 30
+            return _("Vor {count} Monat{plural}").format(count=count, plural=_('e') if count > 1 else '')
+        elif diff.days > 0:
+            return _("Vor {count} Tag{plural}").format(count=diff.days, plural=_('e') if diff.days > 1 else '')
+        elif diff.seconds >= 3600:
+            count = diff.seconds // 3600
+            return _("Vor {count} Stunde{plural}").format(count=count, plural=_('n') if count > 1 else '')
+        elif diff.seconds >= 60:
+            count = diff.seconds // 60
+            return _("Vor {count} Minute{plural}").format(count=count, plural=_('n') if count > 1 else '')
+        else:
+            return _("Gerade eben")
 
     def get_profile_url(self):
         if self.author.pp and hasattr(self.author.pp, 'url'):
@@ -36,11 +61,14 @@ class Feed(models.Model):
     def __str__(self):
         return self.description
 
+
 class FeedLikes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     feed = models.ForeignKey(Feed, on_delete=models.CASCADE, related_name='likes')
+
     def __str__(self):
         return '{} liked {}'.format(self.user.username, self.feed.description)
+
 
 class Commentary(models.Model):
     content = models.TextField(max_length=200, verbose_name=_("Inhalt"))
@@ -51,6 +79,7 @@ class Commentary(models.Model):
     def __str__(self):
         return self.content
 
+
 class Message(models.Model):
     content = models.TextField(max_length=500, verbose_name="Inhalt")
     to = models.ForeignKey(User, on_delete=models.CASCADE, related_name="received_messages")
@@ -59,8 +88,10 @@ class Message(models.Model):
     def __str__(self):
         return self.content
 
+
 class Stone(models.Model):
     pass
+
 
 class Wood(models.Model):
     pass

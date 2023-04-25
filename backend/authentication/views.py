@@ -84,7 +84,7 @@ class MediaView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["feeds"] = super().get_queryset().order_by("-id", "image")
+        context["feeds"] = super().get_queryset().order_by("-published_date")
 
         feed_likes = FeedLikes.objects.all()
         unlike_flag = []

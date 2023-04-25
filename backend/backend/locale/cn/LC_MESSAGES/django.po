@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 14:25+0000\n"
+"POT-Creation-Date: 2023-04-25 08:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: authentication/forms.py:10 authentication/models.py:7
+#: authentication/forms.py:10 authentication/models.py:9
 msgid "Vorname"
 msgstr "名字"
 
-#: authentication/forms.py:11 authentication/models.py:8
+#: authentication/forms.py:11 authentication/models.py:10
 msgid "Nachname"
 msgstr "姓氏"
 
@@ -29,31 +29,69 @@ msgstr "姓氏"
 msgid "Passwort"
 msgstr ""
 
-#: authentication/forms.py:34 authentication/models.py:9
+#: authentication/forms.py:34 authentication/models.py:11
 msgid "Benutzername"
 msgstr "用户名"
 
-#: authentication/models.py:10
+#: authentication/models.py:12
 msgid "E-Mail Adresse"
 msgstr "电子邮件地址"
 
-#: authentication/models.py:22
+#: authentication/models.py:26
 msgid "Beschreibung"
 msgstr ""
 
-#: authentication/models.py:23
+#: authentication/models.py:27
 msgid "Bild"
 msgstr ""
 
-#: authentication/models.py:24 authentication/models.py:47
+#: authentication/models.py:28 authentication/models.py:75
 msgid "Veröffentlicht"
 msgstr ""
 
-#: authentication/models.py:25
+#: authentication/models.py:29
 msgid "Sichtbar"
 msgstr ""
 
+#: authentication/models.py:38
+#, python-brace-format
+msgid "Vor {count} Jahr{plural}"
+msgstr ""
+
+#: authentication/models.py:38 authentication/models.py:41
+#: authentication/models.py:43
+msgid "e"
+msgstr ""
+
+#: authentication/models.py:41
+#, python-brace-format
+msgid "Vor {count} Monat{plural}"
+msgstr ""
+
+#: authentication/models.py:43
+#, python-brace-format
+msgid "Vor {count} Tag{plural}"
+msgstr ""
+
 #: authentication/models.py:46
+#, python-brace-format
+msgid "Vor {count} Stunde{plural}"
+msgstr ""
+
+#: authentication/models.py:46 authentication/models.py:49
+msgid "n"
+msgstr ""
+
+#: authentication/models.py:49
+#, python-brace-format
+msgid "Vor {count} Minute{plural}"
+msgstr ""
+
+#: authentication/models.py:51
+msgid "Gerade eben"
+msgstr ""
+
+#: authentication/models.py:74
 msgid "Inhalt"
 msgstr ""
 

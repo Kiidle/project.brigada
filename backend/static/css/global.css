@@ -54,6 +54,11 @@ main {
     color: gray
 }
 
+.custom-main .contacts .grid-contacts .section, .custom-main .media .grid-media .section .current {
+    color: #ffab00;
+    border-bottom-color: #d9d9d9;
+}
+
 .custom-main .chat {
     background: #e8e8e8;
     display: flex;

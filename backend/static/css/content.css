@@ -368,6 +368,15 @@
     width: 100%;
 }
 
+.content .feeds .feed .feed-timeshow {
+    color: gray;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-align: right;
+    display: flex;
+    padding: 12px;
+}
+
 .content .feeds .commentaries {
     background-color: white;
 }
