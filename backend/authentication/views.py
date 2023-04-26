@@ -206,6 +206,16 @@ class FeedUpdateView(generic.UpdateView):
         context = super().get_context_data(**kwargs)
         return context
 
+class ProfileView(generic.ListView):
+    model = User
+    template_name = "media/profile.html"
+    login_url = reverse_lazy('login')
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect(self.login_url)
+        else:
+            return super().get(request, *args, **kwargs)
+
 
 class ChatsView(generic.ListView):
     model = User

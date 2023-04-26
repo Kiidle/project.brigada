@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 10:16+0000\n"
+"POT-Creation-Date: 2023-04-26 10:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,19 +151,19 @@ msgstr "Help"
 msgid "Abmelden"
 msgstr "Logout"
 
-#: templates/chats/chat.html:172
+#: templates/chats/chat.html:173
 msgid "Nachricht"
 msgstr "Message"
 
-#: templates/chats/chat.html:173
+#: templates/chats/chat.html:174
 msgid "Abschicken"
 msgstr "Send"
 
-#: templates/chats/chats.html:118
+#: templates/chats/chats.html:120
 msgid "Vorname oder Nachname"
 msgstr "First name or last name"
 
-#: templates/chats/chats.html:119 templates/feeds/feed.html:85
+#: templates/chats/chats.html:121 templates/feeds/feed.html:85
 #: templates/feeds/form.html:85 templates/media/media.html:85
 msgid "Suche"
 msgstr "Search"
@@ -199,6 +199,10 @@ msgstr "Post"
 #: templates/feeds/form.html:190
 msgid "Speichern"
 msgstr "Save"
+
+#: templates/home/home.html:85
+msgid "Bürger"
+msgstr "Citizen"
 
 #: templates/home/home.html:137
 msgid "Archiv"

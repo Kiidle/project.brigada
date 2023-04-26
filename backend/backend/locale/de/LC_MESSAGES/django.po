@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 10:16+0000\n"
+"POT-Creation-Date: 2023-04-26 10:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,211 +20,215 @@ msgstr ""
 
 #: authentication/forms.py:12 authentication/models.py:9
 msgid "Vorname"
-msgstr ""
+msgstr "Vorname"
 
 #: authentication/forms.py:13 authentication/models.py:10
 msgid "Nachname"
-msgstr ""
+msgstr "Nachname"
 
 #: authentication/forms.py:14 authentication/forms.py:38
 msgid "Passwort"
-msgstr ""
+msgstr "Passwort"
 
 #: authentication/forms.py:37 authentication/models.py:11
 msgid "Benutzername"
-msgstr ""
+msgstr "Benutzername"
 
 #: authentication/forms.py:42 authentication/models.py:86
 msgid "Inhalt"
-msgstr ""
+msgstr "Inhalt"
 
 #: authentication/models.py:12
 msgid "E-Mail Adresse"
-msgstr ""
+msgstr "E-Mail Adresse"
 
 #: authentication/models.py:24
 msgid "Vollständige Name anzeigen"
-msgstr ""
+msgstr "Vollständige Name anzeigen"
 
 #: authentication/models.py:25
 msgid "Safe Mode"
-msgstr ""
+msgstr "Safe Mode"
 
 #: authentication/models.py:26
 msgid "Benutzeroberfläche"
-msgstr ""
+msgstr "Benutzeroberfläche"
 
 #: authentication/models.py:38
 msgid "Beschreibung"
-msgstr ""
+msgstr "Beschreibung"
 
 #: authentication/models.py:39
 msgid "Bild"
-msgstr ""
+msgstr "Bild"
 
 #: authentication/models.py:40 authentication/models.py:87
 msgid "Veröffentlicht"
-msgstr ""
+msgstr "Veröffentlicht"
 
 #: authentication/models.py:41 templates/feeds/form.html:187
 msgid "Sichtbar"
-msgstr ""
+msgstr "Sichtbar"
 
 #: authentication/models.py:50
 #, python-brace-format
 msgid "Vor {count} Jahr{plural}"
-msgstr ""
+msgstr "Vor {count} Jahr{plural}"
 
 #: authentication/models.py:50 authentication/models.py:53
 #: authentication/models.py:55
 msgid "e"
-msgstr ""
+msgstr "e"
 
 #: authentication/models.py:53
 #, python-brace-format
 msgid "Vor {count} Monat{plural}"
-msgstr ""
+msgstr "Vor {count} Monat{plural}"
 
 #: authentication/models.py:55
 #, python-brace-format
 msgid "Vor {count} Tag{plural}"
-msgstr ""
+msgstr "Vor {count} Tag{plural}"
 
 #: authentication/models.py:58
 #, python-brace-format
 msgid "Vor {count} Stunde{plural}"
-msgstr ""
+msgstr "Vor {count} Stunde{plural}"
 
 #: authentication/models.py:58 authentication/models.py:61
 msgid "n"
-msgstr ""
+msgstr "n"
 
 #: authentication/models.py:61
 #, python-brace-format
 msgid "Vor {count} Minute{plural}"
-msgstr ""
+msgstr "Vor {count} Minute{plural}"
 
 #: authentication/models.py:63
 msgid "Gerade eben"
-msgstr ""
+msgstr "Gerade eben"
 
 #: templates/chats/chat.html:8 templates/chats/chats.html:8
 #: templates/home/home.html:125
 msgid "Chats"
-msgstr ""
+msgstr "Chats"
 
 #: templates/chats/chat.html:24 templates/chats/chats.html:24
 #: templates/feeds/feed.html:25 templates/feeds/form.html:25
 #: templates/home/home.html:8 templates/home/home.html:24
 #: templates/media/media.html:25
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: templates/chats/chat.html:34 templates/chats/chats.html:34
 #: templates/feeds/feed.html:35 templates/feeds/form.html:35
 #: templates/home/home.html:34 templates/media/media.html:35
 msgid "Benachrichtigung"
-msgstr ""
+msgstr "Benachrichtigung"
 
 #: templates/chats/chat.html:44 templates/chats/chats.html:44
 #: templates/feeds/feed.html:45 templates/feeds/form.html:45
 #: templates/home/home.html:44 templates/media/media.html:45
 msgid "Systemprotokolle"
-msgstr ""
+msgstr "Systemprotokolle"
 
 #: templates/chats/chat.html:54 templates/chats/chats.html:54
 #: templates/feeds/feed.html:55 templates/feeds/form.html:55
 #: templates/home/home.html:54 templates/media/media.html:55
 msgid "Benutzer"
-msgstr ""
+msgstr "Benutzer"
 
 #: templates/chats/chat.html:64 templates/chats/chats.html:64
 #: templates/feeds/feed.html:65 templates/feeds/form.html:65
 #: templates/home/home.html:64 templates/login/login.html:24
 #: templates/media/media.html:65 templates/signup/signup.html:24
 msgid "Hilfe"
-msgstr ""
+msgstr "Hilfe"
 
 #: templates/chats/chat.html:71 templates/chats/chats.html:71
 #: templates/feeds/feed.html:72 templates/feeds/form.html:72
 #: templates/home/home.html:71 templates/media/media.html:72
 msgid "Abmelden"
-msgstr ""
-
-#: templates/chats/chat.html:172
-msgid "Nachricht"
-msgstr ""
+msgstr "Abmelden"
 
 #: templates/chats/chat.html:173
+msgid "Nachricht"
+msgstr "Nachricht"
+
+#: templates/chats/chat.html:174
 msgid "Abschicken"
-msgstr ""
+msgstr "Abschicken"
 
-#: templates/chats/chats.html:118
+#: templates/chats/chats.html:120
 msgid "Vorname oder Nachname"
-msgstr ""
+msgstr "Vorname oder Nachname"
 
-#: templates/chats/chats.html:119 templates/feeds/feed.html:85
+#: templates/chats/chats.html:121 templates/feeds/feed.html:85
 #: templates/feeds/form.html:85 templates/media/media.html:85
 msgid "Suche"
-msgstr ""
+msgstr "Suche"
 
 #: templates/feeds/feed.html:9 templates/feeds/form.html:9
 #: templates/home/home.html:113 templates/media/media.html:9
 msgid "Medien"
-msgstr ""
+msgstr "Medien"
 
 #: templates/feeds/feed.html:80 templates/feeds/form.html:80
 #: templates/media/media.html:80
 msgid "Startseite"
-msgstr ""
+msgstr "Startseite"
 
 #: templates/feeds/feed.html:90 templates/feeds/form.html:90
 #: templates/media/media.html:90
 msgid "Abonniert"
-msgstr ""
+msgstr "Abonniert"
 
 #: templates/feeds/feed.html:95 templates/feeds/form.html:95
 #: templates/media/media.html:95
 msgid "Abonnenten"
-msgstr ""
+msgstr "Abonnenten"
 
 #: templates/feeds/feed.html:175 templates/media/media.html:168
 msgid "Hinweis: Nicht sichtbar"
-msgstr ""
+msgstr "Hinweis: Nicht sichtbar"
 
 #: templates/feeds/feed.html:242 templates/feeds/form.html:192
 msgid "Posten"
-msgstr ""
+msgstr "Posten"
 
 #: templates/feeds/form.html:190
 msgid "Speichern"
-msgstr ""
+msgstr "Speichern"
+
+#: templates/home/home.html:85
+msgid "Bürger"
+msgstr "Bürger"
 
 #: templates/home/home.html:137
 msgid "Archiv"
-msgstr ""
+msgstr "Archiv"
 
 #: templates/home/home.html:149
 msgid "Fraktion"
-msgstr ""
+msgstr "Fraktion"
 
 #: templates/login/login.html:8 templates/login/login.html:34
 #: templates/login/login.html:40 templates/signup/signup.html:43
 msgid "Anmelden"
-msgstr ""
+msgstr "Anmelden"
 
 #: templates/login/login.html:42
 msgid "Kein Konto? Stattdessen"
-msgstr ""
+msgstr "Kein Konto? Stattdessen"
 
 #: templates/login/login.html:43 templates/signup/signup.html:8
 #: templates/signup/signup.html:34 templates/signup/signup.html:40
 msgid "Registrieren"
-msgstr ""
+msgstr "Registrieren"
 
 #: templates/signup/signup.html:42
 msgid "Bereits Konto? Stattdessen"
-msgstr ""
+msgstr "Bereits Konto? Stattdessen"
 
 #: templates/signup/signup.html:46
 msgid ""

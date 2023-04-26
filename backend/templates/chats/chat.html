@@ -100,7 +100,7 @@
                     </div>
                     <div class="chat-area" id="chat-area">
                         {% for message in messages %}
-                            {% if message.author == request.user and message.to == user %}
+                                {% if message.author == request.user and message.to == user %}
                                 <div class="sent">
                                     <div class="card">
                                         <p>{{ message.author.first_name }} {{ message.author.last_name }}</p>
@@ -171,6 +171,7 @@
                             {% csrf_token %}
                             <input type="text" class="form-control" name="message"
                                    placeholder="{% translate "Nachricht" %}">
+                            <input type="hidden" name="to" value="{{ user.pk }}">
                             <button type="submit" class="btn btn-primary">{% translate "Abschicken" %}</button>
                         </form>
                     </div>
@@ -178,25 +179,5 @@
             </div>
         </div>
     </div>
-    <footer>
-        <div class="ad">
-            <div class="text">
-                <div class="swiss-made">
-                    <p>Swiss Made</p>
-                </div>
-                <div class="kiidle">
-                    <p class="blue">K</p>
-                    <p class="red">i</p>
-                    <p class="gold">i</p>
-                    <p class="blue">d</p>
-                    <p class="green">l</p>
-                    <p class="red">e</p>
-                </div>
-            </div>
-            <div class="flag">
-                <img src="{% static 'images/switzerland.png' %}" alt='brigada'/>
-            </div>
-        </div>
-    </footer>
     <script src="{% static 'js/chat.js' %}"></script>
 {% endblock %}

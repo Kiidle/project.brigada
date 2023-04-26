@@ -1,0 +1,76 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <header>
+        <div class="grid-header">
+            <div class="title">
+                <h1>{% translate "Medien" %}</h1>
+            </div>
+        </div>
+    </header>
+    <div class="custom-main">
+    <div class="sidebar">
+            <div class="logo">
+                <img src="{% static 'images/brigada.png' %}" alt='brigada'/>
+            </div>
+            <div class="navigation">
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/home_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            {% translate "Home" %}
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/notification_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            {% translate "Benachrichtigung" %}
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/log_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            {% translate "Systemprotokolle" %}
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'home' %}" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/group_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            {% translate "Benutzer" %}
+                        </div>
+                    </div>
+                </a>
+                <a href="https://github.com/Kiidle/project.brigada/wiki" class="section">
+                    <div class="grid-section not-current">
+                        <div class="icon">
+                            <img src="{% static 'svgs/help_filled.svg' %}" alt='home'/>
+                        </div>
+                        <div class="text">
+                            {% translate "Hilfe" %}
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="rest-sidebar">
+                <a href="{% url 'logout' %}">
+                    {% translate "Abmelden" %}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

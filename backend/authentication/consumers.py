@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 from django.shortcuts import render, redirect
 from authentication.models import Message
+from django.db.models import Q
 
 import json
 
@@ -15,45 +16,23 @@ class ChatConsumer(AsyncWebsocketConsumer):
     def connect(self):
         self.accept()
 
-
 class ChatViewWrapper(TemplateView):
     template_name = "chats/chat.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def form_valid(self, form):
+        # Handle valid form submission
+        return super().form_valid(form)
 
-        pk = kwargs.get('pk')
-        user = User.objects.get(pk=pk)
-        context['user'] = user
+    def form_invalid(self, form):
+        # Handle invalid form submission
+        return super().form_invalid(form)
 
-        message_ids = []
-        for message in self.request.user.sent_messages.all():
-            message_ids.append(message.id)
-        for message in self.request.user.received_messages.all():
-            message_ids.append(message.id)
-
-        message_ids = sorted(message_ids)
-
-        messages = []
-        for message_id in message_ids:
-            message = Message.objects.get(id=message_id)
-            messages.append(message)
-
-            context["messages"] = messages
-
-        context["users"] = User.objects.order_by('first_name', 'last_name')
-
-        print(context)
-
-        return context
+    def get(self, request, *args, **kwargs):
+        return self.render_to_response(self.get_context_data())
 
     def post(self, request, *args, **kwargs):
-        message_content = request.POST.get('message')
-        to_user = User.objects.get(id=kwargs.get('pk'))
-        from_user = request.user
-        message = Message.objects.create(content=message_content, to=to_user, author=from_user)
-        return redirect(request.path)
-
+        # Handle the form submission here
+        return redirect('chat', pk=kwargs['pk'])
 
 class ChatRoom(AsyncWebsocketConsumer):
     async def connect(self):
@@ -83,15 +62,15 @@ class ChatRoom(AsyncWebsocketConsumer):
         content = text_data_json['content']
 
         if to == str(self.scope['user'].id):
-            # Hier kannst du die Nachricht verarbeiten und entsprechend reagieren
+            # Get the channel layer
+            channel_layer = get_channel_layer()
 
-            # Beispiel: Nachricht an alle im Raum senden
-            await self.channel_layer.group_send(
-                self.room_group_name,
+            # Send the message to the intended recipient
+            await channel_layer.send(
+                f'chat_{to}',
                 {
                     'type': 'chat_message',
                     'author': author,
-                    'to': to,
                     'content': content
                 }
             )

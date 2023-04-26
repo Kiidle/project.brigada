@@ -107,7 +107,7 @@
                         <div class="group">
                             {% for group in request.user.groups.all %}
                                 {% if group.name == 'citizen' %}
-                                    <p class="citizen">{{ group.name|title }}</p>
+                                    <p class="citizen">{% translate _("Bürger") %}</p>
                                 {% elif group.name == 'lew' %}
                                     <p class="lew">{{ group.name|title }}</p>
                                 {% else %}
