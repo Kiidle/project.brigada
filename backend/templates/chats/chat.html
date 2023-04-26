@@ -75,16 +75,17 @@
         <div class="contacts">
             <div class="grid-contacts">
                 {% for user_in in users %}
-                    {% if user_in == user %}
-                        <a href="{% url 'chats' %}" class="section">
-                            <p class=" current">{{ user_in.first_name }} {{ user_in.last_name }}</p>
-                        </a>
-                    {% else %}
-                        <a href="{% url 'chat' user_in.id %}" class="section">
-                            <p>{{ user_in.first_name }} {{ user_in.last_name }}</p>
-                        </a>
+                    {% if user_in != request.user %}
+                        {% if user_in == user %}
+                            <a href="{% url 'chats' %}" class="section">
+                                <p class=" current">{{ user_in.first_name }} {{ user_in.last_name }}</p>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'chat' user_in.id %}" class="section">
+                                <p>{{ user_in.first_name }} {{ user_in.last_name }}</p>
+                            </a>
+                        {% endif %}
                     {% endif %}
-
                 {% endfor %}
             </div>
         </div>
