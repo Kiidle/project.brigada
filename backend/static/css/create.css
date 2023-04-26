@@ -2,7 +2,6 @@
     background-color: white;
     padding: 12px;
 }
-
 .create-form form p {
     display: grid;
     grid-template-columns: 1fr;
@@ -31,8 +30,15 @@
     margin: 0 10px 0 0;
 }
 
-.create-form form textarea {
+.create-form form .container {
+    overflow: hidden;
+    display: flex;
+    padding: 0 0 12px 0;
+}
+
+.create-form form .container textarea {
     height: 75px;
+    width: 100%;
 }
 
 .create-form form button {

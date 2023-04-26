@@ -163,11 +163,13 @@ class FeedView(generic.DetailView):
             commentary.reference = self.get_object()
             commentary.save()
         return redirect('feed', pk=self.get_object().pk)
+
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect(self.login_url)
         else:
             return super().get(request, *args, **kwargs)
+
 
 class FeedCreateView(generic.CreateView):
     model = Feed
@@ -182,6 +184,7 @@ class FeedCreateView(generic.CreateView):
 
         return super().form_valid(form)
 
+
 class FeedUpdateView(generic.UpdateView):
     model = Feed
     fields = ["description", "image", "visibility"]
@@ -194,10 +197,15 @@ class FeedUpdateView(generic.UpdateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['image'] = self.object.image
+        return initial
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["update"] = True
         return context
+
 
 class ChatsView(generic.ListView):
     model = User
@@ -209,8 +217,6 @@ class ChatsView(generic.ListView):
         context = super().get_context_data(**kwargs)
 
         context["users"] = super().get_queryset().order_by('first_name', 'last_name')
-
-        print(context)
 
         return context
 

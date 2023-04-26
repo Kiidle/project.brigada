@@ -129,9 +129,15 @@
             </div>
             <div class="flex-content">
                 <div class="square-buttons">
-                    <a href="{% url 'media' %}" class="square-button square-button-black a-reset">
-                        <img src="{% static 'svgs/cancel.svg' %}" alt="create">
-                    </a>
+                    {% if feed.id %}
+                        <a href="{% url 'feed' feed.id %}" class="square-button square-button-black a-reset">
+                            <img src="{% static 'svgs/cancel.svg' %}" alt="create">
+                        </a>
+                    {% else %}
+                        <a href="{% url 'media' %}" class="square-button square-button-black a-reset">
+                            <img src="{% static 'svgs/cancel.svg' %}" alt="create">
+                        </a>
+                    {% endif %}
                 </div>
                 <div class="feed-container">
                     <div class="feeds">
@@ -149,8 +155,8 @@
                                     <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
                                     {% if request.user.verified %}
                                         <img src="{% static 'images/verified_filled.svg' %}" alt="verified"/>
-
                                     {% endif %}
+
                                 </div>
                                 <div class="feed-username">
                                     <p>@{{ request.user.username }}</p>
@@ -161,17 +167,54 @@
                     <div class="create-form">
                         {% if feed.id and feed.author == request.user or not feed.id %}
                             <form method="POST" enctype="multipart/form-data">
-                                <div>
-                                    {% csrf_token %}
-                                    {{ form.as_p }}
-                                    <button type="submit">Posten</button>
+                                {% csrf_token %}
+                                <div class="container">
+                                    {{ form.description }}
                                 </div>
+
+                                <div class="container">
+                                    <div>
+                                        {{ form.image }}
+                                    </div>
+
+                                </div>
+                                <div class="container">
+                                    <img class="form-image" id="preview-image" alt="Preview Image">
+                                    {% if feed.image %}
+                                        <img class="form-image" src="{{ feed.image.url }}" alt="Current Image">
+                                    {% endif %}
+                                </div>
+                                <label>{% translate "Sichtbar" %}</label>
+                                {{ form.visibility }}
+                                {% if feed.id %}
+                                    <button type="submit">{% translate "Speichern" %}</button>
+                                {% else %}
+                                    <button type="submit">{% translate "Posten" %}</button>
+                                {% endif %}
                             </form>
-                            {% else %}
+                        {% else %}
                             <div class="permission-error-card">
                                 <p>Zugriff verweigert</p>
                             </div>
                         {% endif %}
+                        <script>
+                            const imageInput = document.querySelector("#id_image");
+                            const previewImage = document.querySelector("#preview-image");
+
+                            imageInput.addEventListener("change", () => {
+                                const file = imageInput.files[0];
+
+                                // Nur weitermachen, wenn eine Datei ausgewählt wurde
+                                if (file) {
+                                    const reader = new FileReader();
+                                    reader.readAsDataURL(file);
+
+                                    reader.onload = () => {
+                                        previewImage.src = reader.result;
+                                    };
+                                }
+                            });
+                        </script>
                     </div>
                 </div>
             </div>

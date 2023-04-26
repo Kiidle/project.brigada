@@ -8,10 +8,10 @@ import json
 
 User = get_user_model()
 
-from channels.generic.websocket import WebsocketConsumer
+from channels.generic.websocket import AsyncWebsocketConsumer
 
 
-class ChatConsumer(WebsocketConsumer):
+class ChatConsumer(AsyncWebsocketConsumer):
     def connect(self):
         self.accept()
 
@@ -55,7 +55,7 @@ class ChatViewWrapper(TemplateView):
         return redirect(request.path)
 
 
-class ChatRoom(WebsocketConsumer):
+class ChatRoom(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = 'room_name'
         self.room_group_name = f'chat_{self.room_name}'

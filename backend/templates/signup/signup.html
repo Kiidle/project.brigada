@@ -39,7 +39,12 @@
                             {{ form.as_p }}
                             <button type="submit">{% translate "Registrieren" %}</button>
                         </form>
-                        <p>{% translate "Bereits Konto? Stattdessen" %} <a href="{% url 'login' %}">{% translate "Anmelden" %}</a></p>
+                        <p>{% translate "Bereits Konto? Stattdessen" %} <a
+                                href="{% url 'login' %}">{% translate "Anmelden" %}</a></p>
+                    </div>
+                    <div class="form-container">
+                        <p>{% translate "Hinweis: Beim erstellen dieses Kontos, akzeptieren Sie unsere Cookies, Allgemeine Geschäftsbedingungen und die Datenschutzerklärung nach dem Gesetz der Datenschutz-Grundverordnung der Europäischen Union" %}</p>
+
                     </div>
                 </div>
             </div>
