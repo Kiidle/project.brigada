@@ -3,7 +3,7 @@
 }
 
 .flex-content {
-    margin: 12px;
+    margin: 12px 0;
     display: flex;
     justify-content: center;
 }
@@ -301,7 +301,7 @@
 }
 
 .content .feeds .feed .feed-description p {
-    margin-left: 12px;
+    margin: 0 12px;
 }
 
 .content .feeds .feed .feed-image {

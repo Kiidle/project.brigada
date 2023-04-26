@@ -148,7 +148,7 @@
                         <div class="feed-container">
                             <div class="feeds">
                                 <div class="feed">
-                                    <a href="/" class="feed-user a-reset">
+                                    <a href="{% url 'profile' feed.author.id %}" class="feed-user a-reset">
                                         <div class="feed-profile">
                                             {% if feed.author.pp %}
                                                 <img src="{{ feed.author.get_profile_url }}" alt="{{ feed.profile }}"/>
@@ -245,7 +245,7 @@
                                 </div>
                                 {% for commentary in feed.commentaries.all %}
                                     <div class="feed">
-                                        <a href="/" class="feed-user a-reset">
+                                        <a href="{% url 'profile' feed.author.id %}" class="feed-user a-reset">
                                             <div class="feed-profile">
                                                 {% if commentary.author.pp %}
                                                     <img src="{{ commentary.author.get_profile_url }}"
@@ -260,7 +260,6 @@
                                                 {% if commentary.author.verified %}
                                                     <img src="{% static 'images/verified_filled.svg' %}"
                                                          alt="verified"/>
-
                                                 {% endif %}
                                             </div>
                                             <div class="feed-username">
@@ -286,4 +285,6 @@
                     </div>
                 {% endif %}
             </div>
+        </div>
+    </div>
 {% endblock %}
