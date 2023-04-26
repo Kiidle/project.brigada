@@ -8,9 +8,11 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import Group
-from .models import Feed, FeedLikes, Commentary
+from .models import Settings, Feed, FeedLikes, Commentary
 from django.http import HttpResponseRedirect, JsonResponse
 from urllib.parse import urlencode
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 User = get_user_model()
 
@@ -27,6 +29,11 @@ class SignUpView(generic.CreateView):
             print("Group 'citizen' created successfully.")
         else:
             print("Group 'citizen' already exists.")
+
+    @receiver(post_save, sender=User)
+    def create_user_privacy(sender, instance, created, **kwargs):
+        if created:
+            Settings.objects.create(user=instance)
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -165,7 +172,7 @@ class FeedView(generic.DetailView):
 class FeedCreateView(generic.CreateView):
     model = Feed
     fields = ["description", "image", "visibility"]
-    template_name = "feeds/create.html"
+    template_name = "feeds/form.html"
 
     def get_success_url(self):
         return reverse_lazy('media')
@@ -175,6 +182,22 @@ class FeedCreateView(generic.CreateView):
 
         return super().form_valid(form)
 
+class FeedUpdateView(generic.UpdateView):
+    model = Feed
+    fields = ["description", "image", "visibility"]
+    template_name = "feeds/form.html"
+
+    def get_success_url(self):
+        return reverse_lazy("feed", args=[self.object.pk])
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["update"] = True
+        return context
 
 class ChatsView(generic.ListView):
     model = User

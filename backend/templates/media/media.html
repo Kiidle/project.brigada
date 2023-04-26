@@ -165,7 +165,7 @@
                                             {% if feed.visibility == True %}
                                                 <p>{{ feed.description }}</p>
                                             {% else %}
-                                                <p class="private">Hinweis: Nicht sichtbar</p>
+                                                <p class="private">{% translate 'Hinweis: Nicht sichtbar' %}</p>
                                                 <p>{{ feed.description }}</p>
                                             {% endif %}
                                         </a>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-25 08:17+0000\n"
+"POT-Creation-Date: 2023-04-26 07:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,21 +17,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: authentication/forms.py:10 authentication/models.py:9
+#: authentication/forms.py:12 authentication/models.py:9
 msgid "Vorname"
 msgstr "名字"
 
-#: authentication/forms.py:11 authentication/models.py:10
+#: authentication/forms.py:13 authentication/models.py:10
 msgid "Nachname"
 msgstr "姓氏"
 
-#: authentication/forms.py:12 authentication/forms.py:35
+#: authentication/forms.py:14 authentication/forms.py:38
 msgid "Passwort"
 msgstr ""
 
-#: authentication/forms.py:34 authentication/models.py:11
+#: authentication/forms.py:37 authentication/models.py:11
 msgid "Benutzername"
 msgstr "用户名"
+
+#: authentication/forms.py:42 authentication/models.py:74
+msgid "Inhalt"
+msgstr ""
 
 #: authentication/models.py:12
 msgid "E-Mail Adresse"
@@ -91,10 +95,6 @@ msgstr ""
 msgid "Gerade eben"
 msgstr ""
 
-#: authentication/models.py:74
-msgid "Inhalt"
-msgstr ""
-
 #: templates/chats/chat.html:8 templates/chats/chats.html:8
 #: templates/home/home.html:125
 msgid "Chats"
@@ -146,11 +146,11 @@ msgstr "留言"
 msgid "Abschicken"
 msgstr "发送"
 
-#: templates/chats/chats.html:112
+#: templates/chats/chats.html:118
 msgid "Vorname oder Nachname"
 msgstr "名或姓"
 
-#: templates/chats/chats.html:113 templates/feeds/create.html:85
+#: templates/chats/chats.html:119 templates/feeds/create.html:85
 #: templates/feeds/feed.html:85 templates/media/media.html:85
 msgid "Suche"
 msgstr "搜索"
@@ -174,6 +174,14 @@ msgstr "订阅"
 #: templates/media/media.html:95
 msgid "Abonnenten"
 msgstr "订户"
+
+#: templates/feeds/feed.html:175 templates/media/media.html:168
+msgid "Hinweis: Nicht sichtbar"
+msgstr ""
+
+#: templates/feeds/feed.html:242
+msgid "Posten"
+msgstr ""
 
 #: templates/home/home.html:137
 msgid "Archiv"

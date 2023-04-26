@@ -159,13 +159,19 @@
                         </div>
                     </div>
                     <div class="create-form">
-                        <form method="POST" enctype="multipart/form-data">
-                            <div>
-                                {% csrf_token %}
-                                {{ form.as_p }}
-                                <button type="submit">Posten</button>
+                        {% if feed.id and feed.author == request.user or not feed.id %}
+                            <form method="POST" enctype="multipart/form-data">
+                                <div>
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    <button type="submit">Posten</button>
+                                </div>
+                            </form>
+                            {% else %}
+                            <div class="permission-error-card">
+                                <p>Zugriff verweigert</p>
                             </div>
-                        </form>
+                        {% endif %}
                     </div>
                 </div>
             </div>

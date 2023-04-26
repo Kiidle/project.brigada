@@ -1,0 +1,11 @@
+.permission-error-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: red;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 2px;
+    cursor: pointer;
+}

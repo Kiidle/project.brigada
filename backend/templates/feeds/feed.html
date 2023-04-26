@@ -133,7 +133,7 @@
                         <img src="{% static 'svgs/cancel.svg' %}" alt="create">
                     </a>
                     {% if request.user == feed.author %}
-                        <a href="{% url 'feed_create' %}" class="square-button square-button-black a-reset">
+                        <a href="{% url 'feed_update' feed.id %}" class="square-button square-button-black a-reset">
                             <img src="{% static 'svgs/edit.svg' %}" alt="create">
                         </a>
                     {% endif %}
@@ -143,138 +143,147 @@
                         </a>
                     {% endif %}
                 </div>
-                <div class="scrollable-feed-commentaries">
-                    <div class="feed-container">
-                        <div class="feeds">
-                            <div class="feed">
-                                <a href="/" class="feed-user a-reset">
-                                    <div class="feed-profile">
-                                        {% if feed.author.pp %}
-                                            <img src="{{ feed.author.get_profile_url }}" alt="{{ feed.profile }}"/>
-                                        {% else %}
-                                            <img class="no-pp" src="{% static 'svgs/profile_filled.svg' %}"/>
-                                        {% endif %}
-
-                                    </div>
-                                    <div class="feed-name">
-                                        <p>{{ feed.author.first_name }} {{ feed.author.last_name }}</p>
-                                        {% if feed.author.verified %}
-                                            <img src="{% static 'images/verified_filled.svg' %}" alt="verified"/>
-
-                                        {% endif %}
-                                    </div>
-                                    <div class="feed-username">
-                                        <p>@{{ feed.author.username }}</p>
-                                    </div>
-                                </a>
-                                <a class="feed-description a-reset">
-                                    {% if feed.visibility == True %}
-                                        <p>{{ feed.description }}</p>
-                                    {% else %}
-                                        <p class="private">Hinweis: Nicht sichtbar</p>
-                                        <p>{{ feed.description }}</p>
-                                    {% endif %}
-                                </a>
-                                <a class="feed-image a-reset">
-                                    {% if feed.image %}
-                                        <img src="{{ feed.get_image_url }}" alt="{{ feed.description }}">
-                                    {% endif %}
-                                </a>
-                                <a class="feed-buttons a-reset">
-                                    <div class="button-like">
-                                        {% if feed.id not in unlike_flag %}
-                                            <form method="POST" action="{% url 'unlike_feed' feed.id %}">
-                                                {% csrf_token %}
-                                                <button type="submit">
-                                                    <img class="like" src="{% static 'svgs/heart_filled.svg' %}"/>
-                                                </button>
-                                            </form>
-                                        {% endif %}
-                                        {% if feed.id in unlike_flag %}
-                                            <form method="POST" action="{% url 'like_feed' feed.id %}">
-                                                {% csrf_token %}
-                                                <button type="submit">
-                                                    <img class="unlike" src="{% static 'svgs/heart_unfilled.svg' %}"/>
-                                                </button>
-                                            </form>
-                                        {% endif %}
-                                    </div>
-                                    <div class="feed-like">
-                                        {% if feed.likes.count > 0 %}
-                                            <p class="likes-count">{{ feed.likes.count }}</p>
-                                        {% endif %}
-                                    </div>
-                                    <div class="button-commentary">
-                                        <img class="unlike" src="{% static 'svgs/commentary_unfilled.svg' %}"/>
-                                    </div>
-                                    <div class="feed-commentary">
-                                        {% if feed.commentaries.count < 1 %}
-                                            <p></p>
-                                        {% else %}
-                                            <p>{{ feed.commentaries.count }}</p>
-                                        {% endif %}
-                                    </div>
-                                    <div class="button-report">
-                                        <button>
-                                            <img class="not-reported" src="{% static 'svgs/report_unfilled.svg' %}"/>
-                                        </button>
-                                    </div>
-                                </a>
-                                <a class="feed-timeshow a-reset">
-                                    <p>{{ feed.time_since_published }}</p>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="feed-container">
-                        <div class="feeds">
-                            <div class="feed">
-                                <div class="create-form">
-                                    <form action="{% url 'feed' feed.id %}" method="post">
-                                        {% csrf_token %}
-                                        {{ commentary_form.as_p }}
-                                        {% if commentary_form.text.errors %}
-                                            <p>{{ commentary_form.text.errors|first }}</p>
-                                        {% endif %}
-                                        <button type="submit">{% translate 'Posten' %}</button>
-                                    </form>
-                                </div>
-                            </div>
-                            {% for commentary in feed.commentaries.all %}
+                {% if feed.visibility == True or request.user == feed.author %}
+                    <div class="scrollable-feed-commentaries">
+                        <div class="feed-container">
+                            <div class="feeds">
                                 <div class="feed">
                                     <a href="/" class="feed-user a-reset">
                                         <div class="feed-profile">
-                                            {% if commentary.author.pp %}
-                                                <img src="{{ commentary.author.get_profile_url }}"
-                                                     alt="{{ commentary.profile }}"/>
+                                            {% if feed.author.pp %}
+                                                <img src="{{ feed.author.get_profile_url }}" alt="{{ feed.profile }}"/>
                                             {% else %}
                                                 <img class="no-pp" src="{% static 'svgs/profile_filled.svg' %}"/>
                                             {% endif %}
 
                                         </div>
                                         <div class="feed-name">
-                                            <p>{{ commentary.author.first_name }} {{ commentary.author.last_name }}</p>
-                                            {% if commentary.author.verified %}
+                                            <p>{{ feed.author.first_name }} {{ feed.author.last_name }}</p>
+                                            {% if feed.author.verified %}
                                                 <img src="{% static 'images/verified_filled.svg' %}" alt="verified"/>
 
                                             {% endif %}
                                         </div>
                                         <div class="feed-username">
-                                            <p>@{{ commentary.author.username }}</p>
+                                            <p>@{{ feed.author.username }}</p>
                                         </div>
                                     </a>
-                                    <a href="{% url 'feed' feed.id %}" class="feed-description a-reset">
+                                    <a class="feed-description a-reset">
                                         {% if feed.visibility == True %}
-                                            <p>{{ commentary.content }}</p>
+                                            <p>{{ feed.description }}</p>
                                         {% else %}
-                                            <p class="private">Hinweis: Nicht sichtbar</p>
-                                            <p>{{ commentary.content }}</p>
+                                            <p class="private">{% translate 'Hinweis: Nicht sichtbar' %}</p>
+                                            <p>{{ feed.description }}</p>
                                         {% endif %}
                                     </a>
+                                    <a class="feed-image a-reset">
+                                        {% if feed.image %}
+                                            <img src="{{ feed.get_image_url }}" alt="{{ feed.description }}">
+                                        {% endif %}
+                                    </a>
+                                    <a class="feed-buttons a-reset">
+                                        <div class="button-like">
+                                            {% if feed.id not in unlike_flag %}
+                                                <form method="POST" action="{% url 'unlike_feed' feed.id %}">
+                                                    {% csrf_token %}
+                                                    <button type="submit">
+                                                        <img class="like" src="{% static 'svgs/heart_filled.svg' %}"/>
+                                                    </button>
+                                                </form>
+                                            {% endif %}
+                                            {% if feed.id in unlike_flag %}
+                                                <form method="POST" action="{% url 'like_feed' feed.id %}">
+                                                    {% csrf_token %}
+                                                    <button type="submit">
+                                                        <img class="unlike"
+                                                             src="{% static 'svgs/heart_unfilled.svg' %}"/>
+                                                    </button>
+                                                </form>
+                                            {% endif %}
+                                        </div>
+                                        <div class="feed-like">
+                                            {% if feed.likes.count > 0 %}
+                                                <p class="likes-count">{{ feed.likes.count }}</p>
+                                            {% endif %}
+                                        </div>
+                                        <div class="button-commentary">
+                                            <img class="unlike" src="{% static 'svgs/commentary_unfilled.svg' %}"/>
+                                        </div>
+                                        <div class="feed-commentary">
+                                            {% if feed.commentaries.count < 1 %}
+                                                <p></p>
+                                            {% else %}
+                                                <p>{{ feed.commentaries.count }}</p>
+                                            {% endif %}
+                                        </div>
+                                        <div class="button-report">
+                                            <button>
+                                                <img class="not-reported"
+                                                     src="{% static 'svgs/report_unfilled.svg' %}"/>
+                                            </button>
+                                        </div>
+                                    </a>
+                                    <a class="feed-timeshow a-reset">
+                                        <p>{{ feed.time_since_published }}</p>
+                                    </a>
                                 </div>
-                            {% endfor %}
+                            </div>
+                        </div>
+                        <div class="feed-container">
+                            <div class="feeds">
+                                <div class="feed">
+                                    <div class="create-form">
+                                        <form action="{% url 'feed' feed.id %}" method="post">
+                                            {% csrf_token %}
+                                            {{ commentary_form.as_p }}
+                                            {% if commentary_form.text.errors %}
+                                                <p>{{ commentary_form.text.errors|first }}</p>
+                                            {% endif %}
+                                            <button type="submit">{% translate 'Posten' %}</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                {% for commentary in feed.commentaries.all %}
+                                    <div class="feed">
+                                        <a href="/" class="feed-user a-reset">
+                                            <div class="feed-profile">
+                                                {% if commentary.author.pp %}
+                                                    <img src="{{ commentary.author.get_profile_url }}"
+                                                         alt="{{ commentary.profile }}"/>
+                                                {% else %}
+                                                    <img class="no-pp" src="{% static 'svgs/profile_filled.svg' %}"/>
+                                                {% endif %}
+
+                                            </div>
+                                            <div class="feed-name">
+                                                <p>{{ commentary.author.first_name }} {{ commentary.author.last_name }}</p>
+                                                {% if commentary.author.verified %}
+                                                    <img src="{% static 'images/verified_filled.svg' %}"
+                                                         alt="verified"/>
+
+                                                {% endif %}
+                                            </div>
+                                            <div class="feed-username">
+                                                <p>@{{ commentary.author.username }}</p>
+                                            </div>
+                                        </a>
+                                        <a href="{% url 'feed' feed.id %}" class="feed-description a-reset">
+                                            {% if feed.visibility == True %}
+                                                <p>{{ commentary.content }}</p>
+                                            {% else %}
+                                                <p class="private">Hinweis: Nicht sichtbar</p>
+                                                <p>{{ commentary.content }}</p>
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% else %}
+                    <div class="permission-error-card">
+                        <p>Zugriff verweigert</p>
+                    </div>
+                {% endif %}
             </div>
 {% endblock %}

@@ -16,6 +16,18 @@ class User(AbstractUser):
         if self.pp and hasattr(self.pp, 'url'):
             return self.pp.url
 
+class Settings(models.Model):
+    class GuiMode(models.TextChoices):
+        LIGHTMODE = "Light Mode", "Light Mode"
+        DARKMODE = "Dark Mode", "Dark Mode"
+
+    show_fulname = models.BooleanField(null=False, default=True, verbose_name=_("Vollständige Name anzeigen"))
+    safemode = models.BooleanField(null=False, default=False, verbose_name=_("Safe Mode"))
+    graphic_interface = models.CharField(max_length=50,choices=GuiMode.choices, default=GuiMode.LIGHTMODE, verbose_name=_("Benutzeroberfläche"))
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="privacy")
+
+    def __str__(self):
+        return f"{self._meta.verbose_name.title()} for {self.user.username}"
 
 class FeedManager(models.Manager):
     def liked_by_user(self, feed_id, user_id):
