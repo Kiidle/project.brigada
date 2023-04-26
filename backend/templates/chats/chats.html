@@ -75,11 +75,13 @@
         <div class="contacts">
             <div class="grid-contacts">
                 {% for user in users %}
-                    {% if not request.GET.search or user.first_name|lower in request.GET.search|lower or user.last_name|lower in request.GET.search|lower %}
+                    {% if user != request.user %}
+                        {% if not request.GET.search or user.first_name|lower in request.GET.search|lower or user.last_name|lower in request.GET.search|lower %}
 
-                        <a href="{% url 'chat' user.id %}" class="section">
-                            <p>{{ user.first_name }} {{ user.last_name }}</p>
-                        </a>
+                            <a href="{% url 'chat' user.id %}" class="section">
+                                <p>{{ user.first_name }} {{ user.last_name }}</p>
+                            </a>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </div>
