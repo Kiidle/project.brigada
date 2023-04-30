@@ -218,6 +218,7 @@
     margin: auto;
     border-radius: 2px;
 }
+
 .flex-content .scrollable-feed-commentaries, .flex-content .scrollable-feeds {
     height: calc(100vh - 162px);
 }
@@ -262,6 +263,9 @@
         "feed-profile feed-name"
         "feed-profile feed-username";
     grid-column-gap: 12px;
+}
+
+.content .feeds .feed .feed-user-border {
     border-bottom-color: #b6b6b6;
     border-bottom-width: 1px;
     border-bottom-style: solid;

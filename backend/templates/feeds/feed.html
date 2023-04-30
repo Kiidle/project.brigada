@@ -148,7 +148,7 @@
                         <div class="feed-container">
                             <div class="feeds">
                                 <div class="feed">
-                                    <a href="{% url 'profile' feed.author.id %}" class="feed-user a-reset">
+                                    <a href="{% url 'profile' feed.author.id %}" class="feed-user feed-user-border a-reset">
                                         <div class="feed-profile">
                                             {% if feed.author.pp %}
                                                 <img src="{{ feed.author.get_profile_url }}" alt="{{ feed.profile }}"/>
