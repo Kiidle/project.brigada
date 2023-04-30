@@ -2,7 +2,6 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <header>
         <div class="grid-header">
             <div class="title">
@@ -75,23 +74,23 @@
         </div>
         <div class="media">
             <div class="grid-media">
-                <div class="section">
-                    <div class="current">
+                <a href="{% url 'media' %}" class="section">
+                    <div>
                         {% translate "Startseite" %}
                     </div>
-                </div>
+                </a>
                 <a href="{% url 'search' %}" class="section">
-                    <div>
+                    <div class="current">
                         {% translate "Suche" %}
                     </div>
                 </a>
                 <div class="section">
-                    <div class="not-current">
+                    <div>
                         {% translate "Abonniert" %}
                     </div>
                 </div>
                 <div class="section">
-                    <div class="not-current">
+                    <div>
                         {% translate "Abonnenten" %}
                     </div>
                 </div>
@@ -127,98 +126,77 @@
                     </div>
                 </div>
             </div>
+            <form class="search-user" action="{% url 'search' %}" method="get">
+                <input type="text" name="search" placeholder="{% translate 'Suche' %}">
+                <button class="search-button search-button-black a-reset" type="submit">
+                    <img src="{% static 'svgs/search_filled.svg' %}"/>
+                </button>
+            </form>
             <div class="flex-content">
-                <div class="square-buttons">
-                    <a href="{% url 'feed_create' %}" class="square-button square-button-black a-reset">
-                        <img src="{% static 'svgs/create.svg' %}" alt="create">
-                    </a>
-                </div>
-                <div class="scrollable-feeds">
-                    <div class="feed-container">
-                        <div class="feeds">
-                            {% for feed in feeds %}
-                                {% if feed.visibility == True or feed.author == request.user %}
+                <div class="feed-container">
+                    <div class="feeds">
+                        {% for user_in in users %}
+                            {% if user_in.verified %}
+                                {% if not request.GET.search or user_in.first_name|lower in request.GET.search|lower or user_in.last_name|lower in request.GET.search|lower or user_in.username|lower in request.GET.search|lower %}
                                     <div class="feed">
-                                        <a href="{% url 'profile' feed.author.id %}" class="feed-user a-reset">
+                                        <a href="{% url 'profile' user_in.id %}" class="feed-user a-reset">
                                             <div class="feed-profile">
-                                                {% if feed.author.pp %}
-                                                    <img src="{{ feed.author.get_profile_url }}"
-                                                         alt="{{ feed.profile }}"/>
+                                                {% if user_in.pp %}
+                                                    <img src="{{ user_in.get_profile_url }}"
+                                                         alt="{{ user_in.profile }}"/>
                                                 {% else %}
                                                     <img class="no-pp" src="{% static 'svgs/profile_filled.svg' %}"/>
                                                 {% endif %}
                                             </div>
                                             <div class="feed-name">
-                                                <p>{{ feed.author.first_name }} {{ feed.author.last_name }}</p>
-                                                {% if feed.author.verified %}
+                                                <p>{{ user_in.first_name }} {{ user_in.last_name }}</p>
+                                                {% if user_in.verified %}
                                                     <img src="{% static 'images/verified_filled.svg' %}"
                                                          alt="verified"/>
 
                                                 {% endif %}
                                             </div>
                                             <div class="feed-username">
-                                                <p>@{{ feed.author.username }}</p>
+                                                <p>@{{ user_in.username }}</p>
                                             </div>
-                                        </a>
-                                        <a href="{% url 'feed' feed.id %}" class="feed-description a-reset">
-                                            {% if feed.visibility == True %}
-                                                <p>{{ feed.description }}</p>
-                                            {% else %}
-                                                <p class="private">{% translate 'Hinweis: Nicht sichtbar' %}</p>
-                                                <p>{{ feed.description }}</p>
-                                            {% endif %}
-                                        </a>
-                                        <a href="{% url 'feed' feed.id %}" class="feed-image a-reset">
-                                            {% if feed.image %}
-                                                <img src="{{ feed.get_image_url }}" alt="{{ feed.description }}">
-                                            {% endif %}
-                                        </a>
-                                        <a href="{% url 'feed' feed.id %}" class="feed-buttons a-reset">
-                                            <div class="button-like">
-                                                {% if feed.id not in unlike_flag %}
-                                                    <button class="unlike-btn">
-                                                        <img class="like" src="{% static 'svgs/heart_filled.svg' %}"/>
-                                                    </button>
-                                                {% endif %}
-                                                {% if feed.id in unlike_flag %}
-                                                    <button class="like-btn">
-                                                        <img class="unlike"
-                                                             src="{% static 'svgs/heart_unfilled.svg' %}"/>
-                                                    </button>
-                                                {% endif %}
-                                            </div>
-                                            <div class="feed-like">
-                                                {% if feed.likes.count > 0 %}
-                                                    <p class="likes-count">{{ feed.likes.count }}</p>
-                                                {% endif %}
-                                            </div>
-                                            <div class="button-commentary">
-                                                <img class="unlike" src="{% static 'svgs/commentary_unfilled.svg' %}"/>
-                                            </div>
-                                            <div class="feed-commentary">
-                                                {% if feed.commentaries.count < 1 %}
-                                                    <p></p>
-                                                {% else %}
-                                                    <p>{{ feed.commentaries.count }}</p>
-                                                {% endif %}
-                                            </div>
-                                            <div class="button-report">
-                                                <button>
-                                                    <img class="not-reported"
-                                                         src="{% static 'svgs/report_unfilled.svg' %}"/>
-                                                </button>
-                                            </div>
-                                        </a>
-                                        <a href="{% url 'feed' feed.id %}" class="feed-timeshow a-reset">
-                                            <p>{{ feed.time_since_published }}</p>
                                         </a>
                                     </div>
                                 {% endif %}
-                            {% endfor %}
-                        </div>
+                            {% endif %}
+                        {% endfor %}
+                        {% for user_in in users %}
+                            {% if not user_in.verified %}
+                                {% if not request.GET.search or user_in.first_name|lower in request.GET.search|lower or user_in.last_name|lower in request.GET.search|lower or user_in.username|lower in request.GET.search|lower %}
+                                    <div class="feed">
+                                        <a href="{% url 'profile' user_in.id %}" class="feed-user a-reset">
+                                            <div class="feed-profile">
+                                                {% if user_in.pp %}
+                                                    <img src="{{ user_in.get_profile_url }}"
+                                                         alt="{{ user_in.profile }}"/>
+                                                {% else %}
+                                                    <img class="no-pp" src="{% static 'svgs/profile_filled.svg' %}"/>
+                                                {% endif %}
+                                            </div>
+                                            <div class="feed-name">
+                                                <p>{{ user_in.first_name }} {{ user_in.last_name }}</p>
+                                                {% if user_in.verified %}
+                                                    <img src="{% static 'images/verified_filled.svg' %}"
+                                                         alt="verified"/>
+
+                                                {% endif %}
+                                            </div>
+                                            <div class="feed-username">
+                                                <p>@{{ user_in.username }}</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 {% endblock %}

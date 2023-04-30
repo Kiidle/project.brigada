@@ -270,11 +270,39 @@ class ProfileView(generic.DetailView):
             return super().get(request, *args, **kwargs)
 
 
+class SearchView(generic.ListView):
+    model = User
+    fields = ["first_name", "last_name", "username" "verified"]
+    template_name = 'media/search.html'
+
+    login_url = reverse_lazy('login')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["users"] = super().get_queryset().order_by("first_name", "last_name", "username")
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect(self.login_url)
+        else:
+            return super().get(request, *args, **kwargs)
+
+
 class ChatsView(generic.ListView):
     model = User
     fields = ["first_name", "last_name"]
     template_name = "chats/chats.html"
     login_url = reverse_lazy('login')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["users"] = super().get_queryset().order_by("first_name", "last_name")
+
+        return context
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
