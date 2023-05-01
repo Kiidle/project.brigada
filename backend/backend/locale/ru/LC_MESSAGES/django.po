@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 10:36+0000\n"
+"POT-Creation-Date: 2023-05-01 08:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,93 +20,105 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: authentication/forms.py:12 authentication/models.py:9
+#: authentication/forms.py:14 authentication/models.py:9
 msgid "Vorname"
 msgstr "Имя"
 
-#: authentication/forms.py:13 authentication/models.py:10
+#: authentication/forms.py:15 authentication/models.py:10
 msgid "Nachname"
 msgstr "Фамилия"
 
-#: authentication/forms.py:14 authentication/forms.py:38
-msgid "Passwort"
-msgstr "Пароль"
-
-#: authentication/forms.py:37 authentication/models.py:11
+#: authentication/forms.py:16 authentication/forms.py:52
+#: authentication/models.py:11
 msgid "Benutzername"
 msgstr "Имя пользователя"
 
-#: authentication/forms.py:42 authentication/models.py:86
+#: authentication/forms.py:18 authentication/forms.py:53
+msgid "Passwort"
+msgstr "Пароль"
+
+#: authentication/forms.py:57 authentication/models.py:91
 msgid "Inhalt"
 msgstr "Содержание"
 
 #: authentication/models.py:12
+msgid "Majestic ID"
+msgstr ""
+
+#: authentication/models.py:13
 msgid "E-Mail Adresse"
 msgstr "Адрес электронной почты"
 
-#: authentication/models.py:24
+#: authentication/models.py:25
 msgid "Vollständige Name anzeigen"
 msgstr ""
 
-#: authentication/models.py:25
+#: authentication/models.py:26 templates/feeds/feed.html:9
+#: templates/feeds/form.html:9 templates/home/home.html:113
+#: templates/media/media.html:9 templates/media/profile.html:8
+#: templates/media/search.html:8
+msgid "Medien"
+msgstr "медиа"
+
+#: authentication/models.py:27
 msgid "Safe Mode"
 msgstr ""
 
-#: authentication/models.py:26
+#: authentication/models.py:28
 msgid "Benutzeroberfläche"
 msgstr ""
 
-#: authentication/models.py:38
+#: authentication/models.py:40
 msgid "Beschreibung"
 msgstr "Описание"
 
-#: authentication/models.py:39
+#: authentication/models.py:41
 msgid "Bild"
 msgstr "Изображение"
 
-#: authentication/models.py:40 authentication/models.py:87
+#: authentication/models.py:42 authentication/models.py:92
 msgid "Veröffentlicht"
 msgstr "Опубликовано"
 
-#: authentication/models.py:41 templates/feeds/form.html:187
+#: authentication/models.py:43 templates/feeds/form.html:192
 msgid "Sichtbar"
 msgstr "Видимый"
 
-#: authentication/models.py:50
+#: authentication/models.py:52
 #, python-brace-format
 msgid "Vor {count} Jahr{plural}"
 msgstr "До {count} год{plural}"
 
-#: authentication/models.py:50 authentication/models.py:53
-#: authentication/models.py:55
+#: authentication/models.py:52 authentication/models.py:55
+#: authentication/models.py:57
 msgid "e"
 msgstr "ы"
 
-#: authentication/models.py:53
+#: authentication/models.py:55
 #, python-brace-format
 msgid "Vor {count} Monat{plural}"
 msgstr "До {count} Месяц{plural}"
 
-#: authentication/models.py:55
+#: authentication/models.py:57
 #, python-brace-format
 msgid "Vor {count} Tag{plural}"
 msgstr "До {count} День{plural}"
 
-#: authentication/models.py:58
+#: authentication/models.py:60
 #, python-brace-format
 msgid "Vor {count} Stunde{plural}"
 msgstr "До {count} Час{plural}"
 
-#: authentication/models.py:58 authentication/models.py:61
+#: authentication/models.py:60 authentication/models.py:63
 msgid "n"
 msgstr "ы"
 
-#: authentication/models.py:61
+#: authentication/models.py:63
 #, python-brace-format
 msgid "Vor {count} Minute{plural}"
 msgstr "До {count} Минута{plural}"
 
-#: authentication/models.py:63
+#: authentication/models.py:65
 msgid "Gerade eben"
 msgstr "Только что"
 
@@ -118,38 +130,44 @@ msgstr "Чаты"
 #: templates/chats/chat.html:24 templates/chats/chats.html:24
 #: templates/feeds/feed.html:25 templates/feeds/form.html:25
 #: templates/home/home.html:8 templates/home/home.html:24
-#: templates/media/media.html:25
+#: templates/media/media.html:25 templates/media/profile.html:24
+#: templates/media/search.html:24
 msgid "Home"
 msgstr "Главная"
 
 #: templates/chats/chat.html:34 templates/chats/chats.html:34
 #: templates/feeds/feed.html:35 templates/feeds/form.html:35
 #: templates/home/home.html:34 templates/media/media.html:35
+#: templates/media/profile.html:34 templates/media/search.html:34
 msgid "Benachrichtigung"
 msgstr "Уведомление"
 
 #: templates/chats/chat.html:44 templates/chats/chats.html:44
 #: templates/feeds/feed.html:45 templates/feeds/form.html:45
 #: templates/home/home.html:44 templates/media/media.html:45
+#: templates/media/profile.html:44 templates/media/search.html:44
 msgid "Systemprotokolle"
 msgstr "Системные журналы"
 
 #: templates/chats/chat.html:54 templates/chats/chats.html:54
 #: templates/feeds/feed.html:55 templates/feeds/form.html:55
 #: templates/home/home.html:54 templates/media/media.html:55
+#: templates/media/profile.html:54 templates/media/search.html:54
 msgid "Benutzer"
 msgstr "Пользователь"
 
 #: templates/chats/chat.html:64 templates/chats/chats.html:64
 #: templates/feeds/feed.html:65 templates/feeds/form.html:65
 #: templates/home/home.html:64 templates/login/login.html:24
-#: templates/media/media.html:65 templates/signup/signup.html:24
+#: templates/media/media.html:65 templates/media/profile.html:64
+#: templates/media/search.html:64 templates/signup/signup.html:24
 msgid "Hilfe"
 msgstr "Помощь"
 
 #: templates/chats/chat.html:71 templates/chats/chats.html:71
 #: templates/feeds/feed.html:72 templates/feeds/form.html:72
 #: templates/home/home.html:71 templates/media/media.html:72
+#: templates/media/profile.html:71 templates/media/search.html:71
 msgid "Abmelden"
 msgstr "Выйти из системы"
 
@@ -157,9 +175,16 @@ msgstr "Выйти из системы"
 msgid "Nachricht"
 msgstr "Сообщение"
 
-#: templates/chats/chat.html:174
+#: templates/chats/chat.html:175
 msgid "Abschicken"
 msgstr "Отправить"
+
+#: templates/chats/chats.html:99 templates/feeds/feed.html:110
+#: templates/feeds/form.html:110 templates/home/home.html:85
+#: templates/media/media.html:110 templates/media/profile.html:109
+#: templates/media/search.html:109
+msgid "Bürger"
+msgstr "граждане"
 
 #: templates/chats/chats.html:120
 msgid "Vorname oder Nachname"
@@ -167,44 +192,40 @@ msgstr "Имя или фамилия"
 
 #: templates/chats/chats.html:121 templates/feeds/feed.html:85
 #: templates/feeds/form.html:85 templates/media/media.html:85
+#: templates/media/profile.html:84 templates/media/search.html:84
+#: templates/media/search.html:130
 msgid "Suche"
 msgstr "Поиск"
 
-#: templates/feeds/feed.html:9 templates/feeds/form.html:9
-#: templates/home/home.html:113 templates/media/media.html:9
-msgid "Medien"
-msgstr "медиа"
-
 #: templates/feeds/feed.html:80 templates/feeds/form.html:80
-#: templates/media/media.html:80
+#: templates/media/media.html:80 templates/media/profile.html:79
+#: templates/media/search.html:79
 msgid "Startseite"
 msgstr "Главная"
 
 #: templates/feeds/feed.html:90 templates/feeds/form.html:90
-#: templates/media/media.html:90
+#: templates/media/media.html:90 templates/media/profile.html:89
+#: templates/media/search.html:89
 msgid "Abonniert"
 msgstr "подписался"
 
 #: templates/feeds/feed.html:95 templates/feeds/form.html:95
-#: templates/media/media.html:95
+#: templates/media/media.html:95 templates/media/profile.html:94
+#: templates/media/search.html:94
 msgid "Abonnenten"
 msgstr "подписчиков"
 
-#: templates/feeds/feed.html:175 templates/media/media.html:168
+#: templates/feeds/feed.html:182 templates/media/media.html:173
 msgid "Hinweis: Nicht sichtbar"
 msgstr "Примечание: Не видно"
 
-#: templates/feeds/feed.html:242 templates/feeds/form.html:192
+#: templates/feeds/feed.html:251 templates/feeds/form.html:197
 msgid "Posten"
 msgstr "Опубликую"
 
-#: templates/feeds/form.html:190
+#: templates/feeds/form.html:195
 msgid "Speichern"
 msgstr "Сохранить"
-
-#: templates/home/home.html:85
-msgid "Bürger"
-msgstr "граждане"
 
 #: templates/home/home.html:137
 msgid "Archiv"
@@ -237,4 +258,4 @@ msgid ""
 "Hinweis: Beim erstellen dieses Kontos, akzeptieren Sie unsere Cookies, "
 "Allgemeine Geschäftsbedingungen und die Datenschutzerklärung nach dem Gesetz "
 "der Datenschutz-Grundverordnung der Europäischen Union"
-msgstr ""
+msgstr "Примечание: Создавая эту учетную запись, вы принимаете наши Cookies, Условия и положения и Политику конфиденциальности в соответствии с Общим положением о защите данных Европейского союза."

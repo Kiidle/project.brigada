@@ -74,16 +74,40 @@
         </div>
         <div class="media">
             <div class="grid-media">
-                <a href="{% url 'media' %}" class="section">
-                    <div>
-                        {% translate "Startseite" %}
-                    </div>
-                </a>
                 <a href="{% url 'search' %}" class="section">
                     <div>
                         {% translate "Suche" %}
                     </div>
                 </a>
+                <a href="{% url 'media' %}" class="section">
+                    <div>
+                        {% translate "Global" %}
+                    </div>
+                </a>
+                <a href="{% url 'foryou' %}" class="section">
+                    <div class="not-current">
+                        {% translate "Für dich" %}
+                    </div>
+                </a>
+                <div class="section">
+                    <div class="not-current">
+                        {% translate "Meine Feeds" %}
+                    </div>
+                </div>
+
+                {% if user == request.user %}
+                    <div class="section">
+                        <div class="current">
+                            {% translate "Mein Profil" %}
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'profile' request.user.id %}" class="section">
+                        <div class="not-current">
+                            {% translate "Mein Profil" %}
+                        </div>
+                    </a>
+                {% endif %}
                 <div class="section">
                     <div>
                         {% translate "Abonniert" %}
@@ -141,7 +165,7 @@
                             {% if not user.verified %}
                                 {% if user.settings.show_fulname %}
                                     <p>{{ user.first_name }} {{ user.last_name }}</p>
-                                    {% else %}
+                                {% else %}
                                     <p>*{{ user.username }}</p>
                                 {% endif %}
                             {% else %}
@@ -151,8 +175,36 @@
                             {% endif %}
                         </div>
                         <div class="profile-username">
-                            <p>@{{ user.username }}</p>
+                            <p>@{{ user.username }}#{{ user.majestic_id }}</p>
                         </div>
+                    </div>
+                    <div class="follow-card">
+                        <div class="block-div">
+                            <p>{{ user.followers.count }}</p>
+                        </div>
+                        <div class="block-div">
+                            <p>{{ user.following.count }}</p>
+                        </div>
+                        {% if user != request.user %}
+                            {% if following %}
+                                <form method="POST" action="{% url 'profile_unfollow' user.pk %}" class="flex-div">
+                                    {% csrf_token %}
+                                    <button type="submit" class="orange-button">
+                                        <p>{% translate 'Entfolgen' %}</p>
+                                    </button>
+                                </form>
+                            {% else %}
+                                <form method="POST" action="{% url 'profile_follow' user.pk %}" class="flex-div">
+                                    {% csrf_token %}
+                                    <button type="submit" class="black-button">
+                                        <p>{% translate 'Folgen' %}</p>
+                                    </button>
+                                </form>
+                            {% endif %}
+                            <div class="flex-div black-button">
+                                <p>{% translate 'Melden' %}</p>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -174,7 +226,6 @@
                         </div>
 
                     </div>
-
                 </div>
             </div>
         </div>

@@ -38,7 +38,10 @@ main {
     height: calc(100vh - 51px);
     display: inline-block;
     overflow-y: scroll;
+}
 
+.custom-main .contacts .grid-contacts, .custom-main .media .grid-media::-webkit-scrollbar {
+    display: none;
 }
 
 .custom-main .contacts .grid-contacts .section, .custom-main .media .grid-media .section {

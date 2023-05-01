@@ -75,14 +75,29 @@
         </div>
         <div class="media">
             <div class="grid-media">
-                <a href="{% url 'media' %}" class="section">
-                    <div>
-                        {% translate "Startseite" %}
-                    </div>
-                </a>
                 <a href="{% url 'search' %}" class="section">
                     <div>
                         {% translate "Suche" %}
+                    </div>
+                </a>
+                <a href="{% url 'media' %}" class="section">
+                    <div>
+                        {% translate "Global" %}
+                    </div>
+                </a>
+                <a href="{% url 'foryou' %}" class="section">
+                    <div class="not-current">
+                        {% translate "Für dich" %}
+                    </div>
+                </a>
+                <div class="section">
+                    <div class="not-current">
+                        {% translate "Meine Feeds" %}
+                    </div>
+                </div>
+                <a href="{% url 'profile' request.user.id %}" class="section">
+                    <div class="not-current">
+                        {% translate "Mein Profil" %}
                     </div>
                 </a>
                 <div class="section">

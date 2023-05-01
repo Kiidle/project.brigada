@@ -8,11 +8,12 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import Group
-from .models import Settings, Feed, FeedLikes, Commentary
+from .models import Settings, Feed, FeedLikes, Commentary, FollowUser
 from django.http import HttpResponseRedirect, JsonResponse
 from urllib.parse import urlencode
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.db.models import Q
 
 User = get_user_model()
 
@@ -158,6 +159,38 @@ class MediaView(generic.ListView):
         else:
             return super().get(request, *args, **kwargs)
 
+class ForYouView(generic.ListView):
+    model = Feed
+    fields = ["description", "image", "published_date", "visibility", "author"]
+    template_name = "media/foryou.html"
+    login_url = reverse_lazy('login')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        feeds = super().get_queryset().order_by("-published_date", "-id")
+
+        following = FollowUser.objects.filter(follower=self.request.user).values_list('follow', flat=True)
+        feeds = feeds.filter(Q(author=self.request.user) | Q(author__in=following))
+
+        context["feeds"] = feeds
+
+        feed_likes = FeedLikes.objects.all()
+        unlike_flag = []
+        for feed in context["feeds"]:
+            liked = feed_likes.filter(feed_id=feed.id, user_id=self.request.user.id).exists()
+            if not liked:
+                unlike_flag.append(feed.id)
+        context["unlike_flag"] = unlike_flag
+
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect(self.login_url)
+        else:
+            return super().get(request, *args, **kwargs)
+
 
 def like_feed(request, feed_id):
     feed = get_object_or_404(Feed, id=feed_id)
@@ -263,12 +296,33 @@ class ProfileView(generic.DetailView):
     template_name = "media/profile.html"
     login_url = reverse_lazy('login')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Überprüfen, ob der aktuelle Benutzer dem angezeigten Benutzer folgt
+        if self.request.user.is_authenticated:
+            follower = self.request.user
+            followee = self.get_object()
+            following = FollowUser.objects.filter(follower=follower, follow=followee).exists()
+            context['following'] = following
+        return context
+
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect(self.login_url)
         else:
             return super().get(request, *args, **kwargs)
 
+def follow_user(request, pk):
+    followee = get_object_or_404(User, pk=pk)
+    follower = request.user
+    FollowUser.objects.create(follower=follower, follow=followee)
+    return HttpResponseRedirect(reverse('profile', args=[followee.pk]))
+
+def unfollow_user(request, pk):
+    followee = get_object_or_404(User, pk=pk)
+    follower = request.user
+    FollowUser.objects.filter(follower=follower, follow=followee).delete()
+    return HttpResponseRedirect(reverse('profile', args=[followee.pk]))
 
 class SearchView(generic.ListView):
     model = User

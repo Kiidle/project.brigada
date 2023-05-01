@@ -31,6 +31,17 @@ class Settings(models.Model):
     def __str__(self):
         return f"{self._meta.verbose_name.title()} for {self.user.username}"
 
+
+class FollowUser(models.Model):
+    follower = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)
+    follow = models.ForeignKey(User, related_name='followers', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('follower', 'follow')
+
+    def __str__(self):
+        return f"{self.follower} follows {self.follow}"
+
 class FeedManager(models.Manager):
     def liked_by_user(self, feed_id, user_id):
         return self.filter(id=feed_id, likes__user_id=user_id).exists()
@@ -106,11 +117,3 @@ class Message(models.Model):
 
     def __str__(self):
         return self.content
-
-
-class Stone(models.Model):
-    pass
-
-
-class Wood(models.Model):
-    pass

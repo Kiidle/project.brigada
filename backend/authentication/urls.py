@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import SignUpView, HomeView, MediaView, FeedView, FeedCreateView, FeedUpdateView, ProfileView, SearchView, ChatsView
+from .views import SignUpView, HomeView, MediaView, FeedView, FeedCreateView, FeedUpdateView, ProfileView, SearchView, ChatsView, ForYouView
 from .consumers import ChatViewWrapper
 
 urlpatterns = [
@@ -9,8 +9,11 @@ urlpatterns = [
     path("logout", views.custom_logout, name="logout"),
     path("", HomeView.as_view(), name="home"),
     path("media", MediaView.as_view(), name="media"),
+    path("media/foryou", ForYouView.as_view(), name="foryou"),
     path("media/search", SearchView.as_view(), name="search"),
     path("media/profile-<int:pk>", ProfileView.as_view(), name="profile"),
+    path("media/profile-<int:pk>/follow", views.follow_user, name="profile_follow"),
+    path("media/profile-<int:pk>/unfollow", views.unfollow_user, name="profile_unfollow"),
     path("media/create", FeedCreateView.as_view(), name="feed_create"),
     path("media/feed-<int:pk>", FeedView.as_view(), name="feed"),
     path("media/feed-<int:pk>/update", FeedUpdateView.as_view(), name="feed_update"),
