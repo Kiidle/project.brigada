@@ -73,6 +73,9 @@ class Feed(models.Model):
     def __str__(self):
         return self.description
 
+    class Meta:
+        ordering = ['-published_date', "-id"]
+
 
 class FeedLikes(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

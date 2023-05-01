@@ -10,7 +10,7 @@
         </div>
     </header>
     <div class="custom-main">
-    <div class="sidebar">
+        <div class="sidebar">
             <div class="logo">
                 <img src="{% static 'images/brigada.png' %}" alt='brigada'/>
             </div>
@@ -70,6 +70,106 @@
                 <a href="{% url 'logout' %}">
                     {% translate "Abmelden" %}
                 </a>
+            </div>
+        </div>
+        <div class="media">
+            <div class="grid-media">
+                <a href="{% url 'media' %}" class="section">
+                    <div>
+                        {% translate "Startseite" %}
+                    </div>
+                </a>
+                <a href="{% url 'search' %}" class="section">
+                    <div>
+                        {% translate "Suche" %}
+                    </div>
+                </a>
+                <div class="section">
+                    <div>
+                        {% translate "Abonniert" %}
+                    </div>
+                </div>
+                <div class="section">
+                    <div>
+                        {% translate "Abonnenten" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="user-container">
+                <div class="card">
+                    <div class="grid-card">
+                        <div class="user-data">
+                            <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
+                        </div>
+                        <div class="group">
+                            {% for group in request.user.groups.all %}
+                                {% if group.name == 'citizen' %}
+                                    <p class="citizen">{% translate _("Bürger") %}</p>
+                                {% elif group.name == 'lew' %}
+                                    <p class="lew">{{ group.name|title }}</p>
+                                {% else %}
+                                    <p>Unverified Group</p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% if user.pp %}
+                            <a href="{% url 'home' %}" class="profile">
+                                <img src="{{ request.user.get_profile_url }}" alt="{{ feed.profile }}"/>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'home' %}" class="no-profile">
+                                <img src="{% static 'svgs/profile_filled.svg' %}" alt='home'/>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="flex-content">
+                <div class="profile">
+                    <div class="profile-card">
+                        <div class="profile-image">
+                            {% if user.pp %}
+                                <img src="{{ user.get_profile_url }}"
+                                     alt="{{ user.profile }}"/>
+                            {% else %}
+                                <img class="no-pp" src="{% static 'svgs/profile_filled.svg' %}"/>
+                            {% endif %}
+                        </div>
+                        <div class="profile-name">
+                            <p>{{ user.first_name }} {{ user.last_name }}</p>
+                            {% if user.verified %}
+                                <img src="{% static 'images/verified_filled.svg' %}"
+                                     alt="verified"/>
+                            {% endif %}
+                        </div>
+                        <div class="profile-username">
+                            <p>@{{ user.username }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-content profile-connect">
+                <div class="profile">
+                    <div class="scrollable">
+                        <div class="normalizator">
+                            <div class="profile-content">
+                                {% for feed in user.feeds.all %}
+                                    {% if feed.visibility == True or feed.author == request.user %}
+                                        <div>
+                                            <a href="{% url 'feed' feed.id %}" class="feed">
+                                                <img src="{{ feed.get_image_url }}" alt="feed.image"/>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

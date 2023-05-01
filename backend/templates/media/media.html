@@ -80,11 +80,11 @@
                         {% translate "Startseite" %}
                     </div>
                 </div>
-                <div class="section">
-                    <div class="not-current">
+                <a href="{% url 'search' %}" class="section">
+                    <div>
                         {% translate "Suche" %}
                     </div>
-                </div>
+                </a>
                 <div class="section">
                     <div class="not-current">
                         {% translate "Abonniert" %}
@@ -139,7 +139,7 @@
                             {% for feed in feeds %}
                                 {% if feed.visibility == True or feed.author == request.user %}
                                     <div class="feed">
-                                        <a href="/" class="feed-user a-reset">
+                                        <a href="{% url 'profile' feed.author.id %}" class="feed-user feed-user-border a-reset">
                                             <div class="feed-profile">
                                                 {% if feed.author.pp %}
                                                     <img src="{{ feed.author.get_profile_url }}"
@@ -147,7 +147,6 @@
                                                 {% else %}
                                                     <img class="no-pp" src="{% static 'svgs/profile_filled.svg' %}"/>
                                                 {% endif %}
-
                                             </div>
                                             <div class="feed-name">
                                                 <p>{{ feed.author.first_name }} {{ feed.author.last_name }}</p>

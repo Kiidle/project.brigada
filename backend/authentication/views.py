@@ -29,6 +29,56 @@ class SignUpView(generic.CreateView):
             print("Group 'citizen' created successfully.")
         else:
             print("Group 'citizen' already exists.")
+        group, created = Group.objects.get_or_create(name='hoodlum')
+        if created:
+            print("Group 'hoodlum' created successfully.")
+        else:
+            print("Group 'hoodlum' already exists.")
+        group, created = Group.objects.get_or_create(name='lica')
+        if created:
+            print("Group 'lica' created successfully.")
+        else:
+            print("Group 'lica' already exists.")
+        group, created = Group.objects.get_or_create(name='byk')
+        if created:
+            print("Group 'byk' created successfully.")
+        else:
+            print("Group 'byk' already exists.")
+        group, created = Group.objects.get_or_create(name='wolk')
+        if created:
+            print("Group 'wolk' created successfully.")
+        else:
+            print("Group 'wolk' already exists.")
+        group, created = Group.objects.get_or_create(name='bojewik')
+        if created:
+            print("Group 'bojewik' created successfully.")
+        else:
+            print("Group 'bojewik' already exists.")
+        group, created = Group.objects.get_or_create(name='soldat')
+        if created:
+            print("Group 'soldat' created successfully.")
+        else:
+            print("Group 'soldat' already exists.")
+        group, created = Group.objects.get_or_create(name='sovietnik')
+        if created:
+            print("Group 'sovietnik' created successfully.")
+        else:
+            print("Group 'sovietnik' already exists.")
+        group, created = Group.objects.get_or_create(name='brigadier')
+        if created:
+            print("Group 'brigadier' created successfully.")
+        else:
+            print("Group 'brigadier' already exists.")
+        group, created = Group.objects.get_or_create(name='medved')
+        if created:
+            print("Group 'medved' created successfully.")
+        else:
+            print("Group 'medved' already exists.")
+        group, created = Group.objects.get_or_create(name='lew')
+        if created:
+            print("Group 'lew' created successfully.")
+        else:
+            print("Group 'lew' already exists.")
 
     @receiver(post_save, sender=User)
     def create_user_privacy(sender, instance, created, **kwargs):
@@ -206,10 +256,34 @@ class FeedUpdateView(generic.UpdateView):
         context = super().get_context_data(**kwargs)
         return context
 
-class ProfileView(generic.ListView):
+
+class ProfileView(generic.DetailView):
     model = User
+    fields = ["first_name", "last_name", "username" "verified"]
     template_name = "media/profile.html"
     login_url = reverse_lazy('login')
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect(self.login_url)
+        else:
+            return super().get(request, *args, **kwargs)
+
+
+class SearchView(generic.ListView):
+    model = User
+    fields = ["first_name", "last_name", "username" "verified"]
+    template_name = 'media/search.html'
+
+    login_url = reverse_lazy('login')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["users"] = super().get_queryset().order_by("first_name", "last_name", "username")
+
+        return context
+
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect(self.login_url)
@@ -226,7 +300,7 @@ class ChatsView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["users"] = super().get_queryset().order_by('first_name', 'last_name')
+        context["users"] = super().get_queryset().order_by("first_name", "last_name")
 
         return context
 

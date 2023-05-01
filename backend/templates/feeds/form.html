@@ -80,11 +80,11 @@
                         {% translate "Startseite" %}
                     </div>
                 </a>
-                <div class="section">
+                <a href="{% url 'search' %}" class="section">
                     <div>
                         {% translate "Suche" %}
                     </div>
-                </div>
+                </a>
                 <div class="section">
                     <div>
                         {% translate "Abonniert" %}
@@ -142,7 +142,7 @@
                 <div class="feed-container">
                     <div class="feeds">
                         <div class="feed">
-                            <a href="/" class="feed-user a-reset">
+                            <a href="{% url 'profile' request.user.id %}" class="feed-user a-reset">
                                 <div class="feed-profile">
                                     {% if request.user.pp %}
                                         <img src="{{ request.user.get_profile_url }}" alt="{{ request.user.profile }}"/>

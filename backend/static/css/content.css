@@ -3,7 +3,7 @@
 }
 
 .flex-content {
-    margin: 12px;
+    margin: 12px 0;
     display: flex;
     justify-content: center;
 }
@@ -34,6 +34,25 @@
 }
 
 .flex-content .square-button img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(248deg) brightness(106%) contrast(106%);
+    height: 32px;
+    width: 32px;
+}
+
+.search-button {
+    height: 48px;
+    width: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+}
+
+.search-button-black {
+    background-color: black;
+}
+
+.search-button img {
     filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(248deg) brightness(106%) contrast(106%);
     height: 32px;
     width: 32px;
@@ -199,6 +218,7 @@
     margin: auto;
     border-radius: 2px;
 }
+
 .flex-content .scrollable-feed-commentaries, .flex-content .scrollable-feeds {
     height: calc(100vh - 162px);
 }
@@ -243,6 +263,9 @@
         "feed-profile feed-name"
         "feed-profile feed-username";
     grid-column-gap: 12px;
+}
+
+.content .feeds .feed .feed-user-border {
     border-bottom-color: #b6b6b6;
     border-bottom-width: 1px;
     border-bottom-style: solid;
@@ -301,7 +324,7 @@
 }
 
 .content .feeds .feed .feed-description p {
-    margin-left: 12px;
+    margin: 0 12px;
 }
 
 .content .feeds .feed .feed-image {
