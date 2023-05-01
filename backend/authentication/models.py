@@ -9,6 +9,7 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=100, verbose_name=_("Vorname"))
     last_name = models.CharField(max_length=100, verbose_name=_("Nachname"))
     username = models.CharField(unique=True, max_length=100, verbose_name=_("Benutzername"))
+    majestic_id = models.PositiveIntegerField(null=True, unique=True, verbose_name=_("Majestic ID"))
     email = models.CharField(max_length=100, verbose_name=_("E-Mail Adresse"))
     verified = models.BooleanField(null=False, default=False)
 
@@ -22,9 +23,10 @@ class Settings(models.Model):
         DARKMODE = "Dark Mode", "Dark Mode"
 
     show_fulname = models.BooleanField(null=False, default=True, verbose_name=_("Vollständige Name anzeigen"))
+    media = models.BooleanField(null=False, default=False, verbose_name=_("Medien"))
     safemode = models.BooleanField(null=False, default=False, verbose_name=_("Safe Mode"))
     graphic_interface = models.CharField(max_length=50,choices=GuiMode.choices, default=GuiMode.LIGHTMODE, verbose_name=_("Benutzeroberfläche"))
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="privacy")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="settings")
 
     def __str__(self):
         return f"{self._meta.verbose_name.title()} for {self.user.username}"

@@ -152,14 +152,19 @@
 
                                 </div>
                                 <div class="feed-name">
-                                    <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
-                                    {% if request.user.verified %}
+                                    {% if not request.user.verified %}
+                                        {% if request.user.settings.show_fulname %}
+                                            <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
+                                        {% else %}
+                                            <p>*{{ request.user.username }}</p>
+                                        {% endif %}
+                                    {% else %}
+                                        <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
                                         <img src="{% static 'images/verified_filled.svg' %}" alt="verified"/>
                                     {% endif %}
-
                                 </div>
                                 <div class="feed-username">
-                                    <p>@{{ request.user.username }}</p>
+                                    <p>@{{ request.user.username }}#{{ request.user.majestic_id }}</p>
                                 </div>
                             </a>
                         </div>

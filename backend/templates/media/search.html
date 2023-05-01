@@ -137,7 +137,7 @@
                     <div class="feeds">
                         {% for user_in in users %}
                             {% if user_in.verified %}
-                                {% if not request.GET.search or user_in.first_name|lower in request.GET.search|lower or user_in.last_name|lower in request.GET.search|lower or user_in.username|lower in request.GET.search|lower %}
+                                {% if not request.GET.search or user_in.first_name|lower in request.GET.search|lower or user_in.last_name|lower in request.GET.search|lower or user_in.username|lower in request.GET.search|lower or user_in.majestic_id|lower in request.GET.search|lower %}
                                     <div class="feed">
                                         <a href="{% url 'profile' user_in.id %}" class="feed-user a-reset">
                                             <div class="feed-profile">
@@ -157,7 +157,7 @@
                                                 {% endif %}
                                             </div>
                                             <div class="feed-username">
-                                                <p>@{{ user_in.username }}</p>
+                                                <p>@{{ user_in.username }}#{{ user_in.majestic_id }}</p>
                                             </div>
                                         </a>
                                     </div>
@@ -166,7 +166,7 @@
                         {% endfor %}
                         {% for user_in in users %}
                             {% if not user_in.verified %}
-                                {% if not request.GET.search or user_in.first_name|lower in request.GET.search|lower or user_in.last_name|lower in request.GET.search|lower or user_in.username|lower in request.GET.search|lower %}
+                                {% if not request.GET.search or user_in.first_name|lower in request.GET.search|lower or user_in.last_name|lower in request.GET.search|lower or user_in.username|lower in request.GET.search|lower or user_in.majestic_id|lower in request.GET.search|lower %}
                                     <div class="feed">
                                         <a href="{% url 'profile' user_in.id %}" class="feed-user a-reset">
                                             <div class="feed-profile">
@@ -178,15 +178,14 @@
                                                 {% endif %}
                                             </div>
                                             <div class="feed-name">
-                                                <p>{{ user_in.first_name }} {{ user_in.last_name }}</p>
-                                                {% if user_in.verified %}
-                                                    <img src="{% static 'images/verified_filled.svg' %}"
-                                                         alt="verified"/>
-
+                                                {% if user_in.settings.show_fulname %}
+                                                    <p>{{ user_in.first_name }} {{ user_in.last_name }}</p>
+                                                {% else %}
+                                                    <p>*{{ user_in.username }}</p>
                                                 {% endif %}
                                             </div>
                                             <div class="feed-username">
-                                                <p>@{{ user_in.username }}</p>
+                                                <p>@{{ user_in.username }}#{{ user_in.majestic_id }}</p>
                                             </div>
                                         </a>
                                     </div>

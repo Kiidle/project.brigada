@@ -138,8 +138,14 @@
                             {% endif %}
                         </div>
                         <div class="profile-name">
-                            <p>{{ user.first_name }} {{ user.last_name }}</p>
-                            {% if user.verified %}
+                            {% if not user.verified %}
+                                {% if user.settings.show_fulname %}
+                                    <p>{{ user.first_name }} {{ user.last_name }}</p>
+                                    {% else %}
+                                    <p>*{{ user.username }}</p>
+                                {% endif %}
+                            {% else %}
+                                <p>{{ user.first_name }} {{ user.last_name }}</p>
                                 <img src="{% static 'images/verified_filled.svg' %}"
                                      alt="verified"/>
                             {% endif %}
