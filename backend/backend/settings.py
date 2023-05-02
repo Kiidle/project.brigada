@@ -79,8 +79,8 @@ DATABASES = {
         'NAME': 'brigada_database',
         'USER': 'brigada_db_admin',
         'PASSWORD': 'pw_brigada.db',
-        'HOST': 'host.docker.internal',
-        'PORT': '5432'
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 

@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: brigada_database
+      POSTGRES_USER: brigada_db_admin
+      POSTGRES_PASSWORD: pw_brigada.db
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - "DATABASE_URL=postgres://brigada_db_admin:pw_brigada.db@db:5432/brigada_database"
