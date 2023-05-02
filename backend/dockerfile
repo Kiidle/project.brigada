@@ -1,0 +1,18 @@
+#Basis-Image
+FROM python:3.11.2
+
+# Arbeitsverzeichnis im Container
+WORKDIR /backend
+
+# Kopiere das Django-Projekt in den Container
+COPY . /backend/
+COPY requirements.txt /backend/
+
+# Installiere die Abhängigkeiten
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Exponiere den Port, auf dem das Django-Projekt läuft
+EXPOSE 8000
+
+# Starte das Django-Projekt
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
