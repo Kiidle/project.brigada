@@ -185,6 +185,26 @@ class ForYouView(generic.ListView):
 
         return context
 
+class MyFeedsView(generic.ListView):
+    model = Feed
+    fields = ["description", "image", "published_date", "visibility", "author"]
+    template_name = "media/myfeeds.html"
+    login_url = reverse_lazy('login')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["feeds"] = super().get_queryset().order_by("-published_date", "-id")
+        feed_likes = FeedLikes.objects.all()
+        unlike_flag = []
+        for feed in context["feeds"]:
+            liked = feed_likes.filter(feed_id=feed.id, user_id=self.request.user.id).exists()
+            if not liked:
+                unlike_flag.append(feed.id)
+        context["unlike_flag"] = unlike_flag
+
+        return context
+
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect(self.login_url)
