@@ -41,16 +41,17 @@ Overall, the Fraktionsverwaltung web platform provides a comprehensive solution 
 
 1. Make sure you have Pyenv installed with the previous guide. If not, please follow the previous guide on how to
    install Pyenv.
-2. Activate your virtual environment by running the following command in your
+2. Make sure you have Docker Desktop installed.
+3. Activate your virtual environment by running the following command in your
    terminal: ```source (your path)/django/project/venv/bin/activate```. This will acitvate your virtual environment and
    any packages you install will be specific to this environment.
-3. Once your virtual environment is activated, you can use pip to install packages. For example, to install Django, run
+4. Once your virtual environment is activated, you can use pip to install packages. For example, to install Django, run
    the following command: ```pip install django```. This will install the latest version of Django.
-4. Wait for the installation to complete. The installation process should automatically install all necessary
+5. Wait for the installation to complete. The installation process should automatically install all necessary
    dependencies.
-5. Check that Django was installed correctly by typing the command "django-admin --version" in the command prompt or
+6. Check that Django was installed correctly by typing the command "django-admin --version" in the command prompt or
    terminal. If Django was installed, the current version of Django should be displayed.
-6. You can also install packages from a `requirements.txt` file. This is useful when you need to install multiple
+7. You can also install packages from a `requirements.txt` file. This is useful when you need to install multiple
    packages at once. To install the packages listed a `requirements.txt`file, ru the following
    command: ```pip install -r requirements.txt```. This will install all the packages listed in the `requirements.txt`
    file. Note that it's important to do this while your virtual environment is activated. Installing packages globally
@@ -88,7 +89,7 @@ Congratulations! You have successfully installed Django on your computer in a vi
 2. Navigate to the directory where the cloned project is located using the "cd" command.
 3. Once you are in the project's directory, you should see a file called "manage.py". This file is responsible for
    managing the Django project.
-4. Type the command ```python manage.py runserver``` and press Enter.
+4. Type the command ```docker-compose up``` and press Enter.
 5. Wait for the server to start up.
 6. Once the server is up and running, open your web browser and type "http://localhost:8000" in the address bar.
 7. If everything was set up correctly, you should see the project.
