@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-01 08:51+0000\n"
+"POT-Creation-Date: 2023-05-02 06:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr "Имя пользователя"
 msgid "Passwort"
 msgstr "Пароль"
 
-#: authentication/forms.py:57 authentication/models.py:91
+#: authentication/forms.py:57 authentication/models.py:102
 msgid "Inhalt"
 msgstr "Содержание"
 
@@ -53,9 +53,10 @@ msgstr "Адрес электронной почты"
 msgid "Vollständige Name anzeigen"
 msgstr ""
 
-#: authentication/models.py:26 templates/feeds/feed.html:9
-#: templates/feeds/form.html:9 templates/home/home.html:113
-#: templates/media/media.html:9 templates/media/profile.html:8
+#: authentication/models.py:26 templates/home/home.html:113
+#: templates/media/feed.html:9 templates/media/form.html:9
+#: templates/media/foryou.html:9 templates/media/media.html:9
+#: templates/media/myfeeds.html:9 templates/media/profile.html:8
 #: templates/media/search.html:8
 msgid "Medien"
 msgstr "медиа"
@@ -68,57 +69,57 @@ msgstr ""
 msgid "Benutzeroberfläche"
 msgstr ""
 
-#: authentication/models.py:40
+#: authentication/models.py:51
 msgid "Beschreibung"
 msgstr "Описание"
 
-#: authentication/models.py:41
+#: authentication/models.py:52
 msgid "Bild"
 msgstr "Изображение"
 
-#: authentication/models.py:42 authentication/models.py:92
+#: authentication/models.py:53 authentication/models.py:103
 msgid "Veröffentlicht"
 msgstr "Опубликовано"
 
-#: authentication/models.py:43 templates/feeds/form.html:192
+#: authentication/models.py:54 templates/media/form.html:207
 msgid "Sichtbar"
 msgstr "Видимый"
 
-#: authentication/models.py:52
+#: authentication/models.py:63
 #, python-brace-format
 msgid "Vor {count} Jahr{plural}"
 msgstr "До {count} год{plural}"
 
-#: authentication/models.py:52 authentication/models.py:55
-#: authentication/models.py:57
+#: authentication/models.py:63 authentication/models.py:66
+#: authentication/models.py:68
 msgid "e"
 msgstr "ы"
 
-#: authentication/models.py:55
+#: authentication/models.py:66
 #, python-brace-format
 msgid "Vor {count} Monat{plural}"
 msgstr "До {count} Месяц{plural}"
 
-#: authentication/models.py:57
+#: authentication/models.py:68
 #, python-brace-format
 msgid "Vor {count} Tag{plural}"
 msgstr "До {count} День{plural}"
 
-#: authentication/models.py:60
+#: authentication/models.py:71
 #, python-brace-format
 msgid "Vor {count} Stunde{plural}"
 msgstr "До {count} Час{plural}"
 
-#: authentication/models.py:60 authentication/models.py:63
+#: authentication/models.py:71 authentication/models.py:74
 msgid "n"
 msgstr "ы"
 
-#: authentication/models.py:63
+#: authentication/models.py:74
 #, python-brace-format
 msgid "Vor {count} Minute{plural}"
 msgstr "До {count} Минута{plural}"
 
-#: authentication/models.py:65
+#: authentication/models.py:76
 msgid "Gerade eben"
 msgstr "Только что"
 
@@ -128,45 +129,51 @@ msgid "Chats"
 msgstr "Чаты"
 
 #: templates/chats/chat.html:24 templates/chats/chats.html:24
-#: templates/feeds/feed.html:25 templates/feeds/form.html:25
 #: templates/home/home.html:8 templates/home/home.html:24
-#: templates/media/media.html:25 templates/media/profile.html:24
+#: templates/media/feed.html:25 templates/media/form.html:25
+#: templates/media/foryou.html:25 templates/media/media.html:25
+#: templates/media/myfeeds.html:25 templates/media/profile.html:24
 #: templates/media/search.html:24
 msgid "Home"
 msgstr "Главная"
 
 #: templates/chats/chat.html:34 templates/chats/chats.html:34
-#: templates/feeds/feed.html:35 templates/feeds/form.html:35
-#: templates/home/home.html:34 templates/media/media.html:35
+#: templates/home/home.html:34 templates/media/feed.html:35
+#: templates/media/form.html:35 templates/media/foryou.html:35
+#: templates/media/media.html:35 templates/media/myfeeds.html:35
 #: templates/media/profile.html:34 templates/media/search.html:34
 msgid "Benachrichtigung"
 msgstr "Уведомление"
 
 #: templates/chats/chat.html:44 templates/chats/chats.html:44
-#: templates/feeds/feed.html:45 templates/feeds/form.html:45
-#: templates/home/home.html:44 templates/media/media.html:45
+#: templates/home/home.html:44 templates/media/feed.html:45
+#: templates/media/form.html:45 templates/media/foryou.html:45
+#: templates/media/media.html:45 templates/media/myfeeds.html:45
 #: templates/media/profile.html:44 templates/media/search.html:44
 msgid "Systemprotokolle"
 msgstr "Системные журналы"
 
 #: templates/chats/chat.html:54 templates/chats/chats.html:54
-#: templates/feeds/feed.html:55 templates/feeds/form.html:55
-#: templates/home/home.html:54 templates/media/media.html:55
+#: templates/home/home.html:54 templates/media/feed.html:55
+#: templates/media/form.html:55 templates/media/foryou.html:55
+#: templates/media/media.html:55 templates/media/myfeeds.html:55
 #: templates/media/profile.html:54 templates/media/search.html:54
 msgid "Benutzer"
 msgstr "Пользователь"
 
 #: templates/chats/chat.html:64 templates/chats/chats.html:64
-#: templates/feeds/feed.html:65 templates/feeds/form.html:65
 #: templates/home/home.html:64 templates/login/login.html:24
-#: templates/media/media.html:65 templates/media/profile.html:64
+#: templates/media/feed.html:65 templates/media/form.html:65
+#: templates/media/foryou.html:65 templates/media/media.html:65
+#: templates/media/myfeeds.html:65 templates/media/profile.html:64
 #: templates/media/search.html:64 templates/signup/signup.html:24
 msgid "Hilfe"
 msgstr "Помощь"
 
 #: templates/chats/chat.html:71 templates/chats/chats.html:71
-#: templates/feeds/feed.html:72 templates/feeds/form.html:72
-#: templates/home/home.html:71 templates/media/media.html:72
+#: templates/home/home.html:71 templates/media/feed.html:72
+#: templates/media/form.html:72 templates/media/foryou.html:72
+#: templates/media/media.html:72 templates/media/myfeeds.html:72
 #: templates/media/profile.html:71 templates/media/search.html:71
 msgid "Abmelden"
 msgstr "Выйти из системы"
@@ -179,10 +186,11 @@ msgstr "Сообщение"
 msgid "Abschicken"
 msgstr "Отправить"
 
-#: templates/chats/chats.html:99 templates/feeds/feed.html:110
-#: templates/feeds/form.html:110 templates/home/home.html:85
-#: templates/media/media.html:110 templates/media/profile.html:109
-#: templates/media/search.html:109
+#: templates/chats/chats.html:99 templates/home/home.html:85
+#: templates/media/feed.html:125 templates/media/form.html:125
+#: templates/media/foryou.html:125 templates/media/media.html:125
+#: templates/media/myfeeds.html:125 templates/media/profile.html:133
+#: templates/media/search.html:124
 msgid "Bürger"
 msgstr "граждане"
 
@@ -190,42 +198,13 @@ msgstr "граждане"
 msgid "Vorname oder Nachname"
 msgstr "Имя или фамилия"
 
-#: templates/chats/chats.html:121 templates/feeds/feed.html:85
-#: templates/feeds/form.html:85 templates/media/media.html:85
-#: templates/media/profile.html:84 templates/media/search.html:84
-#: templates/media/search.html:130
+#: templates/chats/chats.html:121 templates/media/feed.html:80
+#: templates/media/form.html:80 templates/media/foryou.html:80
+#: templates/media/media.html:80 templates/media/myfeeds.html:80
+#: templates/media/profile.html:79 templates/media/search.html:79
+#: templates/media/search.html:145
 msgid "Suche"
 msgstr "Поиск"
-
-#: templates/feeds/feed.html:80 templates/feeds/form.html:80
-#: templates/media/media.html:80 templates/media/profile.html:79
-#: templates/media/search.html:79
-msgid "Startseite"
-msgstr "Главная"
-
-#: templates/feeds/feed.html:90 templates/feeds/form.html:90
-#: templates/media/media.html:90 templates/media/profile.html:89
-#: templates/media/search.html:89
-msgid "Abonniert"
-msgstr "подписался"
-
-#: templates/feeds/feed.html:95 templates/feeds/form.html:95
-#: templates/media/media.html:95 templates/media/profile.html:94
-#: templates/media/search.html:94
-msgid "Abonnenten"
-msgstr "подписчиков"
-
-#: templates/feeds/feed.html:182 templates/media/media.html:173
-msgid "Hinweis: Nicht sichtbar"
-msgstr "Примечание: Не видно"
-
-#: templates/feeds/feed.html:251 templates/feeds/form.html:197
-msgid "Posten"
-msgstr "Опубликую"
-
-#: templates/feeds/form.html:195
-msgid "Speichern"
-msgstr "Сохранить"
 
 #: templates/home/home.html:137
 msgid "Archiv"
@@ -249,6 +228,75 @@ msgstr "Нет счета?"
 msgid "Registrieren"
 msgstr "Регистрация"
 
+#: templates/media/feed.html:85 templates/media/form.html:85
+#: templates/media/foryou.html:85 templates/media/media.html:85
+#: templates/media/myfeeds.html:85 templates/media/profile.html:84
+#: templates/media/search.html:84
+msgid "Global"
+msgstr "Глобальный"
+
+#: templates/media/feed.html:90 templates/media/form.html:90
+#: templates/media/foryou.html:90 templates/media/media.html:90
+#: templates/media/myfeeds.html:90 templates/media/profile.html:89
+#: templates/media/search.html:89
+msgid "Für dich"
+msgstr "Для тебя"
+
+#: templates/media/feed.html:95 templates/media/form.html:95
+#: templates/media/foryou.html:95 templates/media/media.html:95
+#: templates/media/myfeeds.html:95 templates/media/profile.html:94
+#: templates/media/search.html:94
+msgid "Meine Feeds"
+msgstr "Мои корма"
+
+#: templates/media/feed.html:100 templates/media/form.html:100
+#: templates/media/foryou.html:100 templates/media/media.html:100
+#: templates/media/myfeeds.html:100 templates/media/profile.html:101
+#: templates/media/profile.html:107 templates/media/search.html:99
+msgid "Mein Profil"
+msgstr "Мой профиль"
+
+#: templates/media/feed.html:105 templates/media/form.html:105
+#: templates/media/foryou.html:105 templates/media/media.html:105
+#: templates/media/myfeeds.html:105 templates/media/profile.html:113
+#: templates/media/search.html:104
+msgid "Abonniert"
+msgstr "подписался"
+
+#: templates/media/feed.html:110 templates/media/form.html:110
+#: templates/media/foryou.html:110 templates/media/media.html:110
+#: templates/media/myfeeds.html:110 templates/media/profile.html:118
+#: templates/media/search.html:109
+msgid "Abonnenten"
+msgstr "подписчиков"
+
+#: templates/media/feed.html:197 templates/media/foryou.html:190
+#: templates/media/media.html:188 templates/media/myfeeds.html:188
+msgid "Hinweis: Nicht sichtbar"
+msgstr "Примечание: Не видно"
+
+#: templates/media/feed.html:266 templates/media/form.html:212
+msgid "Posten"
+msgstr "Опубликую"
+
+#: templates/media/form.html:210
+msgid "Speichern"
+msgstr "Сохранить"
+
+#: templates/media/profile.html:193
+msgid "Entfolgen"
+msgstr "Отменить"
+
+#: templates/media/profile.html:200
+msgid "Folgen"
+msgstr "Следите"
+
+#: templates/media/profile.html:205
+#, fuzzy
+#| msgid "Abmelden"
+msgid "Melden"
+msgstr "Выйти из системы"
+
 #: templates/signup/signup.html:42
 msgid "Bereits Konto? Stattdessen"
 msgstr "У вас уже есть аккаунт?"
@@ -258,4 +306,10 @@ msgid ""
 "Hinweis: Beim erstellen dieses Kontos, akzeptieren Sie unsere Cookies, "
 "Allgemeine Geschäftsbedingungen und die Datenschutzerklärung nach dem Gesetz "
 "der Datenschutz-Grundverordnung der Europäischen Union"
-msgstr "Примечание: Создавая эту учетную запись, вы принимаете наши Cookies, Условия и положения и Политику конфиденциальности в соответствии с Общим положением о защите данных Европейского союза."
+msgstr ""
+"Примечание: Создавая эту учетную запись, вы принимаете наши Cookies, Условия "
+"и положения и Политику конфиденциальности в соответствии с Общим положением "
+"о защите данных Европейского союза."
+
+#~ msgid "Startseite"
+#~ msgstr "Главная"

@@ -234,7 +234,7 @@ def unlike_feed(request, feed_id):
 class FeedView(generic.DetailView):
     model = Feed
     fields = ["description", "image", "published_date", "visibility", "author", "commentaries"]
-    template_name = "feeds/feed.html"
+    template_name = "media/feed.html"
     login_url = reverse_lazy('login')
 
     def get_context_data(self, **kwargs):
@@ -277,7 +277,7 @@ class FeedView(generic.DetailView):
 class FeedCreateView(generic.CreateView):
     model = Feed
     fields = ["description", "image", "visibility"]
-    template_name = "feeds/form.html"
+    template_name = "media/form.html"
 
     def get_success_url(self):
         return reverse_lazy('media')
@@ -291,7 +291,7 @@ class FeedCreateView(generic.CreateView):
 class FeedUpdateView(generic.UpdateView):
     model = Feed
     fields = ["description", "image", "visibility"]
-    template_name = "feeds/form.html"
+    template_name = "media/form.html"
 
     def get_success_url(self):
         return reverse_lazy("feed", args=[self.object.pk])
@@ -377,6 +377,18 @@ class ChatsView(generic.ListView):
         context["users"] = super().get_queryset().order_by("first_name", "last_name")
 
         return context
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect(self.login_url)
+        else:
+            return super().get(request, *args, **kwargs)
+
+class SettingsView(generic.ListView):
+    model = User
+    fields = ["first_name", "last_name"]
+    template_name = "account/settings.html"
+    login_url = reverse_lazy('login')
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:

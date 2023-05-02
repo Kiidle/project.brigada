@@ -91,11 +91,11 @@
                             {% endfor %}
                         </div>
                         {% if user.pp %}
-                            <a href="{% url 'home' %}" class="profile">
+                            <a href="{% url 'settings' %}" class="profile">
                                 <img src="{{ user.get_profile_url }}" alt="{{ feed.profile }}"/>
                             </a>
                         {% else %}
-                            <a href="{% url 'home' %}" class="no-profile">
+                            <a href="{% url 'settings' %}" class="no-profile">
                                 <img src="{% static 'svgs/profile_filled.svg' %}" alt='home'/>
                             </a>
                         {% endif %}

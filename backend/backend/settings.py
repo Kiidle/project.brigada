@@ -75,8 +75,12 @@ TEMPLATES = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'brigada_database',
+        'USER': 'brigada_db_admin',
+        'PASSWORD': 'pw_brigada.db',
+        'HOST': 'host.docker.internal',
+        'PORT': '5432'
     }
 }
 
